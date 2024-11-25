@@ -1,7 +1,7 @@
 Rent-A-Wheel: Plataforma Web para el Arriendo de Vehículos
 
 🚗 ¿Qué ofrecemos?
-Nuestra plataforma conecta de manera intuitiva a usuarios y arrendatarios, ofreciendo una experiencia optimizada para ambos. Algunas de nuestras principales funcionalidades incluyen:
+Nuestra plataforma conecta de manera intuitiva a usuarios que deseen arrendar un vehiculo, Algunas de nuestras principales funcionalidades incluyen:
 
 Reservas y pagos en tiempo real: Proceso rápido y transparente para gestionar el arriendo.
 Verificación de usuarios y vehículos: Garantiza la confianza y seguridad entre las partes.
