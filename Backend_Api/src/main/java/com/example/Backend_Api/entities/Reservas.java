@@ -16,7 +16,8 @@ import lombok.Setter;
 
 public class Reservas {
     @Id
-    private String id_reserva;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;//Identificador del vehículo
     @ManyToOne
     private Cliente cliente; //llaves foraneas
     @ManyToOne
