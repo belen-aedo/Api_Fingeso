@@ -15,15 +15,14 @@ import lombok.Setter;
 public class Vehiculo{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;//Identificador del vehículo
     private String placa_vehiculo;//Placa del vehículo
     private String marca_vehiculo;//Marca del vehículo
     private String modelo_vehiculo;//Modelo del vehículo
     private String color_vehiculo; //Color del vehículo
     private int anio_vehiculo; //Año de fabricación
     private String estado_vehiculo;//Disponible, Ocupado, Mantenimiento
-
-
+    private double kilometraje_vehiculo;//Kilometraje del vehículo
+    @ManyToOne
+    private Sucursal sucursal_origen;
 
 }

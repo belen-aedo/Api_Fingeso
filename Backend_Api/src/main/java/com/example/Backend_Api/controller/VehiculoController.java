@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "*")
 @RequestMapping("/vehiculo")
 public class VehiculoController {
-
+// localhost:8080/vehiculo/registrar
     @Autowired
     private VehiculoService vehiculoService;
 

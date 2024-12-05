@@ -14,20 +14,20 @@ import lombok.Setter;
 @Entity
 
 
-public class Reservas {
+public class Reserva {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;//Identificador del vehículo
+    Long id_reserva;//Identificador del vehículo
     @ManyToOne
-    private Cliente cliente; //llaves foraneas
+    private Usuario_registrado usuarioRegistrado; //llaves foraneas
     @ManyToOne
     private Vehiculo vehiculo;//llaves foraneas
     @ManyToOne
-    private  Local_arriendo local ;//llaves foraneas
+    private Sucursal local ;//llaves foraneas
 
     private int cantidad_dias;
     private int valor_total;
-    private String estado_reserva;//Activa, Inactiva
+    private boolean estado_reserva;//Activa, Inactiva
     private String fecha_inicio_reserva;
     private String fecha_termino_reserva;
     private String fecha_reserva;
