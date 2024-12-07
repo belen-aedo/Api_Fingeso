@@ -17,5 +17,4 @@ public class Foro_preguntas {
     private Usuario_registrado cliente;//llaves foraneas
     private LocalDate fecha_creacion_pregunta;
     private List<String> listado_respuestas;
-
 }

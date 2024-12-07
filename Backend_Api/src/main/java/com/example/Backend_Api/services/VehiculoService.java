@@ -12,6 +12,7 @@ public class VehiculoService {
     private Vehiculo_repositorio vehiculo_repositorio;
 
     public boolean registrarVehiculo(Vehiculo vehiculo){
+
         try {
             vehiculo_repositorio.save(vehiculo);
             return true;
@@ -19,4 +20,6 @@ public class VehiculoService {
             return false;
         }
     }
+
+
 }

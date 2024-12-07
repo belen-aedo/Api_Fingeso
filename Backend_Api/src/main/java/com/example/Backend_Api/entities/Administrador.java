@@ -27,6 +27,5 @@ public class Administrador {
     private String contrasena_administrador;
     private String lugar_de_trabajo_administrador;//local
 
-
 }
 

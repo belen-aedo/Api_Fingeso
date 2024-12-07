@@ -13,7 +13,6 @@ import lombok.Setter;
 @Table(name = "vehiculo")
 @Entity
 public class Vehiculo{
-
     @Id
     private String placa_vehiculo;//Placa del vehículo
     private String marca_vehiculo;//Marca del vehículo
@@ -22,7 +21,7 @@ public class Vehiculo{
     private int anio_vehiculo; //Año de fabricación
     private String estado_vehiculo;//Disponible, Ocupado, Mantenimiento
     private double kilometraje_vehiculo;//Kilometraje del vehículo
+
     @ManyToOne
     private Sucursal sucursal_origen;
-
 }
