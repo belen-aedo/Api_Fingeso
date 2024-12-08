@@ -2,6 +2,8 @@ package com.example.Backend_Api.entities;
 
 import jakarta.persistence.*;
 
+import java.util.regex.Pattern;
+
 @Table(name = "empleado")
 @Entity
 public class Empleado {
@@ -10,7 +12,7 @@ public class Empleado {
     private long id;
     private String nombre;
     private String rut;
-    private Integer telefono;
+    private String telefono;
     private String rol;
 
     @ManyToOne
@@ -24,7 +26,7 @@ public class Empleado {
     }
 
     // Constructor
-    public Empleado(long id, String nombre, String rut, Integer telefono, String rol, Sucursal sucursal, String correoElectronico, String password) {
+    public Empleado(long id, String nombre, String rut, String telefono, String rol, Sucursal sucursal, String correoElectronico, String password) {
         this.id = id;
         this.nombre = nombre;
         this.rut = rut;
@@ -33,6 +35,7 @@ public class Empleado {
         this.sucursal = sucursal;
         this.correoElectronico = correoElectronico;
         this.password = password;
+
     }
 
     // Getters and Setters
@@ -60,11 +63,11 @@ public class Empleado {
         this.rut = rut;
     }
 
-    public Integer getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(Integer telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
@@ -99,4 +102,5 @@ public class Empleado {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }

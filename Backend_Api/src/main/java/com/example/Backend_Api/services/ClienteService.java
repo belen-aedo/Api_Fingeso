@@ -26,6 +26,7 @@ public class ClienteService {
         return cliente_repositorio.save(cliente);
     }
 
+
     public int login(String correo_registrado, String password_register) {
         Cliente cliente = cliente_repositorio.findByCorreo_registrado(correo_registrado);
         if (cliente != null) {

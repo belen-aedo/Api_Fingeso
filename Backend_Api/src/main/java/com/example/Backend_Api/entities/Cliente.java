@@ -2,6 +2,7 @@ package com.example.Backend_Api.entities;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.regex.Pattern;
 
 @Table(name = "Cliente")
 @Entity
@@ -96,6 +97,49 @@ public class Cliente {
 
     public void setFecha_nacimiento_cliente(LocalDate fecha_nacimiento_cliente) {
         this.fecha_nacimiento_cliente = fecha_nacimiento_cliente;
+    }
+
+    // Validar rut
+    public boolean validarRUT() {
+        try {
+            // Dividir el RUT en número y dígito verificador
+            String[] partes = rut_registrado.split("-");
+            if (partes.length != 2) {
+                return false;
+            }
+            String numeroRUT = partes[0].replaceAll("[^0-9]", ""); // Eliminar cualquier caracter no numérico
+            String digitoVerificadorIngresado = partes[1].toUpperCase();
+            // Validar que el número solo contenga dígitos
+            if (!Pattern.matches("^\\d+$", numeroRUT)) {
+                return false;
+            }
+            // Calcular el dígito verificador
+            String digitoCalculado = calcularDigitoVerificador(numeroRUT);
+            // Comparar el dígito calculado con el ingresado
+            return digitoCalculado.equals(digitoVerificadorIngresado);
+
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    // Método para calcular el dígito verificador de un RUT usando el algoritmo módulo 11.
+    private String calcularDigitoVerificador(String numeroRUT) {
+        int suma = 0;
+        int factor = 2;
+
+        // Recorrer los dígitos del RUT de derecha a izquierda
+        for (int i = numeroRUT.length() - 1; i >= 0; i--) {
+            suma += Character.getNumericValue(numeroRUT.charAt(i)) * factor;
+            factor = (factor == 7) ? 2 : factor + 1; // Ciclar los factores 2,3,4,5,6,7
+        }
+        int mod = 11 - (suma % 11);
+        if (mod == 11) {
+            return "0";
+        } else if (mod == 10) {
+            return "K";
+        } else {
+            return String.valueOf(mod);
+        }
     }
 
 
