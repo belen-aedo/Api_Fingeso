@@ -1,24 +1,16 @@
 package com.example.Backend_Api.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 import java.time.LocalDate;
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+
 @Table(name = "arriendo")
 @Entity
 public class Arriendo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id_arriendo;//Identificador
+    private long id_arriendo;//Identificador
     @ManyToOne
-    private Usuario_registrado cliente; //llaves foraneas
+    private Cliente cliente; //llaves foraneas
     @ManyToOne
     private Vehiculo vehiculo;//llaves foraneas
     @ManyToOne
@@ -26,5 +18,69 @@ public class Arriendo {
     private double monto_total;
     private LocalDate fecha_inicio_arriendo;
     private LocalDate fecha_termino_arriendo;
-    private String estado_arriendo;//Activa, Inactiva
+    private boolean estado_arriendo;//Activa( != 0), Inactiva(0)
+
+    public long getId_arriendo() {
+        return id_arriendo;
+    }
+
+    public void setId_arriendo(long id_arriendo) {
+        this.id_arriendo = id_arriendo;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Vehiculo getVehiculo() {
+        return vehiculo;
+    }
+
+    public void setVehiculo(Vehiculo vehiculo) {
+        this.vehiculo = vehiculo;
+    }
+
+    public Sucursal getLocal() {
+        return local;
+    }
+
+    public void setLocal(Sucursal local) {
+        this.local = local;
+    }
+
+    public double getMonto_total() {
+        return monto_total;
+    }
+
+    public void setMonto_total(double monto_total) {
+        this.monto_total = monto_total;
+    }
+
+    public LocalDate getFecha_inicio_arriendo() {
+        return fecha_inicio_arriendo;
+    }
+
+    public void setFecha_inicio_arriendo(LocalDate fecha_inicio_arriendo) {
+        this.fecha_inicio_arriendo = fecha_inicio_arriendo;
+    }
+
+    public LocalDate getFecha_termino_arriendo() {
+        return fecha_termino_arriendo;
+    }
+
+    public void setFecha_termino_arriendo(LocalDate fecha_termino_arriendo) {
+        this.fecha_termino_arriendo = fecha_termino_arriendo;
+    }
+
+    public boolean isEstado_arriendo() {
+        return estado_arriendo;
+    }
+
+    public void setEstado_arriendo(boolean estado_arriendo) {
+        this.estado_arriendo = estado_arriendo;
+    }
 }

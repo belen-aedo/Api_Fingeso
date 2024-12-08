@@ -3,24 +3,40 @@ package com.example.Backend_Api.entities;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 
-@Table(name = "usuario_registrado")
+@Table(name = "Cliente")
 @Entity
-public class Usuario_registrado {
+public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id_usu_registrado; // Identificador
     private String rut_registrado; // DNI del cliente
     private String nombre_registrado; // Nombre del cliente
-    private String apellido_registrado; // Apellido del cliente
     private String direccion_registrado; // Dirección del cliente
-    private String telefono_registrado; // Teléfono del cliente
+    private int telefono_registrado; // Teléfono del cliente
     private String correo_registrado; // Correo electrónico del cliente
-    private String contrasena_registrado; // Contraseña del cliente
+    private String password; // Contraseña del cliente
     private LocalDate fecha_nacimiento_cliente; // Fecha de nacimiento del cliente
 
-    public long getId_usu_registrado() {
-        return id_usu_registrado;
+    //Constructores
+
+
+    public Cliente(long id_usu_registrado, String rut_registrado, String nombre_registrado, String apellido_registrado, String direccion_registrado, int telefono_registrado, String correo_registrado, String password, LocalDate fecha_nacimiento_cliente) {
+        this.id_usu_registrado = id_usu_registrado;
+        this.rut_registrado = rut_registrado;
+        this.nombre_registrado = nombre_registrado;
+        this.direccion_registrado = direccion_registrado;
+        this.telefono_registrado = telefono_registrado;
+        this.correo_registrado = correo_registrado;
+        this.password = password;
+        this.fecha_nacimiento_cliente = fecha_nacimiento_cliente;
     }
+
+    public Cliente() {
+
+    }
+
+    //Getters y Setters
+    public long getId_usu_registrado() {return id_usu_registrado;}
 
     public void setId_usu_registrado(long id_usu_registrado) {
         this.id_usu_registrado = id_usu_registrado;
@@ -42,14 +58,6 @@ public class Usuario_registrado {
         this.nombre_registrado = nombre_registrado;
     }
 
-    public String getApellido_registrado() {
-        return apellido_registrado;
-    }
-
-    public void setApellido_registrado(String apellido_registrado) {
-        this.apellido_registrado = apellido_registrado;
-    }
-
     public String getDireccion_registrado() {
         return direccion_registrado;
     }
@@ -58,11 +66,11 @@ public class Usuario_registrado {
         this.direccion_registrado = direccion_registrado;
     }
 
-    public String getTelefono_registrado() {
+    public int getTelefono_registrado() {
         return telefono_registrado;
     }
 
-    public void setTelefono_registrado(String telefono_registrado) {
+    public void setTelefono_registrado(int telefono_registrado) {
         this.telefono_registrado = telefono_registrado;
     }
 
@@ -74,12 +82,12 @@ public class Usuario_registrado {
         this.correo_registrado = correo_registrado;
     }
 
-    public String getContrasena_registrado() {
-        return contrasena_registrado;
+    public String getPassword() {
+        return password;
     }
 
-    public void setContrasena_registrado(String contrasena_registrado) {
-        this.contrasena_registrado = contrasena_registrado;
+    public void setPassword(String contrasena_registrado) {
+        this.password = contrasena_registrado;
     }
 
     public LocalDate getFecha_nacimiento_cliente() {
@@ -89,4 +97,6 @@ public class Usuario_registrado {
     public void setFecha_nacimiento_cliente(LocalDate fecha_nacimiento_cliente) {
         this.fecha_nacimiento_cliente = fecha_nacimiento_cliente;
     }
+
+
 }

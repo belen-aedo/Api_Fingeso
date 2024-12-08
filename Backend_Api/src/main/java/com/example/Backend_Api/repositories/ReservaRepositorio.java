@@ -5,6 +5,6 @@ import com.example.Backend_Api.entities.Reserva;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 @Repository
-public interface Reserva_repositorio extends JpaRepository<Reserva, Long>{
+public interface ReservaRepositorio extends JpaRepository<Reserva, Long>{
 
 }

@@ -19,5 +19,4 @@ public class VehiculoController {
         return vehiculoService.registrarVehiculo(vehiculo);
     }
 
-
 }

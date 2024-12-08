@@ -5,7 +5,6 @@ import java.util.List;
 
 @Table(name = "sucural")
 @Entity
-
 public class Sucursal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
