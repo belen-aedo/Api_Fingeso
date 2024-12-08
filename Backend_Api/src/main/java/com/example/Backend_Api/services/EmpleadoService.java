@@ -14,6 +14,7 @@ public class EmpleadoService {
 
     @Autowired
     private EmpleadoRepositorio empleado_repositorio;
+
     // Registra un cliente
     public Empleado registrarEmpleado(long idEmpleado, String nombreEmpleado, String rutEmpleado, String telefonoRegistrado, String rol, Sucursal sucursal, String correoRegistrado, String passwordRegister) {
         Empleado empleado = new Empleado(idEmpleado, nombreEmpleado, rutEmpleado, telefonoRegistrado, rol, sucursal, correoRegistrado, passwordRegister);
