@@ -8,20 +8,21 @@ import java.time.LocalDate;
 public class Usuario_registrado {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_usu_registrado; // Identificador
+    private long id_usu_registrado; // Identificador
     private String rut_registrado; // DNI del cliente
     private String nombre_registrado; // Nombre del cliente
     private String apellido_registrado; // Apellido del cliente
     private String direccion_registrado; // Dirección del cliente
     private String telefono_registrado; // Teléfono del cliente
     private String correo_registrado; // Correo electrónico del cliente
+    private String contrasena_registrado; // Contraseña del cliente
     private LocalDate fecha_nacimiento_cliente; // Fecha de nacimiento del cliente
 
-    public int getId_usu_registrado() {
+    public long getId_usu_registrado() {
         return id_usu_registrado;
     }
 
-    public void setId_usu_registrado(int id_usu_registrado) {
+    public void setId_usu_registrado(long id_usu_registrado) {
         this.id_usu_registrado = id_usu_registrado;
     }
 
@@ -71,6 +72,14 @@ public class Usuario_registrado {
 
     public void setCorreo_registrado(String correo_registrado) {
         this.correo_registrado = correo_registrado;
+    }
+
+    public String getContrasena_registrado() {
+        return contrasena_registrado;
+    }
+
+    public void setContrasena_registrado(String contrasena_registrado) {
+        this.contrasena_registrado = contrasena_registrado;
     }
 
     public LocalDate getFecha_nacimiento_cliente() {
