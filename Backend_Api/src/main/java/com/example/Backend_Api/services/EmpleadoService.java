@@ -18,55 +18,59 @@ public class EmpleadoService {
     // Registra un cliente
     public Empleado registrarEmpleado(long idEmpleado, String nombreEmpleado, String rutEmpleado, String telefonoRegistrado, String rol, Sucursal sucursal, String correoRegistrado, String passwordRegister) {
         Empleado empleado = new Empleado(idEmpleado, nombreEmpleado, rutEmpleado, telefonoRegistrado, rol, sucursal, correoRegistrado, passwordRegister);
-
         //Roles
         LinkedList<String> RolesPermitidos = new LinkedList<String>();
         RolesPermitidos.add("gerente");
         RolesPermitidos.add("mecanico");
         RolesPermitidos.add("empleado");
 
-        //Verificar número telefónico valido
-        ValidacionDatos Validar = new ValidacionDatos(telefonoRegistrado); //dato a validar contiene el numero telefónico
-        if (!Validar.validarNumero()){
-            return null;
+        // Verificar número telefónico válido
+        ValidacionDatos Validar = new ValidacionDatos(telefonoRegistrado); // dato a validar contiene el número telefónico
+
+        if (!Validar.validarNumero()) {
+            throw new IllegalArgumentException("El número telefónico ingresado no es válido.");
         }
 
-        //Verificar rut
-        Validar.setValidarDato(rutEmpleado);// cambiar el dato a validar, al rut
-
-        if (!Validar.validarRUT()){
-           return null;
+        // Verificar RUT
+        Validar.setValidarDatoString(rutEmpleado); // cambiar el dato a validar, al RUT
+        if (!Validar.validarRUT()) {
+            throw new IllegalArgumentException("El RUT ingresado no es válido.");
         }
 
-        //Verificar correo
-        Validar.setValidarDato(correoRegistrado);// cambiar el dato a validar, al correo
-        if (!Validar.validarCorreo()){
-            return null;
+        // Verificar correo
+        Validar.setValidarDatoString(correoRegistrado); // cambiar el dato a validar, al correo
+        if (!Validar.validarCorreo()) {
+            throw new IllegalArgumentException("El correo ingresado no es válido.");
         }
 
-        //Verificar existencia de sucursal
+        // Verificar formato de contraseña
+        Validar.setValidarDatoString(passwordRegister);
+        if (!Validar.validarPassword()) {
+            throw new IllegalArgumentException("La contraseña ingresada no cumple con los requisitos de seguridad.");
+        }
+
+        // Verificar existencia de sucursal
         if (!empleado_repositorio.sucursalExistente(sucursal)) {
-            throw new IllegalArgumentException("Sucursal no registrada");
+            throw new IllegalArgumentException("La sucursal no está registrada.");
         }
 
-        //Verificar si el rol escrito existe
-        for(String rolPermitido : RolesPermitidos ) {
-            if(rolPermitido.equals(empleado.getRol())){
-
-                //Verificado el rol se comprueba si ya ha sido registrado por correo y por rut
-                Empleado existentePorCorreo = empleado_repositorio.findByCorreoElectronico(empleado.getCorreoElectronico());
-                Empleado existentePorRut = empleado_repositorio.findByRut(empleado.getRut());
-                if (existentePorCorreo != null) {
-                    return null;
-                }
-                if (existentePorRut != null) {
-                    return null;
-                }
-                return empleado_repositorio.save(empleado);
-            }
+        // Verificar si el rol escrito existe
+        if (!RolesPermitidos.contains(rol)) {
+            throw new IllegalArgumentException("El rol ingresado no es válido.");
         }
-        return null; //Si no es el rol señalado
+
+        Empleado existentePorCorreo = empleado_repositorio.findByCorreoElectronico(empleado.getCorreoElectronico());
+        Empleado existentePorRut = empleado_repositorio.findByRut(empleado.getRut());
+        if (existentePorCorreo != null) {
+            return null;
+        }
+        if (existentePorRut != null) {
+            return null;
+        }
+
+        return empleado_repositorio.save(empleado);
     }
+
 
     public int login(String correo_registrado, String password_register) {
         Empleado empleado = empleado_repositorio.findByCorreoElectronico(correo_registrado);
