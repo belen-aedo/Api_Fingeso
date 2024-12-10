@@ -6,5 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 @Repository
 public interface ReservaRepositorio extends JpaRepository<Reserva, Long>{
+    Reserva findByCliente(String cliente);
+    Reserva findByVehiculo(String vehiculo);
+    Reserva save(Reserva reserva);
 
 }

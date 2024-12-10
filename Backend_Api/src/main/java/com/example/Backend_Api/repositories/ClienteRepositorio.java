@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface ClienteRepositorio extends JpaRepository<Cliente, Long> {
     Cliente findByCorreo_registrado(String correo_registrado);
     Cliente findByRut_registrado(String rut_registrado);
+    Cliente findById_registrado(long id_registrado);
     Cliente save(Cliente cliente);
 
 }
