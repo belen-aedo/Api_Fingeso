@@ -1,7 +1,11 @@
 package com.example.Backend_Api.entities;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Table;
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Set;
 
 @Table(name = "Cliente")
 @Entity
@@ -12,16 +16,20 @@ public class Cliente {
     private String rut_registrado; // DNI del cliente
     private String nombre_registrado; // Nombre del cliente
     private String direccion_registrado; // Dirección del cliente
-    private int telefono_registrado; // Teléfono del cliente
+    private String telefono_registrado; // Teléfono del cliente
     private String correo_registrado; // Correo electrónico del cliente
     private String password; // Contraseña del cliente
     private LocalDate fecha_nacimiento_cliente; // Fecha de nacimiento del cliente
+    @OneToMany
+    private Set<Reserva> reservas;
+
+
+    // No-arg constructor
+    public Cliente() {
+    }
 
     //Constructores
-
-
-    public Cliente(long id_usu_registrado, String rut_registrado, String nombre_registrado, String apellido_registrado, String direccion_registrado, int telefono_registrado, String correo_registrado, String password, LocalDate fecha_nacimiento_cliente) {
-        this.id_usu_registrado = id_usu_registrado;
+    public Cliente(String rut_registrado, String nombre_registrado, String direccion_registrado, String telefono_registrado, String correo_registrado, String password, LocalDate fecha_nacimiento_cliente) {
         this.rut_registrado = rut_registrado;
         this.nombre_registrado = nombre_registrado;
         this.direccion_registrado = direccion_registrado;
@@ -29,10 +37,6 @@ public class Cliente {
         this.correo_registrado = correo_registrado;
         this.password = password;
         this.fecha_nacimiento_cliente = fecha_nacimiento_cliente;
-    }
-
-    public Cliente() {
-
     }
 
     //Getters y Setters
@@ -66,11 +70,11 @@ public class Cliente {
         this.direccion_registrado = direccion_registrado;
     }
 
-    public int getTelefono_registrado() {
+    public String getTelefono_registrado() {
         return telefono_registrado;
     }
 
-    public void setTelefono_registrado(int telefono_registrado) {
+    public void setTelefono_registrado(String telefono_registrado) {
         this.telefono_registrado = telefono_registrado;
     }
 
@@ -98,5 +102,12 @@ public class Cliente {
         this.fecha_nacimiento_cliente = fecha_nacimiento_cliente;
     }
 
+    public List<Reserva> getReservas() {
+        return reservas;
+    }
+
+    public void setReservas(List<Reserva> reservas) {
+        this.reservas = reservas;
+    }
 
 }

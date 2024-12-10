@@ -8,13 +8,19 @@ import java.time.LocalDate;
 public class Arriendo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private long id_arriendo;//Identificador
+
+    private String rut_cliente; // DNI del cliente
+
+    @OneToOne
+    private Vehiculo vehiculo; //llaves foraneas Significa que un Arriendo esta relacionado con un solo Vehículo.
+
     @ManyToOne
-    private Cliente cliente; //llaves foraneas
-    @ManyToOne
-    private Vehiculo vehiculo;//llaves foraneas
-    @ManyToOne
-    private Sucursal local ;//llaves foraneas
+    private Sucursal local; //llaves foraneas Significa que muchos Arriendo pueden estar relacionados con una sola sucursal.
+
+
+
     private double monto_total;
     private LocalDate fecha_inicio_arriendo;
     private LocalDate fecha_termino_arriendo;
@@ -28,12 +34,12 @@ public class Arriendo {
         this.id_arriendo = id_arriendo;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public String getRut_cliente() {
+        return rut_cliente;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setRut_cliente(String rut_cliente) {
+        this.rut_cliente = rut_cliente;
     }
 
     public Vehiculo getVehiculo() {
@@ -83,4 +89,8 @@ public class Arriendo {
     public void setEstado_arriendo(boolean estado_arriendo) {
         this.estado_arriendo = estado_arriendo;
     }
+
+
 }
+
+

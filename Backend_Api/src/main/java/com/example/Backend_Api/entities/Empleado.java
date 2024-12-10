@@ -8,9 +8,10 @@ public class Empleado {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private String nombre;
     private String rut;
-    private Integer telefono;
+    private String telefono;
     private String rol;
 
     @ManyToOne
@@ -24,8 +25,7 @@ public class Empleado {
     }
 
     // Constructor
-    public Empleado(long id, String nombre, String rut, Integer telefono, String rol, Sucursal sucursal, String correoElectronico, String password) {
-        this.id = id;
+    public Empleado(String nombre, String rut, String telefono, String rol, Sucursal sucursal, String correoElectronico, String password) {
         this.nombre = nombre;
         this.rut = rut;
         this.telefono = telefono;
@@ -60,11 +60,11 @@ public class Empleado {
         this.rut = rut;
     }
 
-    public Integer getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(Integer telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
@@ -99,4 +99,11 @@ public class Empleado {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public void devolucion(int id) {
+        String ocupado = "Ocupado";
+        sucursal.getReserva(id).getVehiculo().setEstado_vehiculo(ocupado);
+    }
+
+
 }

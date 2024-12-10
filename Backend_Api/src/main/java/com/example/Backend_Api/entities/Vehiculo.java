@@ -2,24 +2,30 @@ package com.example.Backend_Api.entities;
 
 import jakarta.persistence.*;
 
-
 @Table(name = "vehiculo")
 @Entity
-public class Vehiculo{
+public class Vehiculo {
     @Id
-    private String placa_vehiculo;//Placa del vehículo
-    private String marca_vehiculo;//Marca del vehículo
-    private String modelo_vehiculo;//Modelo del vehículo
-    private String color_vehiculo; //Color del vehículo
-    private int anio_vehiculo; //Año de fabricación
-    private String estado_vehiculo;//Disponible, Ocupado, Mantenimiento
-    private double kilometraje_vehiculo;//Kilometraje del vehículo
+    private String placa_vehiculo; // Placa del vehículo
+    private String marca_vehiculo; // Marca del vehículo
+    private String modelo_vehiculo; // Modelo del vehículo
+    private String color_vehiculo; // Color del vehículo
+    private int anio_vehiculo; // Año de fabricación
+    private String estado_vehiculo; // Disponible, Ocupado, Mantenimiento
+    private double kilometraje_vehiculo; // Kilometraje del vehículo
 
-    @ManyToOne
+    @OneToOne
     private Sucursal sucursal_origen;
+
+    @OneToOne
+    private Reserva reserva;
 
     public String getPlaca_vehiculo() {
         return placa_vehiculo;
+    }
+
+    public Reserva getReserva_vehiculo (){
+        return reserva;
     }
 
     public void setPlaca_vehiculo(String placa_vehiculo) {
@@ -80,5 +86,13 @@ public class Vehiculo{
 
     public void setSucursal_origen(Sucursal sucursal_origen) {
         this.sucursal_origen = sucursal_origen;
+    }
+
+    public Reserva getReserva() {
+        return reserva;
+    }
+
+    public void setReserva(Reserva reserva) {
+        this.reserva = reserva;
     }
 }

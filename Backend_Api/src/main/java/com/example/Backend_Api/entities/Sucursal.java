@@ -2,18 +2,24 @@ package com.example.Backend_Api.entities;
 
 import jakarta.persistence.*;
 import java.util.List;
+import java.util.Set;
 
-@Table(name = "sucural")
+@Table(name = "sucursal")
 @Entity
 public class Sucursal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id_sucursal;//Identificador del vehículo
+    private long id_sucursal; // Identificador del vehículo
     private String ciudad_sucursal;
     private String telefono_sucursal;
     private int cantidad_vehiculos_disponibles;
-    @OneToMany
-    private List<Vehiculo> vehiculos;
+
+
+    @ManyToMany
+    private Set<Vehiculo> vehiculos;
+
+    @ManyToMany
+    private Set<Reserva> reservas;
 
     public long getId_sucursal() {
         return id_sucursal;
@@ -47,11 +53,28 @@ public class Sucursal {
         this.cantidad_vehiculos_disponibles = cantidad_vehiculos_disponibles;
     }
 
-    public List<Vehiculo> getVehiculos() {
+    public Set<Vehiculo> getVehiculos() {
         return vehiculos;
     }
 
-    public void setVehiculos(List<Vehiculo> vehiculos) {
+    public void setVehiculos(Set<Vehiculo> vehiculos) {
         this.vehiculos = vehiculos;
+    }
+
+    public Set<Reserva> getReservas() {
+        return reservas;
+    }
+
+    public void setReservas(Set<Reserva> reservas) {
+        this.reservas = reservas;
+    }
+
+    public Reserva getReserva(int id) {
+        for (Reserva reserva : reservas) {
+            if(reserva.getId_reserva() == id){
+                return reserva;
+            }
+        }
+        return null;
     }
 }

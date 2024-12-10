@@ -6,13 +6,17 @@ import jakarta.persistence.Id;
 
 import java.time.LocalDate;
 
-public class Publicacion {
+public class VehiculoReferencia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id_publicacion;//Identificador
+
     private String descripcion_publicacion;
+
     private LocalDate fecha_publicacion;
+
     private boolean estado_publicacion;//disponibilida
+
     private double precio_publicacion;
 
     public long getId_publicacion() {

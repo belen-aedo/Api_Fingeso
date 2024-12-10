@@ -9,16 +9,19 @@ import jakarta.persistence.*;
 public class Reserva {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id_reserva;//Identificador del vehículo
+    private long id_reserva;
+
     @ManyToOne
     private Cliente usuarioRegistrado; //llaves foraneas
-    @ManyToOne
+
+    @OneToOne
     private Vehiculo vehiculo;//llaves foraneas
+
     @ManyToOne
     private Sucursal local ;//llaves foraneas
 
     private int cantidad_dias;
-    private int valor_total;
+    private double valor_total;
     private boolean estado_reserva;//Activa, Inactiva
     private String fecha_inicio_reserva;
     private String fecha_termino_reserva;
@@ -65,11 +68,11 @@ public class Reserva {
         this.cantidad_dias = cantidad_dias;
     }
 
-    public int getValor_total() {
+    public double getValor_total() {
         return valor_total;
     }
 
-    public void setValor_total(int valor_total) {
+    public void setValor_total(double valor_total) {
         this.valor_total = valor_total;
     }
 
