@@ -15,10 +15,10 @@ public class Reserva {
     private Cliente usuarioRegistrado; //llaves foraneas
 
     @OneToOne
-    private Vehiculo vehiculo;//llaves foraneas
+    private Vehiculo vehiculo; //llaves foraneas
 
     @ManyToOne
-    private Sucursal local ;//llaves foraneas
+    private Sucursal local ; //llaves foraneas
 
     private int cantidad_dias;
     private double valor_total;

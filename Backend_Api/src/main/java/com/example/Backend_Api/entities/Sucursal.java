@@ -14,8 +14,7 @@ public class Sucursal {
     private String telefono_sucursal;
     private int cantidad_vehiculos_disponibles;
 
-
-    @ManyToMany
+    @OneToMany
     private Set<Vehiculo> vehiculos;
 
     @ManyToMany

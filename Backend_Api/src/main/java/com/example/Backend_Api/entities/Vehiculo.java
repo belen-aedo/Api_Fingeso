@@ -14,7 +14,7 @@ public class Vehiculo {
     private String estado_vehiculo; // Disponible, Ocupado, Mantenimiento
     private double kilometraje_vehiculo; // Kilometraje del vehículo
 
-    @OneToOne
+    @ManyToOne
     private Sucursal sucursal_origen;
 
     @OneToOne
