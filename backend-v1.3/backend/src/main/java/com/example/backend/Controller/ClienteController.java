@@ -23,7 +23,6 @@ public class ClienteController {
         return clienteService.buscarClientePorId(Long.parseLong(id));
     }
 
-
     @PostMapping("/registrar")
     public String registrarCliente(@RequestBody Cliente Nuevocliente) {
         try {
