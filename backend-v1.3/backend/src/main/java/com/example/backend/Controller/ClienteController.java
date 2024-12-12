@@ -23,9 +23,8 @@ public class ClienteController {
         return clienteService.buscarClientePorId(Long.parseLong(id));
     }
 
-
     @PostMapping("/registrar")
-    public void registrarCliente(@RequestBody Cliente Nuevocliente) {
+    public String registrarCliente(@RequestBody Cliente Nuevocliente) {
         try {
             clienteService.registrarCliente(
                     Nuevocliente.getRut(),
@@ -35,11 +34,11 @@ public class ClienteController {
                     Nuevocliente.getEmail(),
                     Nuevocliente.getPassword(),
                     Nuevocliente.getFechaNacimiento());
+            return "Cliente registrado exitosamente";
         } catch (Exception e) {
-            System.out.println(e.getMessage() + " valor devuelto: " + e.getCause());
+            return "Error en registrarse "  + e.getMessage();
         }
     }
-
 
     @PostMapping("/login")
     public int loginCliente(@RequestBody Cliente clienteR) {

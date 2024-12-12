@@ -12,33 +12,46 @@ public class Arriendo {
 
     private long idArriedno;//Identificador
 
-    private String rut; // DNI del cliente
+    private String rutCliente; // DNI del cliente
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "vehiculoId")
+    @JoinColumn(name = "id_vehiculo")
     private Vehiculo vehiculo; // arriendo-1------1-vehiculo
 
+    @ManyToOne
+    @JoinColumn(name = "id_Sucursal_retiro")
+    private Sucursal sucursalRetiro;// Varias reservas para una sucursal, una reserva pertenece a una sucursal, Reserva-M------1-Sucursal
+
+    @ManyToOne
+    @JoinColumn(name = "id_sucursal_devolucion")
+    private Sucursal sucursalDevolucion;
+
+    private LocalDate fechaArriendo;
+    private LocalDate fechaInicioArriendo;
+    private LocalDate FechaTerminoArriendo;
+
     private double CostoTotal;
-    private LocalDate fechaPagoArriendo;
     private boolean EstadoArriendo;
 
-    public Arriendo(long idArriedno, String rut, Vehiculo vehiculo, double costoTotal, LocalDate fechaPagoArriendo, boolean estadoArriendo) {
-        this.idArriedno = idArriedno;
-        this.rut = rut;
+    public Arriendo(String rutCliente, Vehiculo vehiculo, double costoTotal, LocalDate fechaArriendo, boolean estadoArriendo, LocalDate fechaInicioArriendo, LocalDate FechaTerminoArriendo) {
+        this.rutCliente = rutCliente;
         this.vehiculo = vehiculo;
         this.CostoTotal = costoTotal;
-        this.fechaPagoArriendo = fechaPagoArriendo;
+        this.fechaArriendo = fechaArriendo;
         this.EstadoArriendo = estadoArriendo;
+        this.fechaInicioArriendo = fechaInicioArriendo;
+        this.FechaTerminoArriendo = FechaTerminoArriendo;
     }
 
     public Arriendo() {}
 
+    // getters
     public long getIdArriedno() {
         return idArriedno;
     }
 
-    public String getRut() {
-        return rut;
+    public String getRutCliente() {
+        return rutCliente;
     }
 
     public Vehiculo getVehiculo() {
@@ -49,20 +62,29 @@ public class Arriendo {
         return CostoTotal;
     }
 
-    public LocalDate getFechaPagoArriendo() {
-        return fechaPagoArriendo;
+    public LocalDate getFechaArriendo() {
+        return fechaArriendo;
     }
 
-    public boolean isEstadoArriendo() {
+    public LocalDate getFechaInicioArriendo() {
+        return fechaInicioArriendo;
+    }
+
+    public LocalDate getFechaTerminoArriendo() {
+        return FechaTerminoArriendo;
+    }
+
+    public boolean getEstadoArriendo() {
         return EstadoArriendo;
     }
 
+    // setters
     public void setIdArriedno(long idArriedno) {
         this.idArriedno = idArriedno;
     }
 
-    public void setRut(String rut) {
-        this.rut = rut;
+    public void setRutCliente(String rut) {
+        this.rutCliente = rut;
     }
 
     public void setVehiculo(Vehiculo vehiculo) {
@@ -73,11 +95,19 @@ public class Arriendo {
         CostoTotal = costoTotal;
     }
 
-    public void setFechaPagoArriendo(LocalDate fechaPagoArriendo) {
-        this.fechaPagoArriendo = fechaPagoArriendo;
+    public void setFechaArriendo(LocalDate fechaPagoArriendo) {
+        this.fechaArriendo = fechaPagoArriendo;
     }
 
     public void setEstadoArriendo(boolean estadoArriendo) {
         EstadoArriendo = estadoArriendo;
+    }
+
+    public void setFechaInicioArriendo(LocalDate fechaInicioArriendo) {
+        this.fechaInicioArriendo = fechaInicioArriendo;
+    }
+
+    public void setFechaTerminoArriendo(LocalDate fechaTerminoArriendo) {
+        FechaTerminoArriendo = fechaTerminoArriendo;
     }
 }

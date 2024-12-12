@@ -8,7 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class SucursalRepositoryImplement implements SucursalRepsository {
+public class SucursalRepositoryImplement implements SucursalRepository {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;

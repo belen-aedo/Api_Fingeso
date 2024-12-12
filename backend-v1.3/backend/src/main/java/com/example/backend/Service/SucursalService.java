@@ -1,7 +1,7 @@
 package com.example.backend.Service;
 
 import com.example.backend.Entity.Sucursal;
-import com.example.backend.Repository.SucursalRepsository;
+import com.example.backend.Repository.SucursalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class SucursalService {
 
     @Autowired
-    SucursalRepsository sucursal;
+    SucursalRepository sucursal;
 
     Sucursal buscarSucursalPorID(Long id) {
         return sucursal.findById(id);

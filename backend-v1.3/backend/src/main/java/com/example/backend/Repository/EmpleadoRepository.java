@@ -8,7 +8,7 @@ public interface EmpleadoRepository {
     public Empleado findById(long id);
     public Empleado findByEmail(String email);
     public Empleado findByPassword(String password);
-    public Empleado findByrol(String rol);
+    public Empleado findByRut(String rut);
     public void save(Empleado empleado);
 }
 

@@ -1,8 +1,7 @@
 package com.example.backend.Repository;
 
 import com.example.backend.Entity.Empleado;
-import com.example.backend.Entity.Sucursal;
-import com.example.backend.RowMappers.SucursalRowMapper;
+import com.example.backend.RowMappers.EmpleadoRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -16,37 +15,73 @@ public class EmpleadoRepositoryImplement implements EmpleadoRepository {
 
     @Override
     public Empleado findById(long id) {
-        /*
-        String sql = "select * from sucursal where id_sucursal = ?";
+        String sql =
+            " SELECT e.*, s.nombre_sucursal, s.ciudad_sucursal, s.telefono_sucursal " +
+                    "FROM empleado e INNER JOIN sucursal s ON e.id_sucursal = s.id_sucursal " +
+                    "WHERE e.id_empleado = ?; ";
         try {
-            Sucursal sucursal = jdbcTemplate.queryForObject(sql, new Object[]{id}, new SucursalRowMapper());
-            return sucursal;
+            Empleado empleado = jdbcTemplate.queryForObject(sql, new Object[]{id}, new EmpleadoRowMapper());
+            return empleado;
         }catch (EmptyResultDataAccessException e) {
-            System.out.println("No se encontro el sucursal con el id " + id+ "\n" + e);
             return null;
         }
-
-         */
-        return null;
     }
 
     @Override
     public Empleado findByEmail(String email) {
-        return null;
+        String sql =
+                " SELECT e.*, s.nombre_sucursal, s.ciudad_sucursal, s.telefono_sucursal " +
+                        "FROM empleado e INNER JOIN sucursal s ON e.id_sucursal = s.id_sucursal " +
+                        "WHERE e.email = ?; ";
+        try {
+            Empleado empleado = jdbcTemplate.queryForObject(sql, new Object[]{email}, new EmpleadoRowMapper());
+            return empleado;
+        }catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
     @Override
     public Empleado findByPassword(String password) {
-        return null;
+        String sql =
+                " SELECT e.*, s.nombre_sucursal, s.ciudad_sucursal, s.telefono_sucursal " +
+                        "FROM empleado e INNER JOIN sucursal s ON e.id_sucursal = s.id_sucursal " +
+                        "WHERE e.password = ?; ";
+        try {
+            Empleado empleado = jdbcTemplate.queryForObject(sql, new Object[]{password}, new EmpleadoRowMapper());
+            return empleado;
+        }catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
     @Override
-    public Empleado findByrol(String rol) {
-        return null;
+    public Empleado findByRut(String rut) {
+        String sql =
+                " SELECT e.*, s.nombre_sucursal, s.ciudad_sucursal, s.telefono_sucursal " +
+                        "FROM empleado e INNER JOIN sucursal s ON e.id_sucursal = s.id_sucursal " +
+                        "WHERE e.rut = ?; ";
+        try {
+            Empleado empleado = jdbcTemplate.queryForObject(sql, new Object[]{rut}, new EmpleadoRowMapper());
+            return empleado;
+        }catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
     @Override
     public void save(Empleado empleado) {
+        String sql = "INSERT INTO empleado (nombre, rut, telefono, rol, email, password, id_sucursal) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
+        jdbcTemplate.update(sql,
+                empleado.getNombre(),
+                empleado.getRut(),
+                empleado.getTelefono(),
+                empleado.getRol(),
+                empleado.getEmail(),
+                empleado.getPassword(),
+                empleado.getSucursal().getIdSucursal()
+        );
     }
 }

@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class Empleado {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long idEmpleado;
 
     private String nombre;
     private String rut;
@@ -15,28 +15,28 @@ public class Empleado {
     private String rol;
 
     @ManyToOne
-    @JoinColumn(name = "sucursal_id")
+    @JoinColumn(name = "id_sucursal")
     private Sucursal sucursal; // empleado-M---1-sucursal
 
-    private String correoElectronico;
+    private String email;
     private String password;
 
     // No-arg constructor
     public Empleado() { }
 
-    public Empleado(long id, String nombre, String rut, String telefono, String rol, Sucursal sucursal, String correoElectronico, String password) {
-        this.id = id;
+    public Empleado(String nombre, String rut, String telefono, String rol, Sucursal sucursal, String email, String password) {
         this.nombre = nombre;
         this.rut = rut;
         this.telefono = telefono;
         this.rol = rol;
         this.sucursal = sucursal;
-        this.correoElectronico = correoElectronico;
+        this.email = email;
         this.password = password;
     }
 
-    public long getId() {
-        return id;
+    // getters
+    public long getIdEmpleado() {
+        return idEmpleado;
     }
 
     public String getNombre() {
@@ -59,16 +59,17 @@ public class Empleado {
         return sucursal;
     }
 
-    public String getCorreoElectronico() {
-        return correoElectronico;
+    public String getEmail() {
+        return email;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    // Setters
+    public void setIdEmpleado(long id) {
+        this.idEmpleado = id;
     }
 
     public void setNombre(String nombre) {
@@ -91,8 +92,8 @@ public class Empleado {
         this.sucursal = sucursal;
     }
 
-    public void setCorreoElectronico(String correoElectronico) {
-        this.correoElectronico = correoElectronico;
+    public void setEmail(String correoElectronico) {
+        this.email = correoElectronico;
     }
 
     public void setPassword(String password) {
