@@ -71,7 +71,7 @@ public class ClienteService {
         if (existentePorRut != null) {
             throw new IllegalArgumentException("ya se encuentra registrado.");
         }
-
+        System.out.println("registrado(a) correctamente:" + cliente.getNombre());
         clienteRepo.save(cliente);
     }
 
@@ -85,6 +85,7 @@ public class ClienteService {
         Cliente cliente = clienteRepo.findByEmail(correo_registrado);
         if (cliente != null) {
             if (password_register.equals(cliente.getPassword())) {
+                System.out.println("bienvenido(a) devuelta " + cliente.getNombre());
                 return 1;
             }
         }

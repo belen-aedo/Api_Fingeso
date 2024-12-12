@@ -15,7 +15,7 @@ public class Arriendo {
     private String rut; // DNI del cliente
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "vehiculoId")
+    @JoinColumn(name = "id_vehiculo")
     private Vehiculo vehiculo; // arriendo-1------1-vehiculo
 
     private double CostoTotal;

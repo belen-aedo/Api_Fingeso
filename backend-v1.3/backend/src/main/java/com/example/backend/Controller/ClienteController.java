@@ -12,6 +12,8 @@ import java.util.Optional;
 @CrossOrigin
 public class ClienteController {
 
+    //url: http://localhost:8080/api/usuarios/
+
     @Autowired
     private ClienteService clienteService;
 
@@ -21,8 +23,9 @@ public class ClienteController {
         return clienteService.buscarClientePorId(Long.parseLong(id));
     }
 
+
     @PostMapping("/registrar")
-    public void registrarCliente(@RequestBody Cliente Nuevocliente) {
+    public String registrarCliente(@RequestBody Cliente Nuevocliente) {
         try {
             clienteService.registrarCliente(
                     Nuevocliente.getRut(),
@@ -32,8 +35,9 @@ public class ClienteController {
                     Nuevocliente.getEmail(),
                     Nuevocliente.getPassword(),
                     Nuevocliente.getFechaNacimiento());
+            return "Cliente registrado exitosamente";
         } catch (Exception e) {
-            System.out.println(e.getMessage() + " valor devuelto: " + e.getCause());
+            return "Error en registrarse "  + e.getMessage();
         }
     }
 
@@ -43,3 +47,16 @@ public class ClienteController {
     }
 
 }
+
+/*
+ejemplo
+{
+    "nombre": "Juan Perez",
+    "rut": "20722210-0",
+    "telefono": "56996663811",
+    "rol": "empleado",
+    "email": "juan.perez@example.com",
+    "password": "2lol12MN",
+    "sucursal": { "nombreSucursal": "Sucursal uno"}
+}
+ */

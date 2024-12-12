@@ -12,18 +12,19 @@ public class Reserva {
     private long id_reserva;
 
     @ManyToOne
-    @JoinColumn(name = "ClienteId")
+    @JoinColumn(name = "id_cliente")
     private Cliente cliente; // Varias reservas asociadas a un cliente, Reserva-M------1-Cliente
 
     @ManyToOne
-    @JoinColumn(name = "SucursalId")
+    @JoinColumn(name = "id_Sucursal")
     private Sucursal sucursal; // Varias reservas para una sucursal, una reserva pertenece a una sucursal, Reserva-M------1-Sucursal
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "arriendId")
+    @JoinColumn(name = "id_arriendo")
     private Arriendo arriendoAsignado;
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_vehiculo_referencia")
     private VehiculoReferencia vehiculoAsignado; // Reserva-M-----1-VehículoReferencia
 
     private double CostoTotal;

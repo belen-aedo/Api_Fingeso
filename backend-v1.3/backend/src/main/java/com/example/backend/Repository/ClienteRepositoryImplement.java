@@ -16,11 +16,12 @@ import java.util.Optional;
 public class ClienteRepositoryImplement implements ClienteRepository {
 
     @Autowired
-    private JdbcTemplate jdbcTemplate; //Java Database Connectivity
+    private JdbcTemplate jdbcTemplate; //Java Database Connectivity gestiona la conexión a la BDD
 
     @Override
     public Optional<Cliente> findById(Long id) {
         String sql = "SELECT * FROM cliente WHERE id_cliente = ?";
+        // relaiza la pregunta sql al motor de la base de datos
         Cliente cliente = jdbcTemplate.queryForObject(sql, new Object[]{id}, new ClienteRowMapper());
         return Optional.ofNullable(cliente);
     }
