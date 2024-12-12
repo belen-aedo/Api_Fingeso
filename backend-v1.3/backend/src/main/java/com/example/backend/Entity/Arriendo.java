@@ -16,7 +16,7 @@ public class Arriendo {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "vehiculoId")
-    private Vehiculo vehiculo; //llaves foraneas Significa que un Arriendo esta relacionado con un solo Vehículo.
+    private Vehiculo vehiculo; // arriendo-1------1-vehiculo
 
     private double CostoTotal;
     private LocalDate fechaPagoArriendo;

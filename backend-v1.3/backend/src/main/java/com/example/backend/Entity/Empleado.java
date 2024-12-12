@@ -16,7 +16,7 @@ public class Empleado {
 
     @ManyToOne
     @JoinColumn(name = "sucursal_id")
-    private Sucursal sucursal;
+    private Sucursal sucursal; // empleado-M---1-sucursal
 
     private String correoElectronico;
     private String password;
@@ -32,6 +32,70 @@ public class Empleado {
         this.rol = rol;
         this.sucursal = sucursal;
         this.correoElectronico = correoElectronico;
+        this.password = password;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getRut() {
+        return rut;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public Sucursal getSucursal() {
+        return sucursal;
+    }
+
+    public String getCorreoElectronico() {
+        return correoElectronico;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setRut(String rut) {
+        this.rut = rut;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+
+    public void setSucursal(Sucursal sucursal) {
+        this.sucursal = sucursal;
+    }
+
+    public void setCorreoElectronico(String correoElectronico) {
+        this.correoElectronico = correoElectronico;
+    }
+
+    public void setPassword(String password) {
         this.password = password;
     }
 }
