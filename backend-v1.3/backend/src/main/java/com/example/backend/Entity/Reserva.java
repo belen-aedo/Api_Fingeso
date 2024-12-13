@@ -2,6 +2,7 @@ package com.example.backend.Entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Table(name = "reservas")
 @Entity
@@ -48,9 +49,7 @@ public class Reserva {
                    LocalDate fechaInicioReserva,
                    LocalDate fechaTerminoReserva,
                    LocalDate fechaReserva,
-                   Boolean reservaFinalizada,
-                   LocalDate fechaArriendoConcluido) {
-
+                   Boolean reservaFinalizada) {
         this.id_reserva = id_reserva;
         this.cliente = cliente;
         this.sucursalRetiro = sucursalRetiro;
@@ -163,6 +162,19 @@ public class Reserva {
 
     public void setPagoReserva(Boolean pagoReserva) {
         this.pagoReserva = pagoReserva;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Reserva reserva = (Reserva) o;
+        return id_reserva == reserva.id_reserva;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id_reserva);
     }
 }
 

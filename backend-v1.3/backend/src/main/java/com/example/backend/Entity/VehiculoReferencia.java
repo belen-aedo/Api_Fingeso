@@ -12,6 +12,7 @@ public class VehiculoReferencia {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idVehiculoReferencia;//Identificador
 
+    private String modelo;
     private String descripcionPublicacion;
     private boolean estado;//disponibilidad
     private double CostoReservaVehiculo;

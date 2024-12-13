@@ -2,6 +2,8 @@ package com.example.backend.Entity;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Table(name = "vehiculo")
 @Entity
 public class Vehiculo {
@@ -9,12 +11,12 @@ public class Vehiculo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     
-    private String Patente; // Placa del vehículo
+    private String patente; // Placa del vehículo
     private String marca; // Marca del vehículo
     private String modelo; // Modelo del vehículo
     private String colorPrincipal; // Color del vehículo
     private int year; // Año de fabricación
-    private String estadoVehiculo; // Disponible, Ocupado, Mantenimiento
+    private String estadoVehiculo; // D: Disponible, O: Ocupado, M: Mantenimiento
     private double kilometrajeVehiculo; // Kilometraje del vehículo
 
     @ManyToOne
@@ -22,12 +24,12 @@ public class Vehiculo {
     private Sucursal ubicacionActual; // muchos vehiculos en una sucursal, un vehiculo puede estar en una sucursal, Vehiculo-M------1-Sucursal
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_reserva")
-    private Reserva reserva; // una reserva
+    @JoinColumn(name = "id_reserva",  nullable = true)
+    private Reserva reserva; // una vehiculo-1----1-reserva
 
     public Vehiculo(long id, String patente, String marca, String modelo, String colorPrincipal, int year, String estadoVehiculo, double kilometrajeVehiculo, Sucursal ubicacionActual, Reserva reserva) {
         this.id = id;
-        this.Patente = patente;
+        this.patente = patente;
         this.marca = marca;
         this.modelo = modelo;
         this.colorPrincipal = colorPrincipal;
@@ -37,6 +39,7 @@ public class Vehiculo {
         this.ubicacionActual = ubicacionActual;
         this.reserva = reserva;
     }
+
     public Vehiculo() {
     }
 
@@ -45,7 +48,7 @@ public class Vehiculo {
     }
 
     public String getPatente() {
-        return Patente;
+        return patente;
     }
 
     public String getMarca() {
@@ -85,7 +88,7 @@ public class Vehiculo {
     }
 
     public void setPatente(String patente) {
-        Patente = patente;
+        this.patente = patente;
     }
 
     public void setMarca(String marca) {
@@ -119,4 +122,18 @@ public class Vehiculo {
     public void setReserva(Reserva reserva) {
         this.reserva = reserva;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Vehiculo vehiculo = (Vehiculo) o;
+        return id == vehiculo.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
 }

@@ -42,20 +42,6 @@ public class EmpleadoRepositoryImplement implements EmpleadoRepository {
     }
 
     @Override
-    public Empleado findByPassword(String password) {
-        String sql =
-                " SELECT e.*, s.nombre_sucursal, s.ciudad_sucursal, s.telefono_sucursal " +
-                        "FROM empleado e INNER JOIN sucursal s ON e.id_sucursal = s.id_sucursal " +
-                        "WHERE e.password = ?; ";
-        try {
-            Empleado empleado = jdbcTemplate.queryForObject(sql, new Object[]{password}, new EmpleadoRowMapper());
-            return empleado;
-        }catch (EmptyResultDataAccessException e) {
-            return null;
-        }
-    }
-
-    @Override
     public Empleado findByRut(String rut) {
         String sql =
                 " SELECT e.*, s.nombre_sucursal, s.ciudad_sucursal, s.telefono_sucursal " +
