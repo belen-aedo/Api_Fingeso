@@ -6,7 +6,6 @@ import com.example.backend.Service.EmpleadoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-
 @RestController
 @RequestMapping("/api/empleado")
 @CrossOrigin
@@ -33,9 +32,21 @@ public class EmpleadoController {
         }
     }
 
-        @PostMapping("/login")
-        public int loginCliente(@RequestBody Cliente clienteR) {
-            return empleadoService.login(clienteR.getEmail(), clienteR.getPassword());
-        }
-
+    @PostMapping("/login")
+    public int loginEmpleado(@RequestBody Empleado empleadoR) {
+            return empleadoService.login(empleadoR.getEmail(), empleadoR.getPassword());
+    }
 }
+
+/*
+ejemplo
+{
+    "nombre": "Juan Perez",
+    "rut": "20722210-0",
+    "telefono": "56996663811",
+    "rol": "empleado",
+    "email": "juan.perez@example.com",
+    "password": "2lol12MN",
+    "sucursal": { "nombreSucursal": "Sucursal uno"}
+}
+ */

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/usuarios")
+@RequestMapping("/api/cliente")
 @CrossOrigin
 public class ClienteController {
 
@@ -46,16 +46,3 @@ public class ClienteController {
     }
 
 }
-
-/*
-ejemplo
-{
-    "nombre": "Juan Perez",
-    "rut": "20722210-0",
-    "telefono": "56996663811",
-    "rol": "empleado",
-    "email": "juan.perez@example.com",
-    "password": "2lol12MN",
-    "sucursal": { "nombreSucursal": "Sucursal uno"}
-}
- */

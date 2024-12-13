@@ -34,6 +34,7 @@ public class Empleado {
         this.password = password;
     }
 
+    // getters
     public long getIdEmpleado() {
         return idEmpleado;
     }
@@ -66,6 +67,7 @@ public class Empleado {
         return password;
     }
 
+    // Setters
     public void setIdEmpleado(long id) {
         this.idEmpleado = id;
     }

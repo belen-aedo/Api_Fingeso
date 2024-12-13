@@ -19,7 +19,7 @@ public class Sucursal {
     @OneToMany(mappedBy = "ubicacionActual", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Vehiculo> vehiculos; //Scurssal-1-----M-Vehiculos
 
-    @OneToMany(mappedBy = "sucursal", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "sucursalRetiro", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Reserva> reservas; // Sucursal-1------M-Reservas
 
     public Sucursal() {}

@@ -2,6 +2,7 @@ package com.example.backend.Entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Table(name = "reservas")
 @Entity
@@ -16,8 +17,12 @@ public class Reserva {
     private Cliente cliente; // Varias reservas asociadas a un cliente, Reserva-M------1-Cliente
 
     @ManyToOne
-    @JoinColumn(name = "id_Sucursal")
-    private Sucursal sucursal; // Varias reservas para una sucursal, una reserva pertenece a una sucursal, Reserva-M------1-Sucursal
+    @JoinColumn(name = "id_Sucursal_retiro")
+    private Sucursal sucursalRetiro;// Varias reservas para una sucursal, una reserva pertenece a una sucursal, Reserva-M------1-Sucursal
+
+    @ManyToOne
+    @JoinColumn(name = "id_sucursal_devolucion")
+    private Sucursal sucursalDevolucion;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_arriendo")
@@ -28,27 +33,34 @@ public class Reserva {
     private VehiculoReferencia vehiculoAsignado; // Reserva-M-----1-VehículoReferencia
 
     private double CostoTotal;
-    private boolean EstadoReserva;//Activa, Inactiva
     private LocalDate fechaInicioReserva;
     private LocalDate fechaTerminoReserva;
     private LocalDate FechaReserva;
     private Boolean ReservaFinalizada;
-    private LocalDate FechaArriendoConcluido;
+    private Boolean pagoReserva;
 
-
-    public Reserva(long id_reserva, Cliente cliente, Sucursal sucursal, Arriendo arriendoAsignado, VehiculoReferencia vehiculoAsignado, int cantidadDias, double costoTotal, boolean estadoReserva, LocalDate fechaInicioReserva, LocalDate fechaTerminoReserva, LocalDate fechaReserva, Boolean reservaFinalizada, LocalDate fechaArriendoConcluido) {
+    public Reserva(long id_reserva,
+                   Cliente cliente,
+                   Sucursal sucursalRetiro,
+                   Arriendo arriendoAsignado,
+                   VehiculoReferencia vehiculoAsignado,
+                   double costoTotal,
+                   boolean pagoReserva,
+                   LocalDate fechaInicioReserva,
+                   LocalDate fechaTerminoReserva,
+                   LocalDate fechaReserva,
+                   Boolean reservaFinalizada) {
         this.id_reserva = id_reserva;
         this.cliente = cliente;
-        this.sucursal = sucursal;
+        this.sucursalRetiro = sucursalRetiro;
         this.arriendoAsignado = arriendoAsignado;
         this.vehiculoAsignado = vehiculoAsignado;
         this.CostoTotal = costoTotal;
-        this.EstadoReserva = estadoReserva;
+        this.pagoReserva = pagoReserva;
         this.fechaInicioReserva = fechaInicioReserva;
         this.fechaTerminoReserva = fechaTerminoReserva;
         this.FechaReserva = fechaReserva;
         this.ReservaFinalizada = reservaFinalizada;
-        this.FechaArriendoConcluido = fechaArriendoConcluido;
     }
 
     public Reserva() {
@@ -63,8 +75,8 @@ public class Reserva {
         return cliente;
     }
 
-    public Sucursal getSucursal() {
-        return sucursal;
+    public Sucursal getSucursalRetiro() {
+        return sucursalRetiro;
     }
 
     public Arriendo getArriendoAsignado() {
@@ -77,10 +89,6 @@ public class Reserva {
 
     public double getCostoTotal() {
         return CostoTotal;
-    }
-
-    public boolean isEstadoReserva() {
-        return EstadoReserva;
     }
 
     public LocalDate getFechaInicioReserva() {
@@ -99,8 +107,12 @@ public class Reserva {
         return ReservaFinalizada;
     }
 
-    public LocalDate getFechaArriendoConcluido() {
-        return FechaArriendoConcluido;
+    public Sucursal getSucursalDevolucion() {
+        return sucursalDevolucion;
+    }
+
+    public Boolean getPagoReserva() {
+        return pagoReserva;
     }
 
     // Setters
@@ -112,8 +124,8 @@ public class Reserva {
         this.cliente = cliente;
     }
 
-    public void setSucursal(Sucursal sucursal) {
-        this.sucursal = sucursal;
+    public void setSucursalRetiro(Sucursal sucursal) {
+        this.sucursalRetiro = sucursal;
     }
 
     public void setArriendoAsignado(Arriendo arriendoAsignado) {
@@ -126,10 +138,6 @@ public class Reserva {
 
     public void setCostoTotal(double costoTotal) {
         CostoTotal = costoTotal;
-    }
-
-    public void setEstadoReserva(boolean estadoReserva) {
-        EstadoReserva = estadoReserva;
     }
 
     public void setFechaInicioReserva(LocalDate fechaInicioReserva) {
@@ -148,8 +156,25 @@ public class Reserva {
         ReservaFinalizada = reservaFinalizada;
     }
 
-    public void setFechaArriendoConcluido(LocalDate fechaArriendoConcluido) {
-        FechaArriendoConcluido = fechaArriendoConcluido;
+    public void setSucursalDevolucion(Sucursal sucursalDevolucion) {
+        this.sucursalDevolucion = sucursalDevolucion;
+    }
+
+    public void setPagoReserva(Boolean pagoReserva) {
+        this.pagoReserva = pagoReserva;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Reserva reserva = (Reserva) o;
+        return id_reserva == reserva.id_reserva;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id_reserva);
     }
 }
 
