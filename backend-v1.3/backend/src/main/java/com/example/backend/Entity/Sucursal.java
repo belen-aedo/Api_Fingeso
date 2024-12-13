@@ -2,6 +2,7 @@ package com.example.backend.Entity;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Table(name = "sucursal")
@@ -11,42 +12,38 @@ public class Sucursal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idSucursal;
 
+    private String nombreSucursal;
     private String ciudadSucursal;
     private String telefonoSucursal;
-    private int CantidadVehiculosDisponibles;
 
     @OneToMany(mappedBy = "ubicacionActual", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Vehiculo> vehiculos; //Scurssal-1-----M-Vehiculos
 
-    @OneToMany(mappedBy = "sucursal", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "sucursalRetiro", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Reserva> reservas; // Sucursal-1------M-Reservas
 
-    public Sucursal() {
-    }
+    public Sucursal() {}
 
-    public Sucursal(long idSucursal, String ciudadSucursal, String telefonoSucursal, int cantidadVehiculosDisponibles, Set<Vehiculo> vehiculos, Set<Reserva> reservas) {
+    public Sucursal(long idSucursal, String ciudadSucursal, String telefonoSucursal) {
         this.idSucursal = idSucursal;
         this.ciudadSucursal = ciudadSucursal;
         this.telefonoSucursal = telefonoSucursal;
-        this.CantidadVehiculosDisponibles = cantidadVehiculosDisponibles;
-        this.vehiculos = vehiculos;
-        this.reservas = reservas;
+        this.vehiculos = new HashSet<>();
+        this.reservas = new HashSet<>();
     }
 
     public long getIdSucursal() {
+
         return idSucursal;
     }
 
     public String getCiudadSucursal() {
+
         return ciudadSucursal;
     }
 
     public String getTelefonoSucursal() {
         return telefonoSucursal;
-    }
-
-    public int getCantidadVehiculosDisponibles() {
-        return CantidadVehiculosDisponibles;
     }
 
     public Set<Vehiculo> getVehiculos() {
@@ -69,15 +66,19 @@ public class Sucursal {
         this.telefonoSucursal = telefonoSucursal;
     }
 
-    public void setCantidadVehiculosDisponibles(int cantidadVehiculosDisponibles) {
-        CantidadVehiculosDisponibles = cantidadVehiculosDisponibles;
-    }
-
     public void setVehiculos(Set<Vehiculo> vehiculos) {
         this.vehiculos = vehiculos;
     }
 
     public void setReservas(Set<Reserva> reservas) {
         this.reservas = reservas;
+    }
+
+    public String getNombreSucursal() {
+        return nombreSucursal;
+    }
+
+    public void setNombreSucursal(String nombreSucursal) {
+        this.nombreSucursal = nombreSucursal;
     }
 }

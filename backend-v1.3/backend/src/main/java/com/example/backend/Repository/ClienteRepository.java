@@ -1,16 +1,18 @@
 package com.example.backend.Repository;
 
 import com.example.backend.Entity.Cliente;
-import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+import java.util.Optional;
 
 
-public interface ClienteRepository extends JpaRepository<Cliente, Long> {
+public interface ClienteRepository {
+
+    Optional<Cliente> findById(Long id); // es Optional para que no retorne un null
+    List<Cliente> findAll();
     Cliente findByEmail(String email);
     Cliente findByRut(String rut);
-    Cliente findById(long id);
-    //Cliente findByNombre(String nombre);
-    //Cliente findByApellido(String apellido);
-    //Cliente findByTelefono(String telefono);
-    //Cliente findByCorreo(String correo);
+    void save(Cliente cliente);
 }
+
 
