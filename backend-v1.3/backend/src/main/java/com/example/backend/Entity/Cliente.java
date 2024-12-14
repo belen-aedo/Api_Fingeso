@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jakarta.persistence.Table;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 @Table(name = "cliente")
@@ -39,6 +40,7 @@ public class Cliente {
         this.email = email;
         this.password = password;
         this.fechaNacimiento = fechaNacimiento;
+        this.reservas = new HashSet<>();
     }
 
     //Getters

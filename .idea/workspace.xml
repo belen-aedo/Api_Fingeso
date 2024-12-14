@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="27986226-6571-4ed1-bfe2-8c37c2bdc96b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/.idea/dataSources.local.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/.idea/dataSources/5b33a673-5b59-4b6f-9f70-0c5bb1c0c589.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/.idea/dataSources/5b33a673-5b59-4b6f-9f70-0c5bb1c0c589/storage_v2/_src_/database/RentCar.u01cpA.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/.idea/dataSources/5b33a673-5b59-4b6f-9f70-0c5bb1c0c589/storage_v2/_src_/database/RentCar.u01cpA/schema/information_schema.FNRwLQ.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/.idea/dataSources/5b33a673-5b59-4b6f-9f70-0c5bb1c0c589/storage_v2/_src_/database/RentCar.u01cpA/schema/pg_catalog.0S1ZNQ.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/.idea/dataSources/5b33a673-5b59-4b6f-9f70-0c5bb1c0c589/storage_v2/_src_/database/RentCar.u01cpA/schema/public.abK9xQ.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/backend/Datos.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/Controller/EmpleadoController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/Controller/VehiculoFilterController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/Repository/AgendamientoRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/Repository/ClienteRepositoryImplement.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/Repository/EmpleadoRepositoryImplement.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/Repository/ReservaRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/Repository/SucursalRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/Repository/SucursalRepositoryImplement.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/Repository/SucursalRepsository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/Repository/VehiculoRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/Repository/VehiculoRepositoryImplement.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/RowMappers/ClienteRowMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/RowMappers/EmpleadoRowMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/RowMappers/SucursalRowMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/RowMappers/VehiculoRowMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/Service/AgendarRerserva.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/Service/CatalogoService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/Service/SimulacionPago.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/Service/SucursalService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/Service/VehiculoFilterService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/Service/VehiculoReferenciaService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/Service/VehiculoService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/Controller/EmpleadoController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/Controller/VehiculoController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/Repository/ClienteRepositoryImplement.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/Repository/EmpleadoRepositoryImplement.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/Repository/SucursalRepository.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/Repository/SucursalRepositoryImplement.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/Repository/SucursalRepsository.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/Repository/VehiculoRepository.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/Repository/VehiculoRepositoryImplement.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/RowMappers/ClienteRowMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/RowMappers/EmpleadoRowMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/RowMappers/SucursalRowMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/RowMappers/VehiculoRowMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/Service/AgendarRerserva.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/Service/CatalogoService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/Service/SimulacionPago.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/Service/SucursalService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/Service/VehiculoFilterService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/Service/VehiculoReferenciaService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/Service/VehiculoService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/.gitattributes" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/.idea/frontFingeso.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/homesphere_back-main/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/homesphere_back-main/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/homesphere_back-main/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/homesphere_back-main/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/homesphere_back-main/.idea/homesphere_back-main.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/homesphere_back-main/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/homesphere_back-main/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/homesphere_back-main/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/homesphere_back-main/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/homesphere_back-main/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/homesphere_back-main/homesphere_back-main/.gitattributes" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/homesphere_back-main/homesphere_back-main/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/homesphere_back-main/homesphere_back-main/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/homesphere_back-main/homesphere_back-main/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/homesphere_back-main/homesphere_back-main/mvnw.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/homesphere_back-main/homesphere_back-main/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/homesphere_back-main/homesphere_back-main/src/main/java/com/example/homesphere_back/HomesphereBackApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/homesphere_back-main/homesphere_back-main/src/main/java/com/example/homesphere_back/controllers/BrokerController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/homesphere_back-main/homesphere_back-main/src/main/java/com/example/homesphere_back/controllers/MailController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/homesphere_back-main/homesphere_back-main/src/main/java/com/example/homesphere_back/controllers/PropertyController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/homesphere_back-main/homesphere_back-main/src/main/java/com/example/homesphere_back/controllers/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/homesphere_back-main/homesphere_back-main/src/main/java/com/example/homesphere_back/models/Brokers.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/homesphere_back-main/homesphere_back-main/src/main/java/com/example/homesphere_back/models/Property.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/homesphere_back-main/homesphere_back-main/src/main/java/com/example/homesphere_back/models/Users.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/homesphere_back-main/homesphere_back-main/src/main/java/com/example/homesphere_back/repositories/BrokerRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/homesphere_back-main/homesphere_back-main/src/main/java/com/example/homesphere_back/repositories/PropertyRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/homesphere_back-main/homesphere_back-main/src/main/java/com/example/homesphere_back/repositories/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/homesphere_back-main/homesphere_back-main/src/main/java/com/example/homesphere_back/services/BrokerService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/homesphere_back-main/homesphere_back-main/src/main/java/com/example/homesphere_back/services/MailService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/homesphere_back-main/homesphere_back-main/src/main/java/com/example/homesphere_back/services/PropertyService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/homesphere_back-main/homesphere_back-main/src/main/java/com/example/homesphere_back/services/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/homesphere_back-main/homesphere_back-main/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/homesphere_back-main/homesphere_back-main/src/test/java/com/example/homesphere_back/HomesphereBackApplicationTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/vue-project/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/vue-project/.vscode/extensions.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/vue-project/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/vue-project/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/vue-project/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/vue-project/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/vue-project/public/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/vue-project/src/App.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/vue-project/src/assets/base.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/vue-project/src/assets/logo.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/vue-project/src/assets/main.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/vue-project/src/components/botones.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/vue-project/src/components/images/camion_todo_terreno.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/vue-project/src/components/images/camioneta_4x4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/vue-project/src/components/images/camioneta_offroad.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/vue-project/src/components/images/camioneta_offroad.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/vue-project/src/components/images/crossover.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/vue-project/src/components/images/fondo.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/vue-project/src/components/images/fondo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/vue-project/src/components/images/jeep_gladiator.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/vue-project/src/components/images/jeep_recon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/vue-project/src/components/images/logoOficial.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/vue-project/src/components/images/pickupBaja.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/vue-project/src/components/images/pickupRugged.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/vue-project/src/components/images/sedan_compacto.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/vue-project/src/components/images/sub_familiar.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/vue-project/src/components/images/suvLujo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/vue-project/src/components/images/suv_compacto.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/vue-project/src/components/images/todoTerreno.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/vue-project/src/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/vue-project/src/router/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/vue-project/src/views/login.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/vue-project/src/views/principalPage.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/vue-project/src/views/registro.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/vue-project/src/views/soporte.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/frontFingeso-main/frontFingeso-main/vue-project/vite.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/BackendApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/BackendApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/Controller/ClienteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/Controller/ClienteController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/Entity/Arriendo.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/Entity/Arriendo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/Entity/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/Entity/Cliente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/Entity/Empleado.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/Entity/Empleado.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/Entity/Reserva.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/Entity/Reserva.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/Entity/Sucursal.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/Entity/Sucursal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/Entity/Vehiculo.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/Entity/Vehiculo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/Entity/VehiculoReferencia.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/Entity/VehiculoReferencia.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/Repository/ClienteRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/Repository/ClienteRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/Repository/EmpleadoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/Repository/EmpleadoRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/Service/ClienteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/Service/ClienteService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/Service/EmpleadoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/Service/EmpleadoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/Utilidades/ValidacionDatos.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend-v1.3/backend/src/main/java/com/example/backend/Utilidades/ValidacionDatos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/BackendApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/BackendApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/Controller/ClienteController.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/Controller/ClienteController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/Entity/Arriendo.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/Entity/Arriendo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/Entity/Cliente.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/Entity/Cliente.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/Entity/Empleado.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/Entity/Empleado.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/Entity/Reserva.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/Entity/Reserva.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/Entity/Sucursal.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/Entity/Sucursal.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/Entity/Vehiculo.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/Entity/Vehiculo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/Entity/VehiculoReferencia.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/Entity/VehiculoReferencia.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/Repository/ClienteRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/Repository/ClienteRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/Repository/EmpleadoRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/Repository/EmpleadoRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/Service/ClienteService.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/Service/ClienteService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/Service/EmpleadoService.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/Service/EmpleadoService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/Utilidades/ValidacionDatos.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend-v1.3/backend/target/classes/com/example/backend/Utilidades/ValidacionDatos.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2q3MZoK2jVvCufGuCOVMa5RcJEl" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;Spring Boot.BackendApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Merging wakfu&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/Cosas/De Usach/FINGESO/Hito_3/Api_Fingeso&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager">
+    <configuration name="BackendApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="backend" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.backend.BackendApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.22562.145" />
+        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-IU-243.22562.145" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="27986226-6571-4ed1-bfe2-8c37c2bdc96b" name="Changes" comment="" />
+      <created>1733886865937</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1733886865937</updated>
+      <workItem from="1733886868081" duration="1039000" />
+      <workItem from="1734127723915" duration="42000" />
+      <workItem from="1734130402874" duration="810000" />
+      <workItem from="1734132288148" duration="1288000" />
+      <workItem from="1734198091681" duration="14000" />
+      <workItem from="1734202410385" duration="35000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

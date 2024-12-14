@@ -52,6 +52,7 @@ public class ValidacionDatos {
         return matcher.matches(); // Devuelve true si el correo coincide con el patrón y false en caso contrario.
     }
 
+
     /**
      * Contraseña valida si tiene al menos un numero, una mayuscula, una minuscula y del largo de 8 caracteres
      *

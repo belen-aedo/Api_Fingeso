@@ -7,14 +7,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Service
 public class ClienteService {
 
     @Autowired
-    private ClienteRepository ClienteRepo;
-    // Registra un cliente
-    public Cliente registrarCliente(String RutRegistrado, String NombreRegistrado, String DireccionRegistrado, String TelefonoRegistrado, String CorreoRegistrado, String PasswordRegistrada, LocalDate FechaNacimientoCliente) {
+    private ClienteRepository clienteRepo;
+
+    /**
+     * Registrar cliente en la pagína
+     * @param RutRegistrado Rut a del cliente
+     * @param NombreRegistrado Nombre
+     * @param DireccionRegistrado direccion
+     * @param TelefonoRegistrado telefono movil
+     * @param CorreoRegistrado correo del cliente
+     * @param PasswordRegistrada contraseña a guardar
+     * @param FechaNacimientoCliente fecha de nacimiento
+     * @return un cliente registrado
+     */
+    public void registrarCliente(String RutRegistrado, String NombreRegistrado, String DireccionRegistrado, String TelefonoRegistrado, String CorreoRegistrado, String PasswordRegistrada, LocalDate FechaNacimientoCliente) {
 
         Cliente cliente = new Cliente(RutRegistrado, NombreRegistrado, DireccionRegistrado, TelefonoRegistrado, CorreoRegistrado, PasswordRegistrada, FechaNacimientoCliente);
 
@@ -49,31 +61,39 @@ public class ClienteService {
             throw new IllegalArgumentException("Debe ser mayor a 18 años");
         }
 
-        Cliente existentePorCorreo = ClienteRepo.findByEmail(cliente.getEmail());
-        //Cliente existentePorRut = ClienteRepo.findByRut(cliente.getRut());
+        Cliente existentePorCorreo = clienteRepo.findByEmail(cliente.getEmail());
+        Cliente existentePorRut = clienteRepo.findByRut(cliente.getRut());
 
         if (existentePorCorreo != null) {
-            return null;
+            throw new IllegalArgumentException("ya se encuentra registrado con el correo electronico: "+ cliente.getEmail());
         }
 
-        //if (existentePorRut != null) {
-        //    return null;
-        //}
-        return ClienteRepo.save(cliente);
+        if (existentePorRut != null) {
+            throw new IllegalArgumentException("ya se encuentra registrado.");
+        }
+        System.out.println("registrado(a) correctamente:" + cliente.getNombre());
+        clienteRepo.save(cliente);
     }
 
+    /**
+     * Logear cliente en la pagina
+     * @param correo_registrado
+     * @param password_register
+     * @return valida el login para acceder a su cuenta
+     */
     public int login(String correo_registrado, String password_register) {
-        Cliente cliente = ClienteRepo.findByEmail(correo_registrado);
+        Cliente cliente = clienteRepo.findByEmail(correo_registrado);
         if (cliente != null) {
             if (password_register.equals(cliente.getPassword())) {
+                System.out.println("bienvenido(a) devuelta " + cliente.getNombre());
                 return 1;
             }
         }
         return 0;
     }
 
-    public Cliente buscarClientePorId(long idClienteRegistrado) {
-        return ClienteRepo.findById(idClienteRegistrado);
+    public Optional<Cliente> buscarClientePorId(long idClienteRegistrado) {
+        return clienteRepo.findById(idClienteRegistrado);
     }
 
 }
