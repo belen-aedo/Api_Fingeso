@@ -25,15 +25,7 @@ public class VehiculoRowMapper implements RowMapper<Vehiculo> {
         vehiculo.setPatente(rs.getString("patente"));
         vehiculo.setYear(rs.getInt("year"));
 
-        // obtengo la reserva solo por el id, en la pregunta sql solo pongo el id
-        long idReserva = rs.getLong("id_reserva");
-        if (idReserva != 0) { //si es 0 quiere decir que es nula es decir el vehículo no tiene reserva
-            Reserva reserva = new Reserva();
-            reserva.setId_reserva(idReserva);
-            vehiculo.setReserva(reserva);
-        }
-
-        // obtengo la sucursal
+        // obtengo la sucursal que esta el vehiculo
         Sucursal sucursal = new Sucursal();
         sucursal.setIdSucursal(rs.getLong("id_sucursal"));
         sucursal.setNombreSucursal(rs.getString("nombre_sucursal"));

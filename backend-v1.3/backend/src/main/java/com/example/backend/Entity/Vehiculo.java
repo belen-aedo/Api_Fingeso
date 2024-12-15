@@ -22,9 +22,6 @@ public class Vehiculo {
     @JoinColumn(name = "id_sucursal")
     private Sucursal ubicacionActual; // muchos vehiculos en una sucursal, un vehiculo puede estar en una sucursal, Vehiculo-M------1-Sucursal
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_reserva",  nullable = true)
-    private Reserva reserva; // una vehiculo-1----1-reserva
 
     public Vehiculo(long id, String patente, String marca, String modelo, String colorPrincipal, int year, Character estadoVehiculo, double kilometrajeVehiculo, Sucursal ubicacionActual, Reserva reserva) {
         this.id = id;
@@ -36,7 +33,6 @@ public class Vehiculo {
         this.estadoVehiculo = estadoVehiculo;
         this.kilometrajeVehiculo = kilometrajeVehiculo;
         this.ubicacionActual = ubicacionActual;
-        this.reserva = reserva;
     }
 
     public Vehiculo() {}
@@ -77,9 +73,6 @@ public class Vehiculo {
         return ubicacionActual;
     }
 
-    public Reserva getReserva() {
-        return reserva;
-    }
 
     public void setId(long id) {
         this.id = id;
@@ -117,9 +110,6 @@ public class Vehiculo {
         this.ubicacionActual = ubicacionActual;
     }
 
-    public void setReserva(Reserva reserva) {
-        this.reserva = reserva;
-    }
 
     @Override
     public boolean equals(Object o) {

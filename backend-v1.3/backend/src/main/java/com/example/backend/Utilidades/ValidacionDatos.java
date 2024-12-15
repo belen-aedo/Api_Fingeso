@@ -28,6 +28,8 @@ public class ValidacionDatos {
         this.ValidarDatoString = ValidarDato;
     }
 
+    public ValidacionDatos() {}
+
     /**
      * Validar Número telefónico móvil Chileno (no teléfono fijo) String formato 56912345678
      *
@@ -135,5 +137,21 @@ public class ValidacionDatos {
         ValidarDatoString = validarDatoString;
     }
 
+
+    // Calcula la nueva fecha de fin considerando los días de mantenimiento
+    public LocalDate calcularNuevaFechaFin(LocalDate fechaInicio, LocalDate fechaFin) {
+        long duracion = ChronoUnit.DAYS.between(fechaInicio, fechaFin);
+        LocalDate nuevaFechaFin;
+        if (duracion <= 7) {
+            nuevaFechaFin = fechaFin.plusDays(duracion <= 3 ? 1 : 3); // Menos de 3 días: 1 día, menos de 1 semana: 3 días
+        } else if (duracion <= 14) {
+            nuevaFechaFin = fechaFin.plusDays(4); // Entre 1 semana y 2 semanas
+        } else if (duracion <= 21) {
+            nuevaFechaFin = fechaFin.plusDays(5); // Entre 2 semanas y 3 semanas
+        } else {
+            nuevaFechaFin = fechaFin.plusDays(7); // Más de 3 semanas
+        }
+        return nuevaFechaFin; // Devuelve la nueva fecha de fin considerando el mantenimiento
+    }
 
 }

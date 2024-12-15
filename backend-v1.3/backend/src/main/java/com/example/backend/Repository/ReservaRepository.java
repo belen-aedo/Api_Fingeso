@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface ReservaRepository {
+
     public Reserva findById(int id);
     public Reserva findReservaByDate(LocalDate date);
     public void save (Reserva reserva);
