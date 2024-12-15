@@ -8,6 +8,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,8 +52,35 @@ public class VehiculoRepositoryImplement implements VehiculoRepository {
         }
     }
 
+    /**
+     * obtener los vehículos cuya fecha termino de reserva más una semana sea menor a la fecha de retiro y que la sucursal de devolución sea igual
+     * a la sucursal de retiro y los vehiculo que no estén reservados
+     * @param fechaRetiro
+     * @param idSucursalRetiro
+     * @return
+     */
     @Override
-    public List<Vehiculo> ObtenerPorDisponibilidad(String placa) {
-        return List.of();
+    public List<Vehiculo> findBySucursalFecha(LocalDate fechaRetiro, long idSucursalRetiro) {
+        String sql =
+         " SELECT v.id, v.patente, v.estado_vehiculo " +
+         " FROM vehiculo v " +
+         " JOIN reservas r ON r.id_reserva = v.id_reserva " +
+         " JOIN sucursal s ON r.id_sucursal_devolucion = s.id_sucursal " +
+         " WHERE fecha_termino_reserva + (INTERVAL  '1 week') < ? " +
+         " AND s.id_sucursal = ? ; " ;
+        try {
+            // Ejecutar la consulta con los parámetros
+            return jdbcTemplate.query(sql, new VehiculoRowMapperSimplify(), fechaRetiro , idSucursalRetiro);
+        } catch (EmptyResultDataAccessException e) {
+            // Si no hay resultados, devolver una lista vacía
+            return new ArrayList<>();
+        }
     }
 }
+
+//        String sql ="SELECT v.id, v.patente, v.estado_vehiculo " +
+//                    "FROM vehiculo v " +
+//                    "JOIN reservas r ON r.id_reserva = v.id_reserva " +
+//                    "JOIN sucursal s ON r.id_sucursal_devolucion = s.id_sucursal " +
+//                    "WHERE fecha_termino_reserva + INTERVAL '1 week' < ? " +
+//                    "AND s.id_sucursal = ? ; " ;

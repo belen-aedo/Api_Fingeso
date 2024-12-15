@@ -27,7 +27,7 @@ public class Vehiculo {
     @JoinColumn(name = "id_reserva",  nullable = true)
     private Reserva reserva; // una vehiculo-1----1-reserva
 
-    public Vehiculo(long id, String patente, String marca, String modelo, String colorPrincipal, int year, String estadoVehiculo, double kilometrajeVehiculo, Sucursal ubicacionActual, Reserva reserva) {
+    public Vehiculo(long id, String patente, String marca, String modelo, String colorPrincipal, int year, Character estadoVehiculo, double kilometrajeVehiculo, Sucursal ubicacionActual, Reserva reserva) {
         this.id = id;
         this.patente = patente;
         this.marca = marca;
@@ -40,8 +40,7 @@ public class Vehiculo {
         this.reserva = reserva;
     }
 
-    public Vehiculo() {
-    }
+    public Vehiculo() {}
 
     public long getId() {
         return id;

@@ -2,6 +2,7 @@ package com.example.backend.Entity;
 
 import jakarta.persistence.*;
 
+import java.security.PrivateKey;
 import java.time.LocalDate;
 
 @Table(name = "arriendo")
@@ -25,6 +26,8 @@ public class Arriendo {
     @ManyToOne
     @JoinColumn(name = "id_sucursal_devolucion")
     private Sucursal sucursalDevolucion;
+
+    private String patenteVehiculoArrendado;
 
     private LocalDate fechaArriendo;
     private LocalDate fechaInicioArriendo;
