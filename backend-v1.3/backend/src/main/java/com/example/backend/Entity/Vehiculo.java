@@ -10,13 +10,12 @@ public class Vehiculo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    
     private String patente; // Placa del vehículo
     private String marca; // Marca del vehículo
     private String modelo; // Modelo del vehículo
     private String colorPrincipal; // Color del vehículo
     private int year; // Año de fabricación
-    private String estadoVehiculo; // D: Disponible, O: Ocupado, M: Mantenimiento
+    private Character estadoVehiculo; // D: Disponible, O: Ocupado, M: Mantenimiento
     private double kilometrajeVehiculo; // Kilometraje del vehículo
 
     @ManyToOne
@@ -66,7 +65,7 @@ public class Vehiculo {
         return year;
     }
 
-    public String getEstadoVehiculo() {
+    public Character getEstadoVehiculo() {
         return estadoVehiculo;
     }
 
@@ -106,7 +105,7 @@ public class Vehiculo {
         this.year = year;
     }
 
-    public void setEstadoVehiculo(String estadoVehiculo) {
+    public void setEstadoVehiculo(Character estadoVehiculo) {
         this.estadoVehiculo = estadoVehiculo;
     }
 

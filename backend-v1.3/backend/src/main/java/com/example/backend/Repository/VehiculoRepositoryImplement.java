@@ -3,6 +3,7 @@ package com.example.backend.Repository;
 
 import com.example.backend.Entity.Vehiculo;
 import com.example.backend.RowMappers.VehiculoRowMapper;
+import com.example.backend.RowMappers.VehiculoRowMapperSimplify;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
