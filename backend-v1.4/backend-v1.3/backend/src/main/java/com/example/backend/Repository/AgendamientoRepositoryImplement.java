@@ -1,7 +1,6 @@
 package com.example.backend.Repository;
 
-import com.example.backend.Entity.Agendamiento;
-import com.example.backend.Entity.Sucursal;
+import com.example.backend.Entity.*;
 import com.example.backend.RowMappers.AgendamientoRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -21,11 +20,11 @@ public class AgendamientoRepositoryImplement implements AgendamientoRepository {
     private JdbcTemplate jdbcTemplate;
 
     @Override
-    public void save(LocalDate fechaInicio, LocalDate fechaFin, Sucursal sRetiro, Sucursal sDevolucion) {
-        String sql = "INSERT INTO agendamiento (fecha_inicio, fecha_finalizacion, id_sucursal_retiro, id_sucursal_devolucion) " +
-                "VALUES (?, ?, ?, ?)";
+    public void save(LocalDate fechaInicio, LocalDate fechaFin, LocalDate fechaDipo, Sucursal sRetiro, Sucursal sDevolucion, Cliente cliente, Vehiculo vehiculo, Reserva reserva) {
+        String sql = "INSERT INTO agendamiento (fecha_inicio, fecha_finalizacion, proxima_fecha_disponible, id_cliente, id_reserva, id_sucursal_devolucion, id_sucursal_retiro, id_vehiculo) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-        jdbcTemplate.update(sql, fechaInicio, fechaFin, sRetiro.getIdSucursal(), sDevolucion.getIdSucursal());
+        jdbcTemplate.update(sql, fechaInicio, fechaFin, fechaDipo, cliente.getIdCliente(), reserva.getId_reserva(), sDevolucion.getIdSucursal(), sRetiro.getIdSucursal(), vehiculo.getId());
     }
 
     @Override

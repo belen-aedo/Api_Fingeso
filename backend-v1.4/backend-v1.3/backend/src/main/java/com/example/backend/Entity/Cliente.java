@@ -11,6 +11,7 @@ import java.util.Set;
 @Table(name = "cliente")
 @Entity
 public class Cliente {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idCliente; // Identificador
@@ -111,7 +112,6 @@ public class Cliente {
     }
 
     public void setId(long id) {this.idCliente = id;}
-
 
     public void setReservas(Set<Reserva> reservas) {
         this.reservas = reservas;

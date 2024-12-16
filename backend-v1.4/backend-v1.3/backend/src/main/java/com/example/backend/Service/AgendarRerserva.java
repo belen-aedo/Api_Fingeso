@@ -1,9 +1,7 @@
 package com.example.backend.Service;
 
-import com.example.backend.Entity.Agendamiento;
-import com.example.backend.Entity.Reserva;
-import com.example.backend.Entity.Sucursal;
-import com.example.backend.Entity.Vehiculo;
+import com.example.backend.Entity.*;
+import com.example.backend.Repository.AgendamientoRepository;
 import com.example.backend.Repository.SucursalRepository;
 import com.example.backend.Repository.VehiculoRepository;
 import com.example.backend.Utilidades.ValidacionDatos;
@@ -19,19 +17,16 @@ public class AgendarRerserva {
     // aqui se haria el metodo para realizar el agendamiento
 
     @Autowired
-    VehiculoRepository vehiculoRepository;
+    AgendamientoRepository agendamientoRepository;
 
-    @Autowired
-    SucursalRepository sucursalRepository;
-
-    public void realizarAgendamiento (Vehiculo vehiculoSeleccionado, String SucursalSeleccionadaR, String SucursalSeleccionadaD, LocalDate fechaR, LocalDate fechaD ) {
-
-        Reserva NuevaReserva = new Reserva();
-        Agendamiento NuevoAgendamiento = new Agendamiento();
-        NuevoAgendamiento.setVehiculo(vehiculoSeleccionado);
-
-
-
+    public void realizarAgendamiento (Vehiculo vehiculoSeleccionado,
+                                      Sucursal SucursalSeleccionadaR,
+                                      Sucursal SucursalSeleccionadaD,
+                                      LocalDate fechaR,
+                                      LocalDate fechaD,
+                                      LocalDate fechaDispo,
+                                      Reserva reserva, Cliente cliente) {
+        agendamientoRepository.save(fechaR, fechaD, fechaDispo, SucursalSeleccionadaR, SucursalSeleccionadaD, cliente, vehiculoSeleccionado, reserva );
     }
 
 }

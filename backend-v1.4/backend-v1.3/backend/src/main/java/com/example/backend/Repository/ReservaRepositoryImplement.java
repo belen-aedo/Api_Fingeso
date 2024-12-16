@@ -3,6 +3,7 @@ package com.example.backend.Repository;
 import com.example.backend.Entity.Reserva;
 
 import com.example.backend.RowMappers.ReservaRowMapper;
+import com.example.backend.RowMappers.VehiculoReferenciaRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -43,8 +44,8 @@ public class ReservaRepositoryImplement implements ReservaRepository {
     public void save(Reserva reserva) {
         String sql = "INSERT INTO reservas " +
                 "(id_cliente, id_sucursal_retiro, id_sucursal_devolucion, id_vehiculo_referencia, " +
-                "costo_total, fecha_inicio_reserva, fecha_termino_reserva, fecha_reserva, reserva_finalizada, pago_reserva) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                "costo_total, fecha_inicio_reserva, fecha_termino_reserva, fecha_reserva, reserva_finalizada, pago_reserva, id_arriendo) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         // Todavia no se hace el arriendo
         jdbcTemplate.update(sql,
@@ -57,17 +58,32 @@ public class ReservaRepositoryImplement implements ReservaRepository {
                 reserva.getFechaTerminoReserva(),
                 reserva.getFechaReserva(),
                 reserva.getReservaFinalizada(),
-                reserva.getPagoReserva()
+                reserva.getPagoReserva(),
+                null // de momento no se se realiza el arriendo
         );
     }
 
     @Override
     public List<Reserva> findByBetwenDates(LocalDate from, LocalDate to) {
-        String sql = "SELECT * FROM reservas WHERE fecha_reserva BETWEEN ? AND ?";
+        String sql = " SELECT * FROM reservas WHERE fecha_reserva BETWEEN ? AND ? ";
         try {
             return jdbcTemplate.query(sql, new ReservaRowMapper(), from, to);
         } catch (EmptyResultDataAccessException e) {
             return new ArrayList<>();
         }
     }
+
+    @Override
+    public Long findReservaByIdCliente(Long clienteId) {
+        String sql = "SELECT r.id_reserva FROM reservas r JOIN cliente c ON r.id_cliente = c.id_cliente WHERE c.id_cliente = ?";
+
+        try {
+            // Retornamos directamente el ID de la reserva como Long
+            return jdbcTemplate.queryForObject(sql, new Object[]{clienteId}, Long.class);
+        } catch (EmptyResultDataAccessException e) {
+            // Si no se encuentra, retornamos null
+            return null;
+        }
+    }
+
 }

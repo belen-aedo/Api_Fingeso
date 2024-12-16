@@ -97,5 +97,9 @@ public class ClienteService {
         return clienteRepo.findById(idClienteRegistrado);
     }
 
+    public Cliente buscarClientePorRut(String rut) {
+        return clienteRepo.findByRut(rut);
+    }
+
 }
 

@@ -93,4 +93,8 @@ public class VehiculoFilterService {
         return referencias;
     }
 
+    public VehiculoReferencia obtenerReferencia(String modelo) {
+        return vehiculoRepository.getReferencias(modelo);
+    }
+
 }

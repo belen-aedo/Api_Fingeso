@@ -11,11 +11,11 @@ public class SucursalService {
     @Autowired
     SucursalRepository sucursal;
 
-    Sucursal buscarSucursalPorID(Long id) {
+    public Sucursal buscarSucursalPorID(Long id) {
         return sucursal.findById(id);
     }
 
-    Sucursal buscarSucursalPorNombre(String nombre) {
+    public Sucursal buscarSucursalPorNombre(String nombre) {
         return sucursal.findByNombreSucursal(nombre);
     }
 
