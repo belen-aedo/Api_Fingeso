@@ -24,10 +24,6 @@ public class Reserva {
     @JoinColumn(name = "id_sucursal_devolucion")
     private Sucursal sucursalDevolucion;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_arriendo")
-    private Arriendo arriendoAsignado;
-
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_vehiculo_referencia")
     private VehiculoReferencia vehiculoAsignado; // Reserva-M-----1-VehículoReferencia
@@ -42,7 +38,6 @@ public class Reserva {
     public Reserva(long id_reserva,
                    Cliente cliente,
                    Sucursal sucursalRetiro,
-                   Arriendo arriendoAsignado,
                    VehiculoReferencia vehiculoAsignado,
                    double costoTotal,
                    boolean pagoReserva,
@@ -53,7 +48,6 @@ public class Reserva {
         this.id_reserva = id_reserva;
         this.cliente = cliente;
         this.sucursalRetiro = sucursalRetiro;
-        this.arriendoAsignado = arriendoAsignado;
         this.vehiculoAsignado = vehiculoAsignado;
         this.CostoTotal = costoTotal;
         this.pagoReserva = pagoReserva;
@@ -78,10 +72,6 @@ public class Reserva {
 
     public Sucursal getSucursalRetiro() {
         return sucursalRetiro;
-    }
-
-    public Arriendo getArriendoAsignado() {
-        return arriendoAsignado;
     }
 
     public VehiculoReferencia getVehiculoAsignado() {
@@ -127,10 +117,6 @@ public class Reserva {
 
     public void setSucursalRetiro(Sucursal sucursal) {
         this.sucursalRetiro = sucursal;
-    }
-
-    public void setArriendoAsignado(Arriendo arriendoAsignado) {
-        this.arriendoAsignado = arriendoAsignado;
     }
 
     public void setVehiculoAsignado(VehiculoReferencia vehiculoAsignado) {

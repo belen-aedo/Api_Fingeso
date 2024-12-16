@@ -94,8 +94,7 @@ FROM vehiculo v
                                          (a.fecha_inicio >= '2024-12-16' AND a.fecha_inicio <= '2024-12-20')
                                          )
 WHERE s.nombre_sucursal = 'Sucursal Central'
-  AND a.id IS NULL; -- Solo incluir vehículos sin reservas o fuera del rango
-
+AND a.id_reserva IS NULL; -- Solo incluir vehículos sin reservas o fuera del rango
 
 --(4)-VEHICULOS Y VEHICULOS REFRENCIA
 
@@ -103,23 +102,21 @@ WHERE s.nombre_sucursal = 'Sucursal Central'
 INSERT INTO public.vehiculo_referencia (
     cantidad_puertas,
     capacidad_pasajeros,
-    costo_arriendol_vehiculo,
+    costo_arriendo_vehiculo,
     costo_reserva_vehiculo,
-    estado,
     id_vehiculo_referencia,
     acriss,
     descripcion_publicacion,
     mecanico_automatico,
     modelo,
     tipo_combustible,
-    url,
-    imagen_vehiculo_referencia
+    url
 ) VALUES
-      (4, 5, 120000.00, 60000.00, true, 1, 'LCAR', 'Vehículo 4x4 ideal para terrenos difíciles.', 'Automático', 'Toyota Land Cruiser', 'Gasolina', 'http://example.com/toyota_land_cruiser.jpg', null),
-      (4, 5, 150000.00, 75000.00, true, 2, 'LCAR', 'SUV todo terreno con gran capacidad.', 'Automático', 'Jeep Wrangler', 'Gasolina', 'http://example.com/jeep_wrangler.jpg', null),
-      (4, 5, 130000.00, 65000.00, true, 3, 'LCAR', 'Ideal para aventuras off-road.', 'Automático', 'Ford Bronco', 'Gasolina', 'http://example.com/ford_bronco.jpg', null),
-      (4, 5, 140000.00, 70000.00, true, 4, 'LCAR', 'Vehículo con gran tracción para todo tipo de terreno.', 'Automático', 'Land Rover Defender', 'Diésel', 'http://example.com/land_rover_defender.jpg', null),
-      (4, 5, 160000.00, 80000.00, true, 5, 'LCAR', 'SUV de lujo con capacidad para 5 personas.', 'Automático', 'Mercedes-Benz G-Class', 'Gasolina', 'http://example.com/mercedes_g_class.jpg', null);
+      (4, 5, 120000.00, 60000.00, 1, 'LCAR', 'Vehículo 4x4 ideal para terrenos difíciles.', 'Automático', 'Toyota Land Cruiser', 'Gasolina', 'https://drive.google.com/file/d/1TeDws71mnhMre1sKw4UFdvYKmla57CpT/view?usp=drive_link'),
+      (4, 5, 150000.00, 75000.00, 2, 'LCAR', 'SUV todo terreno con gran capacidad.', 'Automático', 'Jeep Wrangler', 'Gasolina', 'http://example.com/jeep_wrangler.jpg'),
+      (4, 5, 130000.00, 65000.00,  3, 'LCAR', 'Ideal para aventuras off-road.', 'Automático', 'Ford Bronco', 'Gasolina', 'http://example.com/ford_bronco.jpg'),
+      (4, 5, 140000.00, 70000.00, 4, 'LCAR', 'Vehículo con gran tracción para todo tipo de terreno.', 'Automático', 'Land Rover Defender', 'Diésel', 'http://example.com/land_rover_defender.jpg'),
+      (4, 5, 160000.00, 80000.00, 5, 'LCAR', 'SUV de lujo con capacidad para 5 personas.', 'Automático', 'Mercedes-Benz G-Class', 'Gasolina', 'http://example.com/mercedes_g_class.jpg');
 
 
 -- Insertar en vehiculo (7 registros ajustados)

@@ -9,7 +9,7 @@ public class Agendamiento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id_agendamiento;
 
     @ManyToOne
     @JoinColumn(name = "id_reserva")
@@ -63,8 +63,8 @@ public class Agendamiento {
         this.reserva = reserva;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId_agendamiento(Long id) {
+        this.id_agendamiento = id;
     }
 
     public void setFechaInicio(LocalDate fechaInicio) {
@@ -87,8 +87,8 @@ public class Agendamiento {
         this.sucursalDevolucion = sucursalDevolucion;
     }
 
-    public Long getId() {
-        return id;
+    public Long getId_agendamiento() {
+        return id_agendamiento;
     }
 
 }

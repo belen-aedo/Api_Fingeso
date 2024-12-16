@@ -58,31 +58,6 @@ public class VehiculoRepositoryImplement implements VehiculoRepository {
         }
     }
 
-    /**
-     * obtener los vehículos cuya fecha termino de reserva más una semana sea menor a la fecha de retiro y que la sucursal de devolución sea igual
-     * a la sucursal de retiro y los vehiculo que no estén reservados
-     *
-     * @param fechaRetiro
-     * @param idSucursalRetiro
-     * @return
-     */
-    @Override
-    public List<Vehiculo> findBySucursalFecha(LocalDate fechaRetiro, long idSucursalRetiro) {
-        String sql =
-                " SELECT v.id, v.patente, v.estado_vehiculo " +
-                        " FROM vehiculo v " +
-                        " JOIN reservas r ON r.id_reserva = v.id_reserva " +
-                        " JOIN sucursal s ON r.id_sucursal_devolucion = s.id_sucursal " +
-                        " WHERE fecha_termino_reserva + (INTERVAL  '1 week') < ? " +
-                        " AND s.id_sucursal = ? ; ";
-        try {
-            // Ejecutar la consulta con los parámetros
-            return jdbcTemplate.query(sql, new VehiculoRowMapperSimplify(), fechaRetiro, idSucursalRetiro);
-        } catch (EmptyResultDataAccessException e) {
-            // Si no hay resultados, devolver una lista vacía
-            return new ArrayList<>();
-        }
-    }
 
 /**
  * Busca los vehículos disponibles en una sucursal específica para un rango de fechas dado.
@@ -112,7 +87,7 @@ public class VehiculoRepositoryImplement implements VehiculoRepository {
                         "       (a.fecha_inicio >= ? AND a.fecha_inicio <= ?) " +
                         "   ) " +
                         " WHERE s.nombre_sucursal = ? " +
-                        " AND a.id IS NULL; ";
+                        " AND a.id_reserva IS NULL; ";
         try {
             return jdbcTemplate.query(
                     sql,

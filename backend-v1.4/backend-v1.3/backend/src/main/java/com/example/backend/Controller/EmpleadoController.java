@@ -3,6 +3,7 @@ package com.example.backend.Controller;
 import com.example.backend.Entity.Cliente;
 import com.example.backend.Entity.Empleado;
 import com.example.backend.Service.EmpleadoService;
+import com.example.backend.Service.ReservaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +14,8 @@ public class EmpleadoController {
 
     @Autowired
     private EmpleadoService empleadoService;
+
+
 
     @PostMapping("/registrar")
     public String registrarEmpleado(@RequestBody Empleado nuevoEmpleado) {
@@ -36,7 +39,12 @@ public class EmpleadoController {
     public int loginEmpleado(@RequestBody Empleado empleadoR) {
             return empleadoService.login(empleadoR.getEmail(), empleadoR.getPassword());
     }
+
+
+
 }
+
+
 
 /*
 ejemplo

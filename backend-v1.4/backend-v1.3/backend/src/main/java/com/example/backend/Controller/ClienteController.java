@@ -1,18 +1,14 @@
 package com.example.backend.Controller;
 
 import com.example.backend.Entity.*;
-import com.example.backend.Repository.SucursalRepository;
-import com.example.backend.Repository.VehiculoReferenciaRepository;
 import com.example.backend.Service.*;
 import com.example.backend.Utilidades.ValidacionDatos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/cliente")
@@ -41,6 +37,7 @@ public class ClienteController {
         return clienteService.buscarClientePorId(Long.parseLong(id));
     }
 
+    // Primero registrarse
     @PostMapping("/registrar")
     public String registrarCliente(@RequestBody Cliente Nuevocliente) {
         try {
@@ -58,14 +55,15 @@ public class ClienteController {
         }
     }
 
+    // Loguearse
     @PostMapping("/login")
     public int loginCliente(@RequestBody Cliente clienteR) {
         return clienteService.login(clienteR.getEmail(), clienteR.getPassword());
     }
 
-    // Paso 2-3-4-5
-    // Obtener vehículos disponibles
-    @GetMapping("/getAvaliableVehiculos")
+
+    // Obtener vehículos disponibles obteniendo los vehículos referencia
+    @GetMapping("/ObtenerVehiculoDisponibles")
     public List<VehiculoReferencia> getAllVehiculosAvailable(
             @RequestParam("nombreSucursalR") String nombreSucursalRet,
             @RequestParam("fechaRetiro") LocalDate fechaRetiro,
@@ -75,18 +73,39 @@ public class ClienteController {
         try {
             List<Vehiculo> VehiculoDispo = vehiculoFilterService.ObtenerVehiculosDisponibles(fechaRetiro, fechaDevolucion,nombreSucursalRet) ;
             List<VehiculoReferencia> VehiculoReferencias = new LinkedList<>();
-            VehiculoReferencias = vehiculoFilterService.obtenerVehiculosReferencia(VehiculoDispo);
-
-            return VehiculoReferencias;
+            return vehiculoFilterService.obtenerVehiculosReferencia(VehiculoDispo);
+            // la idea es que al seleccionar un vehiculo la llave del vehiculo seleccionado se guarde
         } catch (Exception e) {
+
             System.out.println("Error al obtener los vehículos disponibles: " + e.getMessage());
             return new ArrayList<>();
         }
     }
 
-    // Seleccionar Vehículo
-    @GetMapping("/SelecionarVehiculo")
-    public Vehiculo SelecionarVehiculo(@RequestParam("modelo") String modelo,
+    // Seleccionar el vehículo referencia para ver los detalles con el costo de arriendo y devolución cambiados
+    @PostMapping("/VerDetallesVehiculo")
+    public VehiculoReferencia obtenerDetalles(
+            @RequestBody VehiculoReferencia vehiculoReferencia,
+            @RequestParam("fechaRetiro") LocalDate fechaRetiro,
+            @RequestParam("fechaDevolucion") LocalDate fechaDevolucion) {
+
+        try {
+            // Calcular costos y agregarlos a la lista
+            long dias = ChronoUnit.DAYS.between(fechaRetiro, fechaDevolucion);
+            vehiculoReferencia.setCostoReservaVehiculo(vehiculoReferencia.getCostoReservaVehiculo() * dias);
+            vehiculoReferencia.setCostoArriendoVehiculo(vehiculoReferencia.getCostoArriendoVehiculo() * dias);
+
+        } catch (Exception e) {
+            return new VehiculoReferencia();
+        }
+        return vehiculoReferencia;
+        // la idea es guardar el vehiculo referencia ya que contiene los costos de la reserva, por lo cual se debe en este punto actualiza
+        // la llave que contiene el vehiculo referencia guardado anteriormente
+    }
+
+    // Confirmar vehiculo obteniendo el dato del vehículo físico disponible
+    @PostMapping("/SelecionarVehiculoReferencia")
+    public String SelecionarVehiculo(@RequestBody VehiculoReferencia vehiculoReferencia,
                                        @RequestParam("nombreSucursalR") String nombreSucursalRet,
                                        @RequestParam("fechaRetiro") LocalDate fechaRetiro,
                                        @RequestParam("fechaDevolucion") LocalDate fechaDevolucion,
@@ -95,53 +114,71 @@ public class ClienteController {
         List<Vehiculo> VehiculoDispo = vehiculoFilterService.ObtenerVehiculosDisponibles(fechaRetiro, fechaDevolucion,nombreSucursalRet);
         List<Vehiculo> VehiculosMismoModelo = new LinkedList<>();
         for (Vehiculo v : VehiculoDispo) {
-            if (v.getModelo().equals(modelo)) {
+            if (v.getModelo().equals(vehiculoReferencia.getModelo())) {
                 VehiculosMismoModelo.add(v);
             }
         }
-        // tomo el primer vehículo
-        return VehiculosMismoModelo.get(0);
+        // tomo el primer vehículo físico que esté disponible del mismo modelo, la idea es guardar este dato en alguna llave
+        return VehiculosMismoModelo.get(0).getPatente();
     }
 
-    // Proceso de pago
+    // Mostrar detalles de la reserva // siempre se trabaja con el mismo vehiculo referencia que esta en la llave
+    @PostMapping("/DetallesReserva")
+    public List<String> obtenerDetallesReserva(@RequestBody VehiculoReferencia vehiculoReferencia,
+                                                                        @RequestParam("nombreSucursalR") String nombreSucursalRet,
+                                                                        @RequestParam("fechaRetiro") LocalDate fechaRetiro,
+                                                                        @RequestParam("fechaDevolucion") LocalDate fechaDevolucion,
+                                                                        @RequestParam("nombreSucursalD") String nombreSucursalDevo){
+        List<String> DetallesReserva = new LinkedList<>();
+        DetallesReserva.add("Costo Reserva: " + vehiculoReferencia.getCostoReservaVehiculo());
+        DetallesReserva.add("Sucursal de retiro: " + nombreSucursalRet);
+        DetallesReserva.add("Sucursal de devolución: " + nombreSucursalDevo);
+        DetallesReserva.add("Fecha de retiro: " + fechaRetiro);
+        DetallesReserva.add("Fecha de devolución: " + fechaDevolucion);
+        DetallesReserva.add("Modelo: " + vehiculoReferencia.getModelo());
+        DetallesReserva.add(vehiculoReferencia.getDescripcionPublicacion());
+        DetallesReserva.add("Url:" + vehiculoReferencia.getUrl());
+        return DetallesReserva;
+    }
+
+    // Se omite el pago, se hace como que esta pagado
     // Confirmar reserva con vehiculo seleccionado
-
-    @GetMapping("/VehiculoSelecionado")
-    public String RealizarAgendamiento(@RequestParam("Patente") String Patente,
-                                @RequestParam("nombreSucursalR") String nombreSucursalRet,
-                                @RequestParam("fechaRetiro") LocalDate fechaRetiro,
-                                @RequestParam("fechaDevolucion") LocalDate fechaDevolucion,
-                                @RequestParam("nombreSucursalD") String nombreSucursalDevo,
-                                       @RequestParam("Rut") String rut) {
-
+    @PostMapping("/ConfirmarReserva")
+    public String RealizarAgendamiento(
+                                       @RequestBody VehiculoReferencia vehiculoReferencia,
+                                       @RequestParam("patente") String patente,
+                                       @RequestParam("nombreSucursalR") String nombreSucursalRet,
+                                       @RequestParam("fechaRetiro") LocalDate fechaRetiro,
+                                       @RequestParam("fechaDevolucion") LocalDate fechaDevolucion,
+                                       @RequestParam("nombreSucursalD") String nombreSucursalDevo,
+                                       @RequestParam("email") String email) {
         try {
-            Vehiculo AgendarVehiculo = vehiculoFilterService.BuscarVehiculoPorPatente(Patente);
             Sucursal AgendarSucursalRetiro = sucursalService.buscarSucursalPorNombre(nombreSucursalRet);
             Sucursal AgensarSucursalDevo = sucursalService.buscarSucursalPorNombre(nombreSucursalDevo);
-            Cliente cliente = clienteService.buscarClientePorRut(rut);
-            VehiculoReferencia VehiculoReferencia = vehiculoFilterService.obtenerReferencia(AgendarVehiculo.getModelo());
+            Vehiculo vehiculo = vehiculoFilterService.BuscarVehiculoPorPatente(patente);
+            Cliente cliente = clienteService.buscarClientePorCorreo(email);
             Reserva reserva = new Reserva();
             reserva.setCliente(cliente);
-            reserva.setVehiculoAsignado(VehiculoReferencia);
+            reserva.setVehiculoAsignado(vehiculoReferencia);
             reserva.setFechaReserva(LocalDate.now());
             reserva.setFechaTerminoReserva(fechaDevolucion);
             reserva.setFechaInicioReserva(fechaRetiro);
             reserva.setSucursalRetiro(AgendarSucursalRetiro);
             reserva.setSucursalDevolucion(AgensarSucursalDevo);
             reserva.setReservaFinalizada(Boolean.FALSE);
-            reserva.setCostoTotal(Double.valueOf(0));// de momento es 0 devido a que no se esta realizando nigun
+            reserva.setCostoTotal(vehiculoReferencia.getCostoReservaVehiculo());// costo que se cambio anteriormente
             reserva.setPagoReserva(Boolean.TRUE); // SE SIMULA QUE SE PAGUE LA RESERVA
 
-            //Guardar reserva
+            //Guardar reserva // funciona bien
             reservaService.GuardarReserva(reserva);
             Long IdReserva = reservaService.BuscarReservaPorIdCliente(cliente.getIdCliente());
             reserva.setId_reserva(IdReserva);
 
-            //crear aegndamiento
+            //crear agendamiento // con problemas
             ValidacionDatos ValidacionDatos = new ValidacionDatos();
             LocalDate NuevFechaDispo = ValidacionDatos.calcularNuevaFechaFin(fechaRetiro, fechaDevolucion);
 
-            agendarRerservaService.realizarAgendamiento(AgendarVehiculo, AgendarSucursalRetiro, AgensarSucursalDevo, fechaRetiro, fechaDevolucion, NuevFechaDispo, reserva, cliente);
+            agendarRerservaService.realizarAgendamiento(vehiculo, AgendarSucursalRetiro, AgensarSucursalDevo, fechaRetiro, fechaDevolucion, NuevFechaDispo, reserva, cliente);
 
             return "Agendamiento Registrado exitosamente";
 
@@ -150,19 +187,5 @@ public class ClienteController {
             return "Error al realizar agendamiento " + e.getMessage();
         }
     }
-
-
-
-
-    // Paso 6 selección del vehiculo
-    // Paso 7
-    // Paso 8 confirma vehiculo
-    // Paso 11 confirmar datos de reserva
-    // Paso 12-13 precio total a pagar
-    // Pagar
-    // Mostrar que la reserva de a realizado-guardar en la bases de datos
-
-
-
 
 }

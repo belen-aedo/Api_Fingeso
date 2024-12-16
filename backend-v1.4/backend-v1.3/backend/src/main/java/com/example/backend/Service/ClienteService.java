@@ -101,5 +101,9 @@ public class ClienteService {
         return clienteRepo.findByRut(rut);
     }
 
+    public Cliente buscarClientePorCorreo(String email) {
+        return clienteRepo.findByEmail(email);
+    }
+
 }
 

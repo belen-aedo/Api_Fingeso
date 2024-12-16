@@ -27,7 +27,9 @@ public class Arriendo {
     @JoinColumn(name = "id_sucursal_devolucion")
     private Sucursal sucursalDevolucion;
 
-    private String patenteVehiculoArrendado;
+    @OneToOne
+    @JoinColumn(name = "id_reserva")
+    private Reserva reserva;
 
     private LocalDate fechaArriendo;
     private LocalDate fechaInicioArriendo;

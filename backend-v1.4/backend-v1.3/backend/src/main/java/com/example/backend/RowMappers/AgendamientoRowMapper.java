@@ -17,7 +17,7 @@ public class AgendamientoRowMapper implements RowMapper<Agendamiento> {
         Agendamiento agendamiento = new Agendamiento();
 
         // Mapear columnas del Agendamiento
-        agendamiento.setId(rs.getLong("id"));
+        agendamiento.setId_agendamiento(rs.getLong("id"));
         agendamiento.setFechaInicio(rs.getDate("fecha_inicio").toLocalDate());
         agendamiento.setFechaFinalizacion(rs.getDate("fecha_finalizacion").toLocalDate());
 
