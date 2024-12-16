@@ -2,6 +2,7 @@ package com.example.backend.Entity;
 
 import jakarta.persistence.*;
 
+import java.awt.image.BufferedImage;
 import java.time.LocalDate;
 
 @Table(name = "vehiculo_referencia")
@@ -13,6 +14,10 @@ public class VehiculoReferencia {
     private long idVehiculoReferencia;//Identificador
 
     private String modelo;
+
+    @Lob
+    private byte[] imagenVehiculoReferencia;
+
     private String descripcionPublicacion;
     private boolean estado;//disponibilidad
     private double CostoReservaVehiculo;
@@ -48,7 +53,6 @@ public class VehiculoReferencia {
     public VehiculoReferencia() {
 
     }
-
 // Getters
     public long getIdVehiculoReferencia() {
         return idVehiculoReferencia;
@@ -112,8 +116,7 @@ public class VehiculoReferencia {
     }
 
     public void setCostoArriendolVehiculo(double costoArriendolVehiculo) {
-        CostoArriendolVehiculo = costoArriendolVehiculo;
-    }
+        CostoArriendolVehiculo = costoArriendolVehiculo;}
 
     public void setCapacidadPasajeros(int capacidadPasajeros) {
         this.capacidadPasajeros = capacidadPasajeros;

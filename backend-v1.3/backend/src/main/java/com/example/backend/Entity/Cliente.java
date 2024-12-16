@@ -113,4 +113,12 @@ public class Cliente {
     public void setReservas(Set<Reserva> reservas) {
         this.reservas = reservas;
     }
+
+    public long getIdCliente() {
+        return idCliente;
+    }
+
+    public Set<Reserva> getReservas() {
+        return reservas;
+    }
 }

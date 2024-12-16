@@ -1,7 +1,9 @@
 package com.example.backend.Controller;
 
 import com.example.backend.Entity.Vehiculo;
+import com.example.backend.Entity.VehiculoReferencia;
 import com.example.backend.Service.VehiculoFilterService;
+import com.example.backend.Utilidades.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,19 +42,18 @@ public class VehiculoFilterController {
             return new ArrayList<>();
         }
     }
-
     @GetMapping("/getAvaliableVehiculos")
     public List<Vehiculo> getAllVehiculosAvailable(
             @RequestParam("nombreSucursal") String nombreSucursal,
-            @RequestParam("fechaRetiro") LocalDate fechaRetiro ) {
+            @RequestParam("fechaRetiro") LocalDate fechaRetiro,
+            @RequestParam("fechaDevolucion") LocalDate fechaDevolucion) {
         // Implementa
         try {
             // Llamar al servicio para obtener los vehículos disponibles
-            return vehiculoFilterService.ObtenerVehiculosDisponibles(nombreSucursal, fechaRetiro);
+            return vehiculoFilterService.ObtenerVehiculosDisponibles(fechaRetiro, fechaDevolucion, nombreSucursal) ;
         } catch (Exception e) {
             System.out.println("Error al obtener los vehículos disponibles: " + e.getMessage());
             return new ArrayList<>();
         }
-
     }
 }

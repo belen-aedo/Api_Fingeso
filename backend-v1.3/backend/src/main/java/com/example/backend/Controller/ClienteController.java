@@ -13,7 +13,6 @@ import java.util.Optional;
 public class ClienteController {
 
     //url: http://localhost:8080/api/usuarios/
-
     @Autowired
     private ClienteService clienteService;
 

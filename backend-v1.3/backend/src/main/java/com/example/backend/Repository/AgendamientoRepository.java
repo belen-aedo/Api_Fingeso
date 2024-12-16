@@ -13,10 +13,9 @@ public interface AgendamientoRepository {
     /**
      *
      */
-    public void saveAgendaMiento(LocalDate FechaInicio, LocalDate FcehaFin, Sucursal sRetiro, Sucursal sDevolucion);
+    public void save(LocalDate FechaInicio, LocalDate FcehaFin, Sucursal sRetiro, Sucursal sDevolucion);
     public Agendamiento findAgendamientoByIdUsuario(long idUsuario);
     public Agendamiento findAgendamientoByIdReserva(long idReserva);
-    public LocalDate findAgendamientoByProxDate(Long idAgendamiento);
 
 }
 

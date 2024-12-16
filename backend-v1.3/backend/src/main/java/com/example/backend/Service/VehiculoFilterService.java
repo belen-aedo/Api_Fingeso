@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class VehiculoFilterService {
@@ -43,31 +44,9 @@ public class VehiculoFilterService {
         return vehiculos;
     }
 
+    //Retorno un par con los vehiculos disponibles y sus referencias
 
-    /**
-    public List<Vehiculo> ObtenerVehiculosDisponibles(String nombreScursalR, String nombreSucursalD, LocalDate fechaRetiro, LocalDate fechaDevo) {
-        List<Vehiculo> vehiculosDisponibles = new ArrayList<>();
-        for(Vehiculo vehiculo : vehiculoRepository.findBySucursal(nombreSucursalD)) {
-            //solo los que no tengan reserva y esten disponibles, tambien le tema de las fecha
-            if ( (!(vehiculo.getReserva() == null) && vehiculo.getReserva().getArriendoAsignado().getFechaTerminoArriendo().plusWeeks(1).isBefore(fechaRetiro)) || (vehiculo.getReserva()==null && vehiculo.getEstadoVehiculo().equals("D"))){
-                vehiculosDisponibles.add(vehiculo);
-            }
-        }
-        if (vehiculosDisponibles.isEmpty()){
-            throw new IllegalArgumentException("la sucursal indicada no tiene vehículos disponibles: " + nombreSucursalD);
-        }
-        return vehiculosDisponibles;
-    }
-    */
-
-    public List<Vehiculo> ObtenerVehiculosDisponibles(String nombreSucursalR, LocalDate fechaRetiro){
-        Sucursal sucursal = sucursalRepository.findByNombreSucursal(nombreSucursalR);
-        return vehiculoRepository.findBySucursalFecha(fechaRetiro, sucursal.getIdSucursal());
-    }
-
-
-    public List<Vehiculo> ObtenerVehiculo(LocalDate fechaInicio, LocalDate fechaFin, String sRetiro) {
-
+    public List<Vehiculo> ObtenerVehiculosDisponibles(LocalDate fechaInicio, LocalDate fechaFin, String sRetiro) {
         // 1. Validar la duración del arriendo (no puede superar los 30 días)
         if (ChronoUnit.DAYS.between(fechaInicio, fechaFin) > 30) {
             throw new IllegalArgumentException("El arriendo no puede superar los 30 días.");
@@ -85,65 +64,47 @@ public class VehiculoFilterService {
         if (!(fechaInicio.isAfter(fechaActual) || fechaInicio.isEqual(fechaActual))) {
             throw new IllegalArgumentException("la fecha debe estar coordinada con la fecha actual");
         }
+
         ValidacionDatos validacionDatos = new ValidacionDatos();
         LocalDate fechaProximaDisponibilidad  = validacionDatos.calcularNuevaFechaFin( fechaInicio, fechaFin );
 
         // 5. obtener los vehiculo que están disponibles.
-        return vehiculoRepository.findByDates(fechaInicio, fechaProximaDisponibilidad, sRetiro);
+        List<Vehiculo> vehiculosDisponibles = vehiculoRepository.findByDates(fechaInicio, fechaProximaDisponibilidad, sRetiro);
+
+        /*
+        //.6 Obtener modelos únicos
+        List<String> modelos = vehiculosDisponibles.stream()
+                .map(Vehiculo::getModelo)
+                .distinct() // Filtra duplicados
+                .toList();
+
+        // Obtener referencias en una sola consulta
+        List<VehiculoReferencia> referencias = vehiculoRepository.getReferenciasPorModelos(modelos);
+        */
+
+        return vehiculosDisponibles;
     }
 
-    /*
-    public boolean crearAgendamiento(Vehiculo vehiculo, LocalDate fechaInicio, LocalDate fechaFin, Sucursal sucursalRetiro, Sucursal sucursalDevolucion) {
-    // Paso 1: Verificar la disponibilidad del vehículo utilizando el nuevo método fusionado
-    List<Vehiculo> vehiculosDisponibles = findByDates(fechaInicio, fechaFin, sucursalRetiro.getNombreSucursal());
+    public void obtenerVehiculosReferencia(List<Vehiculo> vehiculos) {
+        // Obtener modelos únicos
+        List<String> modelos = vehiculos.stream()
+                .map(Vehiculo::getModelo)
+                .distinct() // Filtra duplicados
+                .toList();
 
-    // Paso 2: Verificar si el vehículo está en la lista de vehículos disponibles
-    if (!vehiculosDisponibles.contains(vehiculo)) {
-        return false; // El vehículo no está disponible en el rango de fechas
+        // Obtener referencias por cada modelo y almacenarlas
+        List<VehiculoReferencia> referencias = new ArrayList<>();
+        modelos.forEach(modelo -> {
+            VehiculoReferencia referencia = vehiculoRepository.getReferencias(modelo);
+            if (referencia != null) { // Manejo de posibles nulos
+                referencias.add(referencia);
+            }
+        });
+
+        // Aquí puedes realizar cualquier operación adicional con las referencias
+        referencias.forEach(System.out::println); // Ejemplo: imprimir referencias
     }
 
-    // Paso 3: Calcular la nueva fecha de fin con los días de mantenimiento
-    LocalDate nuevaFechaFin = calcularNuevaFechaFin(fechaInicio, fechaFin);
 
-    // Paso 4: Verificar que no haya solapamientos con otros agendamientos
-    if (!verificarSolapamientos(vehiculo, fechaInicio, nuevaFechaFin)) {
-        return false; // Existen solapamientos con otros agendamientos
-    }
-
-    // Paso 5: Crear el agendamiento
-    Agendamiento agendamiento = new Agendamiento();
-    agendamiento.setVehiculo(vehiculo);
-    agendamiento.setFechaInicio(fechaInicio);
-    agendamiento.setFechaFin(nuevaFechaFin);
-    agendamiento.setSucursalRetiro(sucursalRetiro);
-    agendamiento.setSucursalDevolucion(sucursalDevolucion);
-    agendamiento.setProximaFechaDisponible(nuevaFechaFin.plusDays(7)); // Ejemplo de próxima fecha disponible
-
-    // Guardar el agendamiento en la base de datos
-    agendamientoRepository.save(agendamiento);
-
-    return true; // Agendamiento creado exitosamente
-}
-
-private LocalDate calcularNuevaFechaFin(LocalDate fechaInicio, LocalDate fechaFin) {
-    // Calcular la nueva fecha de fin con días de mantenimiento
-    int diasMantenimiento = calcularDiasMantenimiento(fechaInicio, fechaFin);
-    return fechaFin.plusDays(diasMantenimiento); // Retornar la nueva fecha de fin con mantenimiento
-}
-
-private boolean verificarSolapamientos(Vehiculo vehiculo, LocalDate fechaInicio, LocalDate fechaFin) {
-    // Verificar si existe algún solapamiento con otros agendamientos
-    List<Agendamiento> agendamientos = agendamientoRepository.findByVehiculo(vehiculo);
-
-    for (Agendamiento agendamiento : agendamientos) {
-        if (!(fechaFin.isBefore(agendamiento.getFechaInicio()) || fechaInicio.isAfter(agendamiento.getProximaFechaDisponible()))) {
-            return false; // Solapamiento encontrado
-        }
-    }
-
-    return true; // No hay solapamientos
-}
-
-    */
 
 }
