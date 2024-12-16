@@ -48,7 +48,6 @@ public class VehiculoFilterService {
     }
 
     //Retorno un par con los vehiculos disponibles y sus referencias
-
     public List<Vehiculo> ObtenerVehiculosDisponibles(LocalDate fechaInicio, LocalDate fechaFin, String sRetiro) {
         // 1. Validar la duración del arriendo (no puede superar los 30 días)
         if (ChronoUnit.DAYS.between(fechaInicio, fechaFin) > 30) {
@@ -74,39 +73,24 @@ public class VehiculoFilterService {
         // 5. obtener los vehiculo que están disponibles.
         List<Vehiculo> vehiculosDisponibles = vehiculoRepository.findByDates(fechaInicio, fechaProximaDisponibilidad, sRetiro);
 
-        /*
-        //.6 Obtener modelos únicos
-        List<String> modelos = vehiculosDisponibles.stream()
-                .map(Vehiculo::getModelo)
-                .distinct() // Filtra duplicados
-                .toList();
-
-        // Obtener referencias en una sola consulta
-        List<VehiculoReferencia> referencias = vehiculoRepository.getReferenciasPorModelos(modelos);
-        */
-
         return vehiculosDisponibles;
     }
 
-    public void obtenerVehiculosReferencia(List<Vehiculo> vehiculos) {
-        // Obtener modelos únicos
+    public List<VehiculoReferencia> obtenerVehiculosReferencia(List<Vehiculo> vehiculos) {
+
         List<String> modelos = vehiculos.stream()
                 .map(Vehiculo::getModelo)
                 .distinct() // Filtra duplicados
                 .toList();
 
-        // Obtener referencias por cada modelo y almacenarlas
         List<VehiculoReferencia> referencias = new ArrayList<>();
         modelos.forEach(modelo -> {
             VehiculoReferencia referencia = vehiculoRepository.getReferencias(modelo);
-            if (referencia != null) { // Manejo de posibles nulos
+            if (referencia != null) {
                 referencias.add(referencia);
             }
         });
-        // Aquí puedes realizar cualquier operación adicional con las referencias
-        referencias.forEach(System.out::println); // Ejemplo: imprimir referencias
+        return referencias;
     }
-
-
 
 }

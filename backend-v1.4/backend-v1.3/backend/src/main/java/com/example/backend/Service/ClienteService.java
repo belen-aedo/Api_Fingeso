@@ -72,6 +72,7 @@ public class ClienteService {
             throw new IllegalArgumentException("ya se encuentra registrado.");
         }
         System.out.println("registrado(a) correctamente:" + cliente.getNombre());
+
         clienteRepo.save(cliente);
     }
 

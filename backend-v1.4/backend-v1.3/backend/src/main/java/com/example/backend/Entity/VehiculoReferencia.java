@@ -2,9 +2,6 @@ package com.example.backend.Entity;
 
 import jakarta.persistence.*;
 
-import java.awt.image.BufferedImage;
-import java.time.LocalDate;
-
 @Table(name = "vehiculo_referencia")
 @Entity
 
@@ -17,19 +14,14 @@ public class VehiculoReferencia {
 
     private String modelo;
 
-    @Lob
-    private byte[] imagenVehiculoReferencia;
-
     private String descripcionPublicacion;
-    private boolean estado;//disponibilidad
     private double CostoReservaVehiculo;
-    private double CostoArriendolVehiculo;
+    private double CostoArriendoVehiculo;
     private int capacidadPasajeros;
     private int cantidadPuertas;
     private String tipoCombustible;
     private String mecanico_automatico;
     private String acriss;
-
 
     //precio, capacidad de pasajeros, cantidad de puertas, tipo de gasolina, mecánico o automático,
     public VehiculoReferencia(String descripcionPublicacion,
@@ -42,9 +34,8 @@ public class VehiculoReferencia {
                               String mecanico_automatico,
                               String acriss, String url) {
         this.descripcionPublicacion = descripcionPublicacion;
-        this.estado = estado;
         this.CostoReservaVehiculo = CostoReservaVehiculo;
-        this.CostoArriendolVehiculo = CostoArriendolVehiculo;
+        this.CostoArriendoVehiculo = CostoArriendolVehiculo;
         this.capacidadPasajeros = capacidadPasajeros;
         this.cantidadPuertas = cantidadPuertas;
         this.tipoCombustible = tipoCombustible;
@@ -65,21 +56,15 @@ public class VehiculoReferencia {
         return descripcionPublicacion;
     }
 
-    public boolean getEstado() {
-        return estado;
-    }
 
     public double getCostoReservaVehiculo() {
         return CostoReservaVehiculo;
     }
 
-    public double getCostoArriendolVehiculo() {
-        return CostoArriendolVehiculo;
+    public double getCostoArriendoVehiculo() {
+        return CostoArriendoVehiculo;
     }
 
-    public boolean isEstado() {
-        return estado;
-    }
 
     public int getCapacidadPasajeros() {
         return capacidadPasajeros;
@@ -110,16 +95,13 @@ public class VehiculoReferencia {
         this.descripcionPublicacion = descripcionPublicacion;
     }
 
-    public void setEstado(boolean estadoPublicacion) {
-        this.estado = estadoPublicacion;
-    }
 
     public void setCostoReservaVehiculo(double precioPublicacion) {
         this.CostoReservaVehiculo = precioPublicacion;
     }
 
-    public void setCostoArriendolVehiculo(double costoArriendolVehiculo) {
-        CostoArriendolVehiculo = costoArriendolVehiculo;}
+    public void setCostoArriendoVehiculo(double costoArriendoVehiculo) {
+        CostoArriendoVehiculo = costoArriendoVehiculo;}
 
     public void setCapacidadPasajeros(int capacidadPasajeros) {
         this.capacidadPasajeros = capacidadPasajeros;
@@ -145,10 +127,6 @@ public class VehiculoReferencia {
 
     public void setUrl(String url){ this.url = url; }
 
-    public void setImagenVehiculoReferencia(byte[] imagenVehiculoReferencia) {
-        this.imagenVehiculoReferencia = imagenVehiculoReferencia;
-    }
-
     public String getUrl() {
         return url;
     }
@@ -157,7 +135,5 @@ public class VehiculoReferencia {
         return modelo;
     }
 
-    public byte[] getImagenVehiculoReferencia() {
-        return imagenVehiculoReferencia;
-    }
+
 }

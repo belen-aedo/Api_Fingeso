@@ -143,9 +143,9 @@ public class VehiculoRepositoryImplement implements VehiculoRepository {
     }
 
     public VehiculoReferencia getReferencias(String modelo) {
-        String sql = "SELECT v.*" +
-                " FROM vehiculo_referencia v" +
-                " WHERE v.modelo = ?";
+        String sql = " SELECT v.* " +
+                     " FROM vehiculo_referencia v " +
+                     " WHERE v.modelo = ? ";
         try {
             // Ejecutar la consulta con los parámetros
             return jdbcTemplate.queryForObject(sql, new Object[]{modelo} ,new VehiculoReferenciaRowMapper());

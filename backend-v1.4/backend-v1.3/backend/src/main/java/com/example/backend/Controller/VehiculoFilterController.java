@@ -44,13 +44,18 @@ public class VehiculoFilterController {
     }
 
     @GetMapping("/getAvaliableVehiculos")
-    public List<Vehiculo> getAllVehiculosAvailable(
+    public List<VehiculoReferencia> getAllVehiculosAvailable(
             @RequestParam("nombreSucursal") String nombreSucursal,
             @RequestParam("fechaRetiro") LocalDate fechaRetiro,
             @RequestParam("fechaDevolucion") LocalDate fechaDevolucion) {
+
         // Implementa
         try {
-            return vehiculoFilterService.ObtenerVehiculosDisponibles(fechaRetiro, fechaDevolucion, nombreSucursal) ;
+            List<Vehiculo> VehiculoDispo = vehiculoFilterService.ObtenerVehiculosDisponibles(fechaRetiro, fechaDevolucion, nombreSucursal) ;
+            List<VehiculoReferencia> VehiculoReferencias = new LinkedList<>();
+            VehiculoReferencias = vehiculoFilterService.obtenerVehiculosReferencia(VehiculoDispo);
+
+            return VehiculoReferencias;
         } catch (Exception e) {
             System.out.println("Error al obtener los vehículos disponibles: " + e.getMessage());
             return new ArrayList<>();
