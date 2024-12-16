@@ -7,8 +7,8 @@
         <span class="brand-name">Rent-A-Wheel</span>
       </div>
       <div class="header-buttons">
-        <router-link to="/principal" class="header-button">Inicia sesion</router-link>
-        <router-link to="/ayuda" class="header-button">Soporte</router-link>
+        <router-link to="/devolucion" class="header-button">Devolución de vehiculo</router-link>
+        
       </div>
     </header>
 

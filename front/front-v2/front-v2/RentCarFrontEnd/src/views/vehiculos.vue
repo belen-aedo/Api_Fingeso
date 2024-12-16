@@ -5,11 +5,9 @@
       <div class="logo-container">
         <img src="./media/icono2.png" alt="Rent-A-Wheel" class="logo">
         <span class="brand-name">Rent-A-Wheel</span>
+        <router-link to="/Cliente" class="header-button">Pagina anterior</router-link>
       </div>
-      <div class="header-buttons">
-        <router-link to="/principal" class="header-button">Inicia sesión</router-link>
-        <router-link to="/ayuda" class="header-button">Soporte</router-link>
-      </div>
+      
     </header>
     
       <h2>Vehículos Disponibles</h2>
@@ -40,8 +38,10 @@
           {
             id: 1,
             name: 'Camioneta 4x4',
+            patente: 'AB1234',
             description: 'Un vehículo ideal para los viajes montañosos, 5 pasajeros, 4 puertas, bencina, mecánico',
             price: 35000,
+  
             image: "./camioneta_4x4.png",
           },
           {

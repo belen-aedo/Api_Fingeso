@@ -6,13 +6,9 @@ const router = createRouter({
     {
       path: '/', // Ruta principal
       name: 'Home',
-      component: () => import('../views/userSolicitation.vue'),
-    },
-    {
-      path: '/principal', // Ruta principalPage
-      name: 'Principal',
       component: () => import('../views/principalPage.vue'),
     },
+  
     {
       path: '/cliente', // Ruta cliente
       name: 'Cliente',
@@ -28,11 +24,8 @@ const router = createRouter({
       name: 'Arriendo',
       component: () => import('../views/arriendo.vue'),
     },
-    {
-      path: '/ayuda', // Ruta ayuda
-      name: 'Ayuda',
-      component: () => import('../views/ayuda.vue'),
-    },
+    
+
     {
       path: '/devolucion', // Ruta devolucion
       name: 'Devolucion',
