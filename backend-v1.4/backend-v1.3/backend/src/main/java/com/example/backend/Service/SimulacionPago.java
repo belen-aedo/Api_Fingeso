@@ -1,4 +1,4 @@
 package com.example.backend.Service;
 
-public class VehiculoService {
+public class SimulacionPago {
 }

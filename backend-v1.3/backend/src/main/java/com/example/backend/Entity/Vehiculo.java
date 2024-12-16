@@ -10,24 +10,20 @@ public class Vehiculo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    
     private String patente; // Placa del vehículo
     private String marca; // Marca del vehículo
     private String modelo; // Modelo del vehículo
     private String colorPrincipal; // Color del vehículo
     private int year; // Año de fabricación
-    private String estadoVehiculo; // D: Disponible, O: Ocupado, M: Mantenimiento
+    private Character estadoVehiculo; // D: Disponible, O: Ocupado, M: Mantenimiento
     private double kilometrajeVehiculo; // Kilometraje del vehículo
 
     @ManyToOne
     @JoinColumn(name = "id_sucursal")
     private Sucursal ubicacionActual; // muchos vehiculos en una sucursal, un vehiculo puede estar en una sucursal, Vehiculo-M------1-Sucursal
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_reserva",  nullable = true)
-    private Reserva reserva; // una vehiculo-1----1-reserva
 
-    public Vehiculo(long id, String patente, String marca, String modelo, String colorPrincipal, int year, String estadoVehiculo, double kilometrajeVehiculo, Sucursal ubicacionActual, Reserva reserva) {
+    public Vehiculo(long id, String patente, String marca, String modelo, String colorPrincipal, int year, Character estadoVehiculo, double kilometrajeVehiculo, Sucursal ubicacionActual, Reserva reserva) {
         this.id = id;
         this.patente = patente;
         this.marca = marca;
@@ -37,11 +33,9 @@ public class Vehiculo {
         this.estadoVehiculo = estadoVehiculo;
         this.kilometrajeVehiculo = kilometrajeVehiculo;
         this.ubicacionActual = ubicacionActual;
-        this.reserva = reserva;
     }
 
-    public Vehiculo() {
-    }
+    public Vehiculo() {}
 
     public long getId() {
         return id;
@@ -67,7 +61,7 @@ public class Vehiculo {
         return year;
     }
 
-    public String getEstadoVehiculo() {
+    public Character getEstadoVehiculo() {
         return estadoVehiculo;
     }
 
@@ -79,9 +73,6 @@ public class Vehiculo {
         return ubicacionActual;
     }
 
-    public Reserva getReserva() {
-        return reserva;
-    }
 
     public void setId(long id) {
         this.id = id;
@@ -107,7 +98,7 @@ public class Vehiculo {
         this.year = year;
     }
 
-    public void setEstadoVehiculo(String estadoVehiculo) {
+    public void setEstadoVehiculo(Character estadoVehiculo) {
         this.estadoVehiculo = estadoVehiculo;
     }
 
@@ -119,9 +110,6 @@ public class Vehiculo {
         this.ubicacionActual = ubicacionActual;
     }
 
-    public void setReserva(Reserva reserva) {
-        this.reserva = reserva;
-    }
 
     @Override
     public boolean equals(Object o) {

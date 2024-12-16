@@ -2,6 +2,7 @@ package com.example.backend.Entity;
 
 import jakarta.persistence.*;
 
+import java.awt.image.BufferedImage;
 import java.time.LocalDate;
 
 @Table(name = "vehiculo_referencia")
@@ -12,7 +13,13 @@ public class VehiculoReferencia {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idVehiculoReferencia;//Identificador
 
+    private String url; // Aquí agregas el campo URL
+
     private String modelo;
+
+    @Lob
+    private byte[] imagenVehiculoReferencia;
+
     private String descripcionPublicacion;
     private boolean estado;//disponibilidad
     private double CostoReservaVehiculo;
@@ -33,7 +40,7 @@ public class VehiculoReferencia {
                               int cantidadPuertas,
                               String tipoCombustible,
                               String mecanico_automatico,
-                              String acriss) {
+                              String acriss, String url) {
         this.descripcionPublicacion = descripcionPublicacion;
         this.estado = estado;
         this.CostoReservaVehiculo = CostoReservaVehiculo;
@@ -43,12 +50,12 @@ public class VehiculoReferencia {
         this.tipoCombustible = tipoCombustible;
         this.mecanico_automatico = mecanico_automatico;
         this.acriss = acriss;
+        this.url = url;
     }
 
     public VehiculoReferencia() {
 
     }
-
 // Getters
     public long getIdVehiculoReferencia() {
         return idVehiculoReferencia;
@@ -112,8 +119,7 @@ public class VehiculoReferencia {
     }
 
     public void setCostoArriendolVehiculo(double costoArriendolVehiculo) {
-        CostoArriendolVehiculo = costoArriendolVehiculo;
-    }
+        CostoArriendolVehiculo = costoArriendolVehiculo;}
 
     public void setCapacidadPasajeros(int capacidadPasajeros) {
         this.capacidadPasajeros = capacidadPasajeros;
@@ -133,5 +139,25 @@ public class VehiculoReferencia {
 
     public void setAcriss(String acriss) {
         this.acriss = acriss;
+    }
+
+    public void setModelo(String modelo) { this.modelo = modelo; }
+
+    public void setUrl(String url){ this.url = url; }
+
+    public void setImagenVehiculoReferencia(byte[] imagenVehiculoReferencia) {
+        this.imagenVehiculoReferencia = imagenVehiculoReferencia;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public byte[] getImagenVehiculoReferencia() {
+        return imagenVehiculoReferencia;
     }
 }
