@@ -67,6 +67,7 @@ public class Reserva {
     }
 
    //Getters
+
     public long getId_reserva() {
         return id_reserva;
     }
@@ -163,6 +164,8 @@ public class Reserva {
     public void setPagoReserva(Boolean pagoReserva) {
         this.pagoReserva = pagoReserva;
     }
+
+    public void setId(long id_reserva) { this.id_reserva = id_reserva;}
 
     @Override
     public boolean equals(Object o) {

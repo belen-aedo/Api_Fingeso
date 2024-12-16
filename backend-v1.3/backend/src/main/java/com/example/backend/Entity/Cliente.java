@@ -110,6 +110,9 @@ public class Cliente {
         this.fechaNacimiento = fechaNacimiento;
     }
 
+    public void setId(long id) {this.idCliente = id;}
+
+
     public void setReservas(Set<Reserva> reservas) {
         this.reservas = reservas;
     }

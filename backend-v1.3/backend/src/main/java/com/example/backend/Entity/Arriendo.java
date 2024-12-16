@@ -82,7 +82,7 @@ public class Arriendo {
     }
 
     // setters
-    public void setIdArriedno(long idArriedno) {
+    public void setIdArriendo(long idArriedno) {
         this.idArriedno = idArriedno;
     }
 

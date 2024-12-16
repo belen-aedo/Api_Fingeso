@@ -69,6 +69,26 @@ public class Agendamiento {
         this.id = id;
     }
 
+    public void setFechaInicio(LocalDate fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    public void setFechaFinalizacion(LocalDate fechaFinalizacion) {
+        this.fechaFinalizacion = fechaFinalizacion;
+    }
+
+    public void setProximaFechaDisponible(LocalDate proximaFechaDisponible) {
+        this.ProximaFechaDisponible = proximaFechaDisponible;
+    }
+
+    public void setSucursalRetiro(Sucursal sucursalRetiro) {
+        this.sucursalRetiro = sucursalRetiro;
+    }
+
+    public void setSucursalDevolucion(Sucursal sucursalDevolucion) {
+        this.sucursalDevolucion = sucursalDevolucion;
+    }
+
     public Long getId() {
         return id;
     }

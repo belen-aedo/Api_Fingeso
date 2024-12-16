@@ -61,7 +61,6 @@ public class ValidacionDatos {
      * @return True o false según la contraseña, ejemplo 123456aA
      */
     public boolean validarPassword() {
-        // Patrón regex para validar la contraseña con las condiciones especificadas
         Pattern patron = Pattern.compile("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d]{8}$");
         Matcher matcher = patron.matcher(this.ValidarDatoString);
         // Devuelve true si la contraseña cumple con el patrón
@@ -153,5 +152,7 @@ public class ValidacionDatos {
         }
         return nuevaFechaFin; // Devuelve la nueva fecha de fin considerando el mantenimiento
     }
+
+
 
 }

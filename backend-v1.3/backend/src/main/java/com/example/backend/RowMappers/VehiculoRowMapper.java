@@ -1,7 +1,5 @@
 package com.example.backend.RowMappers;
 
-import com.example.backend.Entity.Cliente;
-import com.example.backend.Entity.Reserva;
 import com.example.backend.Entity.Sucursal;
 import com.example.backend.Entity.Vehiculo;
 import org.springframework.jdbc.core.RowMapper;

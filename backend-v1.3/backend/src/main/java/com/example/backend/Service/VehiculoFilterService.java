@@ -2,8 +2,11 @@ package com.example.backend.Service;
 
 import com.example.backend.Entity.Sucursal;
 import com.example.backend.Entity.Vehiculo;
+import com.example.backend.Entity.VehiculoReferencia;
 import com.example.backend.Repository.SucursalRepository;
 import com.example.backend.Repository.VehiculoRepository;
+import com.example.backend.Repository.VehiculoRepositoryImplement;
+import com.example.backend.Utilidades.Pair;
 import com.example.backend.Utilidades.ValidacionDatos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -100,7 +103,6 @@ public class VehiculoFilterService {
                 referencias.add(referencia);
             }
         });
-
         // Aquí puedes realizar cualquier operación adicional con las referencias
         referencias.forEach(System.out::println); // Ejemplo: imprimir referencias
     }

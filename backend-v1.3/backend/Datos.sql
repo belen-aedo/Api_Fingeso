@@ -95,3 +95,76 @@ FROM vehiculo v
                                          )
 WHERE s.nombre_sucursal = 'Sucursal Central'
   AND a.id IS NULL; -- Solo incluir vehículos sin reservas o fuera del rango
+
+
+--(4)-VEHICULOS Y VEHICULOS REFRENCIA
+
+-- Insertar en vehiculo_referencia (5 registros)
+INSERT INTO public.vehiculo_referencia (
+    cantidad_puertas,
+    capacidad_pasajeros,
+    costo_arriendol_vehiculo,
+    costo_reserva_vehiculo,
+    estado,
+    id_vehiculo_referencia,
+    acriss,
+    descripcion_publicacion,
+    mecanico_automatico,
+    modelo,
+    tipo_combustible,
+    url,
+    imagen_vehiculo_referencia
+) VALUES
+      (4, 5, 120000.00, 60000.00, true, 1, 'LCAR', 'Vehículo 4x4 ideal para terrenos difíciles.', 'Automático', 'Toyota Land Cruiser', 'Gasolina', 'http://example.com/toyota_land_cruiser.jpg', null),
+      (4, 5, 150000.00, 75000.00, true, 2, 'LCAR', 'SUV todo terreno con gran capacidad.', 'Automático', 'Jeep Wrangler', 'Gasolina', 'http://example.com/jeep_wrangler.jpg', null),
+      (4, 5, 130000.00, 65000.00, true, 3, 'LCAR', 'Ideal para aventuras off-road.', 'Automático', 'Ford Bronco', 'Gasolina', 'http://example.com/ford_bronco.jpg', null),
+      (4, 5, 140000.00, 70000.00, true, 4, 'LCAR', 'Vehículo con gran tracción para todo tipo de terreno.', 'Automático', 'Land Rover Defender', 'Diésel', 'http://example.com/land_rover_defender.jpg', null),
+      (4, 5, 160000.00, 80000.00, true, 5, 'LCAR', 'SUV de lujo con capacidad para 5 personas.', 'Automático', 'Mercedes-Benz G-Class', 'Gasolina', 'http://example.com/mercedes_g_class.jpg', null);
+
+
+-- Insertar en vehiculo (7 registros ajustados)
+INSERT INTO public.vehiculo (
+    estado_vehiculo,
+    kilometraje_vehiculo,
+    year,
+    id,
+    id_sucursal,
+    color_principal,
+    marca,
+    modelo,
+    patente
+) VALUES
+      ('A', 20000.00, 2022, 1, 1, 'Negro', 'Toyota', 'Toyota Land Cruiser', 'ABC1234'),
+      ('A', 15000.00, 2023, 2, 1, 'Blanco', 'Jeep', 'Jeep Wrangler', 'XYZ5678'),
+      ('A', 10000.00, 2021, 3, 1, 'Rojo', 'Ford', 'Ford Bronco', 'LMN2345'),
+      ('A', 30000.00, 2020, 4, 1, 'Verde', 'Land Rover', 'Land Rover Defender', 'DEF7890'),
+      ('A', 5000.00, 2023, 5, 1, 'Azul', 'Mercedes-Benz', 'Mercedes-Benz G-Class', 'GHI5678'),
+      ('A', 25000.00, 2022, 6, 2, 'Amarillo', 'Toyota', 'Toyota Land Cruiser', 'JKL2345'),
+      ('A', 10000.00, 2023, 7, 2, 'Blanco', 'Jeep', 'Jeep Wrangler', 'MNO3456');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -42,6 +42,7 @@ public class VehiculoFilterController {
             return new ArrayList<>();
         }
     }
+
     @GetMapping("/getAvaliableVehiculos")
     public List<Vehiculo> getAllVehiculosAvailable(
             @RequestParam("nombreSucursal") String nombreSucursal,
@@ -49,7 +50,6 @@ public class VehiculoFilterController {
             @RequestParam("fechaDevolucion") LocalDate fechaDevolucion) {
         // Implementa
         try {
-            // Llamar al servicio para obtener los vehículos disponibles
             return vehiculoFilterService.ObtenerVehiculosDisponibles(fechaRetiro, fechaDevolucion, nombreSucursal) ;
         } catch (Exception e) {
             System.out.println("Error al obtener los vehículos disponibles: " + e.getMessage());
