@@ -190,7 +190,7 @@ public class ClienteController {
         } catch (Exception e) {
 
             reservaService.borrarPorId(reserva.getId_reserva());
-            
+
             return "Error al realizar agendamiento " + e.getMessage();
         }
     }

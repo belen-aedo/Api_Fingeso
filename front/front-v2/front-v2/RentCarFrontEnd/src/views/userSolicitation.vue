@@ -74,12 +74,12 @@
 
         <div class="form-row">
           <div class="form-group date-group">
-            <label>Fecha y hora de retiro:</label>
+            <label>Fecha de retiro:</label>
             <input type="date" />
           </div>
           
           <div class="form-group date-group">
-            <label>Fecha y hora de devolución:</label>
+            <label>Fecha de devolución:</label>
             <input type="date" />
             </div>
         </div>
