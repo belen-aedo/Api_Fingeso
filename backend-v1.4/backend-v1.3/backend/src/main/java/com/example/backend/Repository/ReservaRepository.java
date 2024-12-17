@@ -12,5 +12,6 @@ public interface ReservaRepository {
     public void save (Reserva reserva);
     public List<Reserva> findByBetwenDates(LocalDate From, LocalDate To);
     public Long findReservaByIdCliente(Long clienteId);
+    public void deleteById(Long id);
 
 }

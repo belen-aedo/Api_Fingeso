@@ -85,4 +85,10 @@ public class ReservaRepositoryImplement implements ReservaRepository {
         }
     }
 
+    @Override
+    public void deleteById(Long id) {
+        String sql = "DELETE FROM reservas WHERE id_reserva = ?";
+        jdbcTemplate.update (sql, id);
+    }
+
 }

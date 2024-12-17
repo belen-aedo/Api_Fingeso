@@ -152,12 +152,17 @@ public class ClienteController {
                                        @RequestParam("fechaDevolucion") LocalDate fechaDevolucion,
                                        @RequestParam("nombreSucursalD") String nombreSucursalDevo,
                                        @RequestParam("email") String email) {
+
+        Reserva reserva = null;
+
         try {
             Sucursal AgendarSucursalRetiro = sucursalService.buscarSucursalPorNombre(nombreSucursalRet);
             Sucursal AgensarSucursalDevo = sucursalService.buscarSucursalPorNombre(nombreSucursalDevo);
             Vehiculo vehiculo = vehiculoFilterService.BuscarVehiculoPorPatente(patente);
             Cliente cliente = clienteService.buscarClientePorCorreo(email);
-            Reserva reserva = new Reserva();
+
+            reserva = new Reserva();
+
             reserva.setCliente(cliente);
             reserva.setVehiculoAsignado(vehiculoReferencia);
             reserva.setFechaReserva(LocalDate.now());
@@ -184,6 +189,8 @@ public class ClienteController {
 
         } catch (Exception e) {
 
+            reservaService.borrarPorId(reserva.getId_reserva());
+            
             return "Error al realizar agendamiento " + e.getMessage();
         }
     }

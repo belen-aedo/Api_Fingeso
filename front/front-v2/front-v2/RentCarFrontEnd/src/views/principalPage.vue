@@ -24,7 +24,7 @@
           <input type="email" v-model="email" placeholder="Ingrese correo">
           <input type="password" v-model="passwordRegister" placeholder="Ingrese contraseña">
           <input type="password" v-model="passwordRegisterConfirmation" placeholder="Repita contraseña">
-          <input type="fechaDeNacimiento" v-model="fechaDeNacimiento" placeholder="Ingrese fecha de nacimiento(Ejemplo: 2002-01-01)">
+          <input type="fechaNacimiento" v-model="fechaNacimiento" placeholder="Ingrese fecha de nacimiento(Ejemplo: 2002-01-01)">
           <button class="sessionButton" @click="addUser">Registrar</button>
         </div>
         <div class="alsoButtons">
@@ -57,7 +57,7 @@ export default {
       password: '',
       passwordRegister: '',
       passwordRegisterConfirmation: '',
-      fechaDeNacimiento: ''
+      fechaNacimiento: ''
     };
   },
   methods: {
@@ -96,10 +96,9 @@ export default {
           this.telefono.trim() &&
           this.email.trim() &&
           this.passwordRegister.trim() &&
-          this.fechaDeNacimiento
+          this.fechaNacimiento
         ) {
-          const fechaFormateada = new Date(this.fechaDeNacimiento).toISOString().split('T')[0];
-
+          
           const nuevoUsuario = {
             "rut": this.rut,
             "nombre": this.nombre,
@@ -107,7 +106,7 @@ export default {
             "telefono": this.telefono,
             "email": this.email,
             "password": this.passwordRegister,
-            "fechaDeNacimiento": this.fechaDeNacimiento
+            "fechaNacimiento": this.fechaNacimiento
           };
 
           try {

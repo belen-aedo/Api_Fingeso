@@ -20,6 +20,11 @@ public class ReservaService {
         return reservaRepository.findReservaByIdCliente(idCliente);
     }
 
+    public void borrarPorId(Long id) {
+        reservaRepository.deleteById(id);
+    }
+
+
 
 
 }

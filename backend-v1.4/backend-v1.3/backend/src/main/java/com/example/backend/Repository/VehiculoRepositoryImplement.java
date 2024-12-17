@@ -77,17 +77,18 @@ public class VehiculoRepositoryImplement implements VehiculoRepository {
  */
     @Override
     public List<Vehiculo> findByDates(LocalDate fechaRetiro, LocalDate fechaDevolucion, String nombreSucursal) {
-        String sql =
-                " SELECT v.*, s.* " + "FROM vehiculo v " +
-                        " JOIN sucursal s ON v.id_sucursal = s.id_sucursal " +
-                        " LEFT JOIN agendamiento a ON a.id_vehiculo = v.id " +
-                        "   AND ( " +
-                        "       (a.fecha_inicio <= ? AND a.proxima_fecha_disponible >= ?) OR " +
-                        "       (a.fecha_inicio <= ? AND a.proxima_fecha_disponible >= ?) OR " +
-                        "       (a.fecha_inicio >= ? AND a.fecha_inicio <= ?) " +
-                        "   ) " +
-                        " WHERE s.nombre_sucursal = ? " +
-                        " AND a.id_reserva IS NULL; ";
+        String sql = " SELECT v.*, s.* " +
+                     " FROM vehiculo v " +
+                     " JOIN sucursal s ON v.id_sucursal = s.id_sucursal " +
+                     " LEFT JOIN agendamiento a ON a.id_vehiculo = v.id " +
+                     "   AND ( " +
+                "       (a.fecha_inicio <= ? AND a.proxima_fecha_disponible >= ?) OR " +
+                "       (a.fecha_inicio <= ? AND a.proxima_fecha_disponible >= ?) OR " +
+                "       (a.fecha_inicio >= ? AND a.fecha_inicio <= ?) " +
+                "   ) " +
+                      " WHERE s.nombre_sucursal = ? " +
+                      " AND a.id_reserva IS NULL " +
+                      " AND v.estado_vehiculo = 'D' ;";
         try {
             return jdbcTemplate.query(
                     sql,
