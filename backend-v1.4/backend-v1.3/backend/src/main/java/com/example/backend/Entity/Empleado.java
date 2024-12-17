@@ -12,7 +12,7 @@ public class Empleado {
     private String nombre;
     private String rut;
     private String telefono;
-    private String rol;
+    private String rol; // mecanico, gerente, asalariado
 
     @ManyToOne
     @JoinColumn(name = "id_sucursal")

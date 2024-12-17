@@ -29,4 +29,8 @@ public class AgendarRerserva {
         agendamientoRepository.save(fechaR, fechaD, fechaDispo, SucursalSeleccionadaR, SucursalSeleccionadaD, cliente, vehiculoSeleccionado, reserva );
     }
 
+    public void BorrarAgendamiento(Long idReserva) {
+        agendamientoRepository.DeleteAgendamientoByIdReserva(idReserva);
+    }
+
 }

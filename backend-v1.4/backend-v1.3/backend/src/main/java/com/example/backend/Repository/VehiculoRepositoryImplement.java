@@ -131,6 +131,21 @@ public class VehiculoRepositoryImplement implements VehiculoRepository {
         }
     }
 
+    @Override
+    public Vehiculo getVehiculoByIdReserva(Long id) {
+
+        String sql = " SELECT v.id, v.patente, v.marca, v.modelo, v.color_principal " +
+                     " FROM vehiculo v INNER JOIN arriendo a ON v.id = a.id_vehiculo WHERE a.id_reserva = ? ";
+        try {
+
+            return jdbcTemplate.queryForObject(sql, new Object[]{id} ,new VehiculoRowMapperSimplify());
+
+        } catch (EmptyResultDataAccessException e) {
+
+            return null;
+        }
+    }
+
 
 
 }

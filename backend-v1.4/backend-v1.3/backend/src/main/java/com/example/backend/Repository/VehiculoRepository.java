@@ -12,5 +12,6 @@ public interface VehiculoRepository {
     List<Vehiculo> findByDates(LocalDate fechaRetiro, LocalDate fechaDevolucion, String nombreSucursal);
     VehiculoReferencia getReferencias(String modelo);
     List<VehiculoReferencia> getReferenciasPorModelos(List<String> modelos);
+    Vehiculo getVehiculoByIdReserva(Long id);
 
 }

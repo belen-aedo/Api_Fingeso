@@ -13,6 +13,7 @@ public interface AgendamientoRepository {
     public void save(LocalDate FechaInicio, LocalDate FcehaFin, LocalDate FechaDispo, Sucursal sRetiro, Sucursal sDevolucion, Cliente cliente,Vehiculo vehiculo, Reserva reserva);
     public Agendamiento findAgendamientoByIdUsuario(long idUsuario);
     public Agendamiento findAgendamientoByIdReserva(long idReserva);
+    public void DeleteAgendamientoByIdReserva(long idRserva);
 
 }
 

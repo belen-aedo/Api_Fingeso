@@ -1,9 +1,9 @@
 package com.example.backend.Service;
 
+import com.example.backend.Entity.Arriendo;
 import com.example.backend.Entity.Empleado;
 import com.example.backend.Entity.Sucursal;
-import com.example.backend.Repository.EmpleadoRepository;
-import com.example.backend.Repository.SucursalRepository;
+import com.example.backend.Repository.*;
 import com.example.backend.Utilidades.ValidacionDatos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +18,10 @@ public class EmpleadoService {
 
     @Autowired
     private SucursalRepository sucursalRepository;
+
+    @Autowired
+    ArriendoRepository arriendoRepository;
+
 
     // Registra un cliente
     public void registrarEmpleado(String nombreEmpleado, String rutEmpleado, String telefonoRegistrado, String rol, String nombreSucursal, String correoRegistrado, String passwordRegister) {
@@ -88,6 +92,16 @@ public class EmpleadoService {
             }
         }
         return 0;
+    }
+
+
+    public Arriendo BuscarArriendoPorReserva(Long id_reserva) {
+
+        Arriendo arriendo = arriendoRepository.findArriendoByIdReserva(id_reserva);
+        if (arriendo == null) {
+            throw new IllegalArgumentException("La reserva no existe");
+        }
+        return arriendo;
     }
 
 }

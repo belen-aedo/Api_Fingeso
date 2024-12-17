@@ -41,12 +41,17 @@ public class AgendamientoRepositoryImplement implements AgendamientoRepository {
 
     @Override
     public Agendamiento findAgendamientoByIdReserva(long idReserva) {
-        String sql = "SELECT * FROM agendamiento WHERE id_reserva = ?";
+        String sql = " SELECT * FROM agendamiento WHERE id_reserva = ? ";
         try {
             return jdbcTemplate.queryForObject(sql, new AgendamientoRowMapper(), idReserva);
         } catch (EmptyResultDataAccessException e){
             return null;
         }
+    }
+
+    public void DeleteAgendamientoByIdReserva(long idRserva) {
+        String sql = "DELETE FROM reservas WHERE id_reserva = ?";
+        jdbcTemplate.update (sql, idRserva);
     }
 
 }

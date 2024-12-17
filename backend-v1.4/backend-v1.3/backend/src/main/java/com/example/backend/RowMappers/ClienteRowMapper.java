@@ -2,7 +2,7 @@ package com.example.backend.RowMappers;
 
 import com.example.backend.Entity.Cliente;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Component;
+
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

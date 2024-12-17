@@ -15,7 +15,9 @@ public class VehiculoRowMapperSimplify implements RowMapper<Vehiculo> {
         Vehiculo vehiculo = new Vehiculo();
         vehiculo.setId(rs.getLong("id"));
         vehiculo.setPatente(rs.getString("patente"));
-        vehiculo.setEstadoVehiculo(rs.getString("estado_vehiculo").charAt(0));
+        vehiculo.setMarca(rs.getString("marca"));
+        vehiculo.setModelo(rs.getString("modelo"));
+        vehiculo.setColorPrincipal(rs.getString("color_principal"));
         return vehiculo;
     }
 }

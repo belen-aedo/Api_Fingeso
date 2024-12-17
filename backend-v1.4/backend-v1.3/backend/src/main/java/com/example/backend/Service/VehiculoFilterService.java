@@ -97,4 +97,8 @@ public class VehiculoFilterService {
         return vehiculoRepository.getReferencias(modelo);
     }
 
+    public  Vehiculo ObtenerDatosDeVehiculos(Long idRserva ) {
+        return vehiculoRepository.getVehiculoByIdReserva(idRserva);
+    }
+
 }

@@ -3,7 +3,9 @@ package com.example.backend.Controller;
 import com.example.backend.Entity.*;
 import com.example.backend.Service.*;
 import com.example.backend.Utilidades.ValidacionDatos;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -61,7 +63,6 @@ public class ClienteController {
         return clienteService.login(clienteR.getEmail(), clienteR.getPassword());
     }
 
-
     // Obtener vehículos disponibles obteniendo los vehículos referencia
     @GetMapping("/ObtenerVehiculoDisponibles")
     public List<VehiculoReferencia> getAllVehiculosAvailable(
@@ -69,7 +70,6 @@ public class ClienteController {
             @RequestParam("fechaRetiro") LocalDate fechaRetiro,
             @RequestParam("fechaDevolucion") LocalDate fechaDevolucion,
             @RequestParam("nombreSucursalD") String nombreSucursalDevo){
-
         try {
             List<Vehiculo> VehiculoDispo = vehiculoFilterService.ObtenerVehiculosDisponibles(fechaRetiro, fechaDevolucion,nombreSucursalRet) ;
             List<VehiculoReferencia> VehiculoReferencias = new LinkedList<>();
@@ -144,6 +144,7 @@ public class ClienteController {
     // Se omite el pago, se hace como que esta pagado
     // Confirmar reserva con vehiculo seleccionado
     @PostMapping("/ConfirmarReserva")
+    @Transactional
     public String RealizarAgendamiento(
                                        @RequestBody VehiculoReferencia vehiculoReferencia,
                                        @RequestParam("patente") String patente,
@@ -152,17 +153,12 @@ public class ClienteController {
                                        @RequestParam("fechaDevolucion") LocalDate fechaDevolucion,
                                        @RequestParam("nombreSucursalD") String nombreSucursalDevo,
                                        @RequestParam("email") String email) {
-
-        Reserva reserva = null;
-
         try {
             Sucursal AgendarSucursalRetiro = sucursalService.buscarSucursalPorNombre(nombreSucursalRet);
             Sucursal AgensarSucursalDevo = sucursalService.buscarSucursalPorNombre(nombreSucursalDevo);
             Vehiculo vehiculo = vehiculoFilterService.BuscarVehiculoPorPatente(patente);
             Cliente cliente = clienteService.buscarClientePorCorreo(email);
-
-            reserva = new Reserva();
-
+            Reserva reserva = new Reserva();
             reserva.setCliente(cliente);
             reserva.setVehiculoAsignado(vehiculoReferencia);
             reserva.setFechaReserva(LocalDate.now());
@@ -182,17 +178,13 @@ public class ClienteController {
             //crear agendamiento // con problemas
             ValidacionDatos ValidacionDatos = new ValidacionDatos();
             LocalDate NuevFechaDispo = ValidacionDatos.calcularNuevaFechaFin(fechaRetiro, fechaDevolucion);
-
             agendarRerservaService.realizarAgendamiento(vehiculo, AgendarSucursalRetiro, AgensarSucursalDevo, fechaRetiro, fechaDevolucion, NuevFechaDispo, reserva, cliente);
 
             return "Agendamiento Registrado exitosamente";
 
         } catch (Exception e) {
-
-            reservaService.borrarPorId(reserva.getId_reserva());
-
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return "Error al realizar agendamiento " + e.getMessage();
         }
     }
-
 }

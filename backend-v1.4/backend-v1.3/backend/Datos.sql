@@ -22,7 +22,7 @@ VALUES
 
 --(1)-------------------------------------------------------------------------------------------------------------------
 
-INSERT INTO agendamiento (id, fecha_inicio, fecha_finalizacion, proxima_fecha_disponible, id_cliente, id_reserva, id_sucursal_devolucion, id_sucursal_retiro, id_vehiculo)
+INSERT INTO agendamiento (id_agendamiento, fecha_inicio, fecha_finalizacion, proxima_fecha_disponible, id_cliente, id_reserva, id_sucursal_devolucion, id_sucursal_retiro, id_vehiculo)
 VALUES
     (1, '2024-12-18', '2024-12-20', '2024-12-21', NULL, NULL, 1, 1, 1), -- Vehículo 1 reservado hasta el 20/12/2024
     (2, '2024-12-22', '2024-12-24', '2024-12-25', NULL, NULL, 1, 1, 1), -- Vehículo 1 reservado del 22 al 24/12/2024
@@ -41,13 +41,13 @@ FROM vehiculo v
                                          (a.fecha_inicio >= '2024-12-14' AND a.fecha_inicio <= '2024-12-16')
                                          )
 WHERE s.nombre_sucursal = 'Sucursal Central'
-  AND a.id IS NULL; -- Solo incluir vehículos sin reservas o fuera del rango
+  AND a.id_agendamiento IS NULL; -- Solo incluir vehículos sin reservas o fuera del rango
 
 --(2)-------------------------------------------------------------------------------------------------------------------
 
 DELETE FROM agendamiento; -- Limpia los datos previos para evitar duplicados
 
-INSERT INTO agendamiento (id, fecha_inicio, fecha_finalizacion, proxima_fecha_disponible, id_cliente, id_reserva, id_sucursal_devolucion, id_sucursal_retiro, id_vehiculo)
+INSERT INTO agendamiento (id_agendamiento, fecha_inicio, fecha_finalizacion, proxima_fecha_disponible, id_cliente, id_reserva, id_sucursal_devolucion, id_sucursal_retiro, id_vehiculo)
 VALUES
 -- Reservas del Vehículo 1
 (1, '2024-12-18', '2024-12-20', '2024-12-21', NULL, NULL, 1, 1, 1), -- Reservado hasta el 20/12/2024
@@ -67,13 +67,13 @@ FROM vehiculo v
                                          (a.fecha_inicio >= '2024-12-26' AND a.fecha_inicio <= '2024-12-30')
                                          )
 WHERE s.nombre_sucursal = 'Sucursal Central'
-  AND a.id IS NULL; -- Solo incluir vehículos sin reservas o fuera del rango
+  AND a.id_agendamiento IS NULL; -- Solo incluir vehículos sin reservas o fuera del rango
 
 --(3)-------------------------------------------------------------------------------------------------------------------
 
 DELETE FROM agendamiento; -- Limpia los datos previos para evitar conflictos
 
-INSERT INTO agendamiento (id, fecha_inicio, fecha_finalizacion, proxima_fecha_disponible, id_cliente, id_reserva, id_sucursal_devolucion, id_sucursal_retiro, id_vehiculo)
+INSERT INTO agendamiento (id_agendamiento, fecha_inicio, fecha_finalizacion, proxima_fecha_disponible, id_cliente, id_reserva, id_sucursal_devolucion, id_sucursal_retiro, id_vehiculo)
 VALUES
 -- Reservas del Vehículo 1
 (1, '2024-12-15', '2024-12-17', '2024-12-18', NULL, NULL, 1, 1, 1), -- Reservado del 15 al 17

@@ -2,17 +2,15 @@ package com.example.backend.Entity;
 
 import jakarta.persistence.*;
 
-import java.security.PrivateKey;
 import java.time.LocalDate;
 
 @Table(name = "arriendo")
 @Entity
 public class Arriendo {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    private long idArriedno;//Identificador
-
+    private long id_arriendo;//Identificador
     private String rutCliente; // DNI del cliente
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -36,7 +34,8 @@ public class Arriendo {
     private LocalDate FechaTerminoArriendo;
 
     private double CostoTotal;
-    private boolean EstadoArriendo;
+    private boolean EstadoArriendo; // TRUE : esta vigente/corriendo, FALSE : Finalizado
+    private boolean PendienteArriendo; // si el vehiculo arrendado llega en malas condiciones se marca como pendiente
 
     public Arriendo(String rutCliente, Vehiculo vehiculo, double costoTotal, LocalDate fechaArriendo, boolean estadoArriendo, LocalDate fechaInicioArriendo, LocalDate FechaTerminoArriendo) {
         this.rutCliente = rutCliente;
@@ -51,8 +50,8 @@ public class Arriendo {
     public Arriendo() {}
 
     // getters
-    public long getIdArriedno() {
-        return idArriedno;
+    public long getId_arriendo() {
+        return id_arriendo;
     }
 
     public String getRutCliente() {
@@ -85,7 +84,7 @@ public class Arriendo {
 
     // setters
     public void setIdArriendo(long idArriedno) {
-        this.idArriedno = idArriedno;
+        this.id_arriendo = idArriedno;
     }
 
     public void setRutCliente(String rut) {
@@ -112,7 +111,41 @@ public class Arriendo {
         this.fechaInicioArriendo = fechaInicioArriendo;
     }
 
+    public void setSucursalRetiro(Sucursal sucursalRetiro) { this.sucursalRetiro = sucursalRetiro;}
+
+    public void setSucursalDevolucion(Sucursal sucursalDevolucion) { this.sucursalDevolucion = sucursalDevolucion;}
+
+    public void setReserva(Reserva reserva) { this.reserva = reserva; }
+
     public void setFechaTerminoArriendo(LocalDate fechaTerminoArriendo) {
         FechaTerminoArriendo = fechaTerminoArriendo;
+    }
+
+    public Sucursal getSucursalRetiro() {
+        return sucursalRetiro;
+    }
+
+    public Sucursal getSucursalDevolucion() {
+        return sucursalDevolucion;
+    }
+
+    public Reserva getReserva() {
+        return reserva;
+    }
+
+    public boolean isEstadoArriendo() {
+        return EstadoArriendo;
+    }
+
+    public void setId_arriendo(long idArriedno) {
+        this.id_arriendo = idArriedno;
+    }
+
+    public boolean isPendienteArriendo() {
+        return PendienteArriendo;
+    }
+
+    public void setPendienteArriendo(boolean pendienteArriendo) {
+        PendienteArriendo = pendienteArriendo;
     }
 }
