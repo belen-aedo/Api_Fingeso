@@ -54,16 +54,17 @@ public class EmpleadoController {
     }
 
 
-    @PostMapping("/DatosArriendo")
+    @GetMapping("/DatosArriendo")
     public String ObtenerDatosArriendo(@RequestParam("Nombre Sucursal") String sucursalActual, @RequestParam("id reserva") Long idReserva) {
         StringBuilder sb = new StringBuilder();
         try {
             Sucursal sucursal = sucursalService.buscarSucursalPorNombre(sucursalActual);
             Vehiculo vehiculo = vehiculoFilterService.ObtenerDatosDeVehiculos(idReserva);
             Arriendo arriendo = empleadoService.BuscarArriendoPorReserva(idReserva);
+            Sucursal sucursal2 = sucursalService.buscarSucursalPorId(arriendo.getSucursalDevolucion().getIdSucursal());
             if (arriendo.getEstadoArriendo()) {
                 sb.append("El arriendo continua");
-                if (!arriendo.getSucursalDevolucion().getNombreSucursal().equals(sucursal)) {
+                if (!sucursal2.getNombreSucursal().equals(sucursal)) {
                     sb.append("|");
                     sb.append("El arriendo no es de esta sucursal");
                 }
@@ -112,7 +113,6 @@ public class EmpleadoController {
 
         }
 }
-
 
 
 /*

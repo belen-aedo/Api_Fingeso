@@ -4,7 +4,20 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
-@Table(name = "reservas")
+@Table(
+        name = "reservas",
+        uniqueConstraints = @UniqueConstraint(
+                columnNames = {
+                        "id_cliente",
+                        "id_sucursal_retiro",
+                        "id_sucursal_devolucion",
+                        "id_vehiculo_referencia",
+                        "fecha_inicio_reserva",
+                        "fecha_termino_reserva"
+                }
+        )
+)
+
 @Entity
 public class Reserva {
 
@@ -14,11 +27,11 @@ public class Reserva {
 
     @ManyToOne
     @JoinColumn(name = "id_cliente")
-    private Cliente cliente; // Varias reservas asociadas a un cliente, Reserva-M------1-Cliente
+    private Cliente cliente;
 
     @ManyToOne
     @JoinColumn(name = "id_Sucursal_retiro")
-    private Sucursal sucursalRetiro;// Varias reservas para una sucursal, una reserva pertenece a una sucursal, Reserva-M------1-Sucursal
+    private Sucursal sucursalRetiro;
 
     @ManyToOne
     @JoinColumn(name = "id_sucursal_devolucion")
@@ -26,7 +39,7 @@ public class Reserva {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_vehiculo_referencia")
-    private VehiculoReferencia vehiculoAsignado; // Reserva-M-----1-VehículoReferencia
+    private VehiculoReferencia vehiculoAsignado;
 
     private double CostoTotal;
     private LocalDate fechaInicioReserva;

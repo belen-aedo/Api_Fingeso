@@ -142,6 +142,7 @@ public class ClienteController {
     }
 
     // Se omite el pago, se hace como que esta pagado
+
     // Confirmar reserva con vehiculo seleccionado
     @PostMapping("/ConfirmarReserva")
     @Transactional
@@ -172,10 +173,10 @@ public class ClienteController {
 
             //Guardar reserva // funciona bien
             reservaService.GuardarReserva(reserva);
-            Long IdReserva = reservaService.BuscarReservaPorIdCliente(cliente.getIdCliente());
+            Long IdReserva = reservaService.GuardarReserva(reserva);
             reserva.setId_reserva(IdReserva);
 
-            //crear agendamiento // con problemas
+            //crear agendamiento // funciona bien
             ValidacionDatos ValidacionDatos = new ValidacionDatos();
             LocalDate NuevFechaDispo = ValidacionDatos.calcularNuevaFechaFin(fechaRetiro, fechaDevolucion);
             agendarRerservaService.realizarAgendamiento(vehiculo, AgendarSucursalRetiro, AgensarSucursalDevo, fechaRetiro, fechaDevolucion, NuevFechaDispo, reserva, cliente);

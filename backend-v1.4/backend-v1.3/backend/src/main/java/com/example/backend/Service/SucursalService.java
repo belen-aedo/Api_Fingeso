@@ -20,4 +20,8 @@ public class SucursalService {
         return sucursal.findByNombreSucursal(nombre);
     }
 
+    public Sucursal buscarSucursalPorId(Long id) {
+        return sucursal.findById(id);
+    }
+
 }

@@ -6,9 +6,12 @@ import com.example.backend.RowMappers.ReservaRowMapper;
 import com.example.backend.RowMappers.VehiculoReferenciaRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.dao.EmptyResultDataAccessException;
 
+import java.sql.PreparedStatement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,25 +44,33 @@ public class ReservaRepositoryImplement implements ReservaRepository {
     }
 
     @Override
-    public void save(Reserva reserva) {
+    public Long save(Reserva reserva) {
         String sql = "INSERT INTO reservas " +
                 "(id_cliente, id_sucursal_retiro, id_sucursal_devolucion, id_vehiculo_referencia, " +
                 "costo_total, fecha_inicio_reserva, fecha_termino_reserva, fecha_reserva, reserva_finalizada, pago_reserva) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        // Todavia no se hace el arriendo
-        jdbcTemplate.update(sql,
-                reserva.getCliente().getIdCliente(),
-                reserva.getSucursalRetiro().getIdSucursal(),
-                reserva.getSucursalDevolucion().getIdSucursal(),
-                reserva.getVehiculoAsignado().getIdVehiculoReferencia(),
-                reserva.getCostoTotal(),
-                reserva.getFechaInicioReserva(),
-                reserva.getFechaTerminoReserva(),
-                reserva.getFechaReserva(),
-                reserva.getReservaFinalizada(),
-                reserva.getPagoReserva()
-        );
+        // KeyHolder para capturar el ID generado
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+
+        // Ejecutar la consulta y capturar la clave generada
+        jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(sql, new String[]{"id_reserva"});
+            ps.setLong(1, reserva.getCliente().getIdCliente());
+            ps.setLong(2, reserva.getSucursalRetiro().getIdSucursal());
+            ps.setLong(3, reserva.getSucursalDevolucion().getIdSucursal());
+            ps.setLong(4, reserva.getVehiculoAsignado().getIdVehiculoReferencia());
+            ps.setDouble(5, reserva.getCostoTotal());
+            ps.setDate(6, java.sql.Date.valueOf(reserva.getFechaInicioReserva()));
+            ps.setDate(7, java.sql.Date.valueOf(reserva.getFechaTerminoReserva()));
+            ps.setDate(8, java.sql.Date.valueOf(reserva.getFechaReserva()));
+            ps.setBoolean(9, reserva.getReservaFinalizada());
+            ps.setBoolean(10, reserva.getPagoReserva());
+            return ps;
+        }, keyHolder);
+
+        // Retornar el ID generado
+        return keyHolder.getKey().longValue();
     }
 
     @Override
