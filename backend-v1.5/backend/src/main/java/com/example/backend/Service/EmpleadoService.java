@@ -20,7 +20,7 @@ public class EmpleadoService {
     private SucursalRepository sucursalRepository;
 
     @Autowired
-    ArriendoRepository arriendoRepository;
+    private ArriendoRepository arriendoRepository;
 
 
     // Registra un cliente
@@ -99,7 +99,7 @@ public class EmpleadoService {
 
         Arriendo arriendo = arriendoRepository.findArriendoByIdReserva(id_reserva);
         if (arriendo == null) {
-            throw new IllegalArgumentException("La reserva no existe");
+            throw new IllegalArgumentException("No existe el arriendo vinculado al ID de la reserva indicada: " + id_reserva);
         }
         return arriendo;
     }

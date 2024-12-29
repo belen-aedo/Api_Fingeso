@@ -139,7 +139,67 @@ INSERT INTO public.vehiculo (
       ('A', 25000.00, 2022, 6, 2, 'Amarillo', 'Toyota', 'Toyota Land Cruiser', 'JKL2345'),
       ('A', 10000.00, 2023, 7, 2, 'Blanco', 'Jeep', 'Jeep Wrangler', 'MNO3456');
 
+--(5)----- fechas para el 6 de enero (presentación)
 
+// Insertar reservas con agendamiento y arriendo vinculado
+String sqlReserva = "INSERT INTO reservas (id_cliente, id_sucursal_retiro, id_sucursal_devolucion, id_vehiculo_referencia, " +
+        "costo_total, fecha_inicio_reserva, fecha_termino_reserva, fecha_reserva, reserva_finalizada, pago_reserva) " +
+        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+// Insertar reservas para los clientes existentes
+jdbcTemplate.update(sqlReserva, 1, 1, 2, 1, 60000.00, java.sql.Date.valueOf("2025-01-06"), java.sql.Date.valueOf("2025-01-08"),
+        java.sql.Date.valueOf("2024-12-28"), true, true);
+jdbcTemplate.update(sqlReserva, 2, 2, 1, 2, 75000.00, java.sql.Date.valueOf("2025-01-06"), java.sql.Date.valueOf("2025-01-08"),
+        java.sql.Date.valueOf("2024-12-28"), true, false);
+jdbcTemplate.update(sqlReserva, 1, 1, 2, 3, 65000.00, java.sql.Date.valueOf("2025-01-06"), java.sql.Date.valueOf("2025-01-08"),
+        java.sql.Date.valueOf("2024-12-28"), true, true);
+jdbcTemplate.update(sqlReserva, 2, 2, 1, 4, 70000.00, java.sql.Date.valueOf("2025-01-06"), java.sql.Date.valueOf("2025-01-08"),
+        java.sql.Date.valueOf("2024-12-28"), true, false);
+
+// Insertar agendamientos
+String sqlAgendamiento = "INSERT INTO agendamiento (fecha_finalizacion, fecha_inicio, proxima_fecha_disponible, id_agendamiento, id_cliente, id_reserva, id_sucursal_devolucion, id_sucursal_retiro, id_vehiculo) " +
+        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+// Agendamiento basado en las reservas y vehículos
+// reserva 1 cliente 1
+jdbcTemplate.update(sqlAgendamiento, java.sql.Date.valueOf("2025-01-08"), java.sql.Date.valueOf("2025-01-06"),
+        java.sql.Date.valueOf("2025-01-09"), 1, 1, 1, 2, 1);
+
+// reserva 2 cliente 2
+jdbcTemplate.update(sqlAgendamiento, java.sql.Date.valueOf("2025-01-08"), java.sql.Date.valueOf("2025-01-06"),
+        java.sql.Date.valueOf("2025-01-09"), 2, 2, 2, 1, 2);
+
+// reserva 4 cliente 2
+jdbcTemplate.update(sqlAgendamiento, java.sql.Date.valueOf("2025-01-08"), java.sql.Date.valueOf("2025-01-06"),
+        java.sql.Date.valueOf("2025-01-09"), 3, 2, 4, 1, 2);
+
+// reserva 3 cliente 1
+jdbcTemplate.update(sqlAgendamiento, java.sql.Date.valueOf("2025-01-08"), java.sql.Date.valueOf("2025-01-06"),
+        java.sql.Date.valueOf("2025-01-09"), 4, 1, 3, 2, 1);
+
+// Insertar arriendos
+String sqlArriendo = "INSERT INTO arriendo (costo_total, estado_arriendo, fecha_arriendo, fecha_inicio_arriendo, fecha_termino_arriendo, " +
+        "pendiente_arriendo, id_arriendo, id_reserva, id_sucursal_devolucion, id_sucursal_retiro, id_vehiculo, rut_cliente) " +
+        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+// Arriendo para la reserva 1 (Cliente 1)
+jdbcTemplate.update(sqlArriendo, 60000.00, true, java.sql.Date.valueOf("2025-01-06"),
+        java.sql.Date.valueOf("2025-01-06"), java.sql.Date.valueOf("2025-01-08"), false, 1, 1, 2, 1, 1, "12345678-9");
+
+// Arriendo para la reserva 2 (Cliente 2)
+jdbcTemplate.update(sqlArriendo, 75000.00, true, java.sql.Date.valueOf("2025-01-06"),
+        java.sql.Date.valueOf("2025-01-06"), java.sql.Date.valueOf("2025-01-08"), false, 2, 2, 1, 2, 2, "98765432-1");
+
+// Arriendo para la reserva 3 (Cliente 1)
+jdbcTemplate.update(sqlArriendo, 65000.00, true, java.sql.Date.valueOf("2025-01-06"),
+        java.sql.Date.valueOf("2025-01-06"), java.sql.Date.valueOf("2025-01-08"), false, 3, 3, 1, 1, 3, "12345678-9");
+
+// Arriendo para la reserva 4 (Cliente 2)
+jdbcTemplate.update(sqlArriendo, 70000.00, true, java.sql.Date.valueOf("2025-01-06"),
+        java.sql.Date.valueOf("2025-01-06"), java.sql.Date.valueOf("2025-01-08"), false, 4, 4, 1, 2, 4, "98765432-1");
+
+System.out.println("Datos de clientes, sucursales, vehículos, reservas y agendamientos insertados exitosamente.");
+System.out.println("Datos de arriendos insertados exitosamente.");
 
 
 

@@ -54,35 +54,57 @@ public class EmpleadoController {
     }
 
 
+    //ejemplo http://localhost:8080/api/empleado/DatosArriendo?Nombre Sucursal=Sucursal Central&id reserva=1
     @GetMapping("/DatosArriendo")
     public String ObtenerDatosArriendo(@RequestParam("Nombre Sucursal") String sucursalActual, @RequestParam("id reserva") Long idReserva) {
         StringBuilder sb = new StringBuilder();
         try {
             Sucursal sucursal = sucursalService.buscarSucursalPorNombre(sucursalActual);
-            Vehiculo vehiculo = vehiculoFilterService.ObtenerDatosDeVehiculos(idReserva);
-            Arriendo arriendo = empleadoService.BuscarArriendoPorReserva(idReserva);
-            Sucursal sucursal2 = sucursalService.buscarSucursalPorId(arriendo.getSucursalDevolucion().getIdSucursal());
+            Vehiculo vehiculo = vehiculoFilterService.ObtenerDatosDeVehiculos(idReserva); // busco el vehiculo vinculado al arriendo por el id de la reserva
+            Arriendo arriendo = empleadoService.BuscarArriendoPorReserva(idReserva); // busco el arriendo vinculado a la reserva
+            Sucursal sucursal2 = sucursalService.buscarSucursalPorId(arriendo.getSucursalDevolucion().getIdSucursal()); // busco la sucursal de devolución vinculada al arriendo
             if (arriendo.getEstadoArriendo()) {
+
                 sb.append("El arriendo continua");
-                if (!sucursal2.getNombreSucursal().equals(sucursal)) {
-                    sb.append("|");
-                    sb.append("El arriendo no es de esta sucursal");
+
+                // evaluó si la sucursal en la que se está, es la sucursal correspondiente de devolución
+                if (!sucursal2.getNombreSucursal().equals(sucursal.getNombreSucursal())) {
+                    sb.append("\n");
+                    sb.append("El arriendo no es de esta sucursal\n");
+                    sb.append("Sucursal actual: ").append(sucursalActual).append(" \nSucursal de devolución del arriendo: ").append(sucursal2.getNombreSucursal());
+                    sb.append("\n");
+
+                }else {
+                    sb.append("\n");
+                    sb.append("El arriendo pertenece a esta sucursal\n");
+                    sb.append("Sucursal actual: ").append(sucursalActual).append(" \nSucursal de devolución del arriendo: ").append(sucursal2.getNombreSucursal());
+                    sb.append("\n");
                 }
-                if (arriendo.getFechaTerminoArriendo().isEqual(LocalDate.now()) || arriendo.getFechaTerminoArriendo().isBefore(LocalDate.now())) {
-                    //arriendo en cuanto a fecha es vigente
-                    sb.append("|");
-                    sb.append("El arriendo:" + " " + arriendo.toString() + " " + "Esta vingente");
-                    return String.valueOf(sb);
+                // evaluó si las fechas corresponden
+                if ( arriendo.getFechaInicioArriendo().isAfter(LocalDate.now())) {
+                    sb.append("\n");
+                    sb.append("El arriendo todavía no comienza");
+                    sb.append("\nfecha actual :").append(LocalDate.now()).append("\nfecha inicio del arriendo: ").append(arriendo.getFechaInicioArriendo());
+                }else if (arriendo.getFechaTerminoArriendo().isEqual(LocalDate.now()) || arriendo.getFechaTerminoArriendo().isAfter(LocalDate.now())) {
+                    sb.append("\n");
+                    sb.append("Arriendo dentro del plazo establecido");
+                    sb.append("\nfecha actual :").append(LocalDate.now()).append("\nfecha de termino del arriendo: ").append(arriendo.getFechaTerminoArriendo());
+                }else {
+                    sb.append("\n");
+                    sb.append("Arriendo fuera del plazo establecido");
+                    sb.append("\nfecha actual :").append(LocalDate.now()).append("\nfecha de termino del arriendo: ").append(arriendo.getFechaTerminoArriendo());
                 }
-                sb.append("Vehiculo asociado al arriendo: \n").append("Vehiculo ").append("\n");
-                sb.append(String.valueOf(vehiculo.getId()) + "\n" + "Patente: " + vehiculo.getPatente() + "\n"
-                        + "Marca: " + vehiculo.getMarca() + "\n"
-                        + "Modelo: " + vehiculo.getModelo() + "\n"
-                        + "Color: " + vehiculo.getColorPrincipal() + "\n"
-                        + "Año: " + String.valueOf(vehiculo.getYear()) + "\n"
-                        + "EstadoVehiculo: " + vehiculo.getEstadoVehiculo() + "\n"
-                        + "Kilomtraje: " + String.valueOf(vehiculo.getKilometrajeVehiculo()) + "\n"
-                        + "Ubicacion: " + String.valueOf(vehiculo.getUbicacionActual()) + "\n");
+                // datos del vehículo asociado al arriendo
+                sb.append("\n\nVehiculo asociado al arriendo: \n");
+                sb.append("ID: ").append(vehiculo.getId()).append("\n").append("Patente: ").append(vehiculo.getPatente()).append("\n").append("Marca: ").append(vehiculo.getMarca()).append("\n").append("Modelo: ").append(vehiculo.getModelo()).append("\n").append("Color principal: ").append(vehiculo.getColorPrincipal()).append("\n");
+
+                // persona asociada al arriendo
+                sb.append("\nRut persona asociad al arriendo: ");
+                sb.append(arriendo.getRutCliente());
+
+                return String.valueOf(sb);
+            }else {
+                sb.append("Arriendo concluido");
             }
         } catch (Exception e) {
             sb.append(e.getMessage());
@@ -90,8 +112,11 @@ public class EmpleadoController {
         return sb.toString();
     }
 
+    // ejemplo http://localhost:8080/api/empleado/confirmaDevolucion?EstadoPendiente=1&idReserva=4
     @PostMapping("/confirmaDevolucion")
     public String confirmarDevolucion(@RequestParam("EstadoPendiente") int Bool, @RequestParam("idReserva") Long idReserva){
+
+        StringBuilder sb = new StringBuilder();
         try{
             // se borra el agendamiento del vehículo
         agendarRerservaService.BorrarAgendamiento(idReserva);
@@ -100,12 +125,14 @@ public class EmpleadoController {
         // si el vehículo no se encontró en buenas condiciones queda el arriendo como pendiente
         if(Bool==1){
             arriendoService.CambiarEstadoPendiente(arriendo.getId_arriendo(),true );
+            sb.append("Arriendo marcado como pendiente con el ID: ").append(arriendo.getId_arriendo()).append("\n");
         }
 
         // el arriendo concluye
-        arriendoService.CambiarEstadoPendiente(arriendo.getId_arriendo(),false );
+        arriendoService.CambiarEstado(arriendo.getId_arriendo(),false );
+        sb.append("Devolución confirmada");
 
-            return "devolución confirmada";
+            return sb.toString();
 
         }catch (Exception e){
             return "Error al confirmar el devolución: " + e.getMessage();

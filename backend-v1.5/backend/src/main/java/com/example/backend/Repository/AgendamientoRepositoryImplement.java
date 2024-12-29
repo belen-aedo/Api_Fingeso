@@ -50,7 +50,7 @@ public class AgendamientoRepositoryImplement implements AgendamientoRepository {
     }
 
     public void DeleteAgendamientoByIdReserva(long idRserva) {
-        String sql = "DELETE FROM reservas WHERE id_reserva = ?";
+        String sql = "DELETE FROM agendamiento WHERE id_reserva = ?";
         jdbcTemplate.update (sql, idRserva);
     }
 

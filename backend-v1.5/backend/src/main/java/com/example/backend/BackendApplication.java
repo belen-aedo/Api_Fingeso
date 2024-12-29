@@ -67,11 +67,11 @@ public class BackendApplication implements CommandLineRunner {
 				"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		jdbcTemplate.update(sqlVehiculo, "D", 20000.00, 2022, 1, 1, "Negro", "Toyota", "Toyota Land Cruiser", "ABC1234");
-		jdbcTemplate.update(sqlVehiculo, "M", 15000.00, 2023, 2, 1, "Blanco", "Jeep", "Jeep Wrangler", "XYZ5678");
+		jdbcTemplate.update(sqlVehiculo, "D", 15000.00, 2023, 2, 1, "Blanco", "Jeep", "Jeep Wrangler", "XYZ5678");
 		jdbcTemplate.update(sqlVehiculo, "D", 10000.00, 2021, 3, 1, "Rojo", "Ford", "Ford Bronco", "LMN2345");
-		jdbcTemplate.update(sqlVehiculo, "M", 30000.00, 2020, 4, 1, "Verde", "Land Rover", "Land Rover Defender", "DEF7890");
+		jdbcTemplate.update(sqlVehiculo, "D", 30000.00, 2020, 4, 1, "Verde", "Land Rover", "Land Rover Defender", "DEF7890");
 		jdbcTemplate.update(sqlVehiculo, "D", 5000.00, 2023, 5, 1, "Azul", "Mercedes-Benz", "Mercedes-Benz G-Class", "GHI5678");
-		jdbcTemplate.update(sqlVehiculo, "M", 25000.00, 2022, 6, 2, "Amarillo", "Toyota", "Toyota Land Cruiser", "JKL2345");
+		jdbcTemplate.update(sqlVehiculo, "D", 25000.00, 2022, 6, 2, "Amarillo", "Toyota", "Toyota Land Cruiser", "JKL2345");
 		jdbcTemplate.update(sqlVehiculo, "D", 10000.00, 2023, 7, 2, "Blanco", "Jeep", "Jeep Wrangler", "MNO3456");
 
 
@@ -81,14 +81,21 @@ public class BackendApplication implements CommandLineRunner {
 				"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		// Insertar reservas para los clientes existentes
-		jdbcTemplate.update(sqlReserva, 1, 1, 2, 1, 60000.00, java.sql.Date.valueOf("2024-12-29"), java.sql.Date.valueOf("2024-12-30"),
-				java.sql.Date.valueOf("2024-12-28"), true, true);
-		jdbcTemplate.update(sqlReserva, 2, 2, 1, 2, 75000.00, java.sql.Date.valueOf("2024-12-30"), java.sql.Date.valueOf("2024-12-31"),
-				java.sql.Date.valueOf("2024-12-28"), true, false);
-		jdbcTemplate.update(sqlReserva, 1, 1, 2, 3, 65000.00, java.sql.Date.valueOf("2025-01-01"), java.sql.Date.valueOf("2025-01-02"),
-				java.sql.Date.valueOf("2024-12-28"), true, true);
-		jdbcTemplate.update(sqlReserva, 2, 2, 1, 4, 70000.00, java.sql.Date.valueOf("2025-01-01"), java.sql.Date.valueOf("2025-01-02"),
-				java.sql.Date.valueOf("2024-12-28"), true, false);
+		//cliente 1 reserva 1
+		jdbcTemplate.update(sqlReserva, 1, 1, 2, 1, 60000.00, java.sql.Date.valueOf("2025-01-04"), java.sql.Date.valueOf("2025-01-06"),
+				java.sql.Date.valueOf("2025-12-29"), true, true);
+
+		//cliente 2 reserva 2
+		jdbcTemplate.update(sqlReserva, 2, 1, 1, 2, 75000.00, java.sql.Date.valueOf("2025-01-04"), java.sql.Date.valueOf("2024-01-07"),
+				java.sql.Date.valueOf("2024-12-29"), true, false);
+
+		//cliente 1 reserva 3
+		jdbcTemplate.update(sqlReserva, 1, 1, 2, 3, 65000.00, java.sql.Date.valueOf("2025-01-06"), java.sql.Date.valueOf("2025-01-07"),
+				java.sql.Date.valueOf("2024-12-29"), true, true);
+
+		//cliente 2 reserva 4
+		jdbcTemplate.update(sqlReserva, 2, 1, 1, 4, 70000.00, java.sql.Date.valueOf("2025-01-08"), java.sql.Date.valueOf("2025-01-09"),
+				java.sql.Date.valueOf("2024-12-29"), true, false);
 
 		// Insertar agendamientos
 		String sqlAgendamiento = "INSERT INTO agendamiento (fecha_finalizacion, fecha_inicio, proxima_fecha_disponible, id_agendamiento, id_cliente, id_reserva, id_sucursal_devolucion, id_sucursal_retiro, id_vehiculo) " +
@@ -96,21 +103,20 @@ public class BackendApplication implements CommandLineRunner {
 
 		// Agendamiento basado en las reservas y vehículos
 		// reserva 1 cliente 1
-		jdbcTemplate.update(sqlAgendamiento, java.sql.Date.valueOf("2024-12-30"), java.sql.Date.valueOf("2024-12-29"),
-				java.sql.Date.valueOf("2025-01-01"), 1, 1, 1, 2, 1, 1);
+		jdbcTemplate.update(sqlAgendamiento, java.sql.Date.valueOf("2025-01-06"), java.sql.Date.valueOf("2025-01-04"),
+				java.sql.Date.valueOf("2025-01-07"), 1, 1, 1, 2, 1, 1);
 
-		// reserva 2 cleinte 2
-		jdbcTemplate.update(sqlAgendamiento, java.sql.Date.valueOf("2024-12-31"), java.sql.Date.valueOf("2024-12-30"),
-				java.sql.Date.valueOf("2025-01-01"), 2, 2, 2, 1, 2, 2);
+		// reserva 2 cliente 2
+		jdbcTemplate.update(sqlAgendamiento, java.sql.Date.valueOf("2025-01-07"), java.sql.Date.valueOf("2025-01-04"),
+				java.sql.Date.valueOf("2025-01-08"), 2, 2, 2, 1, 1, 2);
 
 		//reserva 4 cliente 2
-		jdbcTemplate.update(sqlAgendamiento, java.sql.Date.valueOf("2025-01-02"), java.sql.Date.valueOf("2025-01-01"),
-				java.sql.Date.valueOf("2025-01-03"), 3, 2, 4, 1, 2, 2);
+		jdbcTemplate.update(sqlAgendamiento, java.sql.Date.valueOf("2025-01-09"), java.sql.Date.valueOf("2025-01-04"),
+				java.sql.Date.valueOf("2025-01-10"), 3, 2, 4, 1, 1, 4);
 
 		//reserva 3 cliente 1
-		jdbcTemplate.update(sqlAgendamiento, java.sql.Date.valueOf("2025-01-02"), java.sql.Date.valueOf("2024-01-01"),
-				java.sql.Date.valueOf("2025-01-03"), 4, 1, 3, 2, 1, 1);
-
+		jdbcTemplate.update(sqlAgendamiento, java.sql.Date.valueOf("2025-01-07"), java.sql.Date.valueOf("2024-01-06"),
+				java.sql.Date.valueOf("2025-01-08"), 4, 1, 3, 2, 1, 3);
 
 
 		// Insertar arriendos
@@ -119,24 +125,23 @@ public class BackendApplication implements CommandLineRunner {
 				"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		// Arriendo para la reserva 1 (Cliente 1)
-		jdbcTemplate.update(sqlArriendo, 60000.00, true, java.sql.Date.valueOf("2024-12-29"),
-				java.sql.Date.valueOf("2024-12-29"), java.sql.Date.valueOf("2024-12-30"), false, 1, 1, 2, 1, 1, "12345678-9");
+		jdbcTemplate.update(sqlArriendo, 60000.00, true, java.sql.Date.valueOf("2024-12-31"),
+				java.sql.Date.valueOf("2025-01-04"), java.sql.Date.valueOf("2025-01-06"), false, 1, 1, 2, 1, 1, "12345678-9");
 
 		// Arriendo para la reserva 2 (Cliente 2)
-		jdbcTemplate.update(sqlArriendo, 75000.00, true, java.sql.Date.valueOf("2024-12-30"),
-				java.sql.Date.valueOf("2024-12-30"), java.sql.Date.valueOf("2024-12-31"), false, 2, 2, 1, 2, 2, "98765432-1");
+		jdbcTemplate.update(sqlArriendo, 75000.00, true, java.sql.Date.valueOf("2024-12-31"),
+				java.sql.Date.valueOf("2025-01-04"), java.sql.Date.valueOf("2024-01-07"), false, 2, 2, 1, 1, 2, "98765432-1");
 
 		// Arriendo para la reserva 3 (Cliente 1)
-		jdbcTemplate.update(sqlArriendo, 65000.00, true, java.sql.Date.valueOf("2025-01-01"),
-				java.sql.Date.valueOf("2025-01-01"), java.sql.Date.valueOf("2025-01-02"), false, 3, 3, 1, 1, 3, "12345678-9");
+		jdbcTemplate.update(sqlArriendo, 65000.00, true, java.sql.Date.valueOf("2024-12-31"),
+				java.sql.Date.valueOf("2025-01-06"), java.sql.Date.valueOf("2025-01-07"), false, 3, 3, 1, 1, 3, "12345678-9");
 
 		// Arriendo para la reserva 4 (Cliente 2)
-		jdbcTemplate.update(sqlArriendo, 70000.00, true, java.sql.Date.valueOf("2025-01-01"),
-				java.sql.Date.valueOf("2025-01-01"), java.sql.Date.valueOf("2025-01-02"), false, 4, 4, 1, 2, 4, "98765432-1");
+		jdbcTemplate.update(sqlArriendo, 70000.00, true, java.sql.Date.valueOf("2024-12-31"),
+				java.sql.Date.valueOf("2025-01-04"), java.sql.Date.valueOf("2025-01-09"), false, 4, 4, 1, 1, 4, "98765432-1");
 
 		System.out.println("Datos de clientes, sucursales, vehículos, reservas y agendamientos insertados exitosamente.");
 		System.out.println("Datos de arriendos insertados exitosamente.");
-
 	}
 
 }

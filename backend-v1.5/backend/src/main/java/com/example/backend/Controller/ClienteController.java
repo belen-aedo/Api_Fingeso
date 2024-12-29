@@ -39,6 +39,7 @@ public class ClienteController {
         return clienteService.buscarClientePorId(Long.parseLong(id));
     }
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // Primero registrarse
     @PostMapping("/registrar")
     public String registrarCliente(@RequestBody Cliente Nuevocliente) {
@@ -63,6 +64,7 @@ public class ClienteController {
         return clienteService.login(clienteR.getEmail(), clienteR.getPassword());
     }
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // Obtener vehículos disponibles obteniendo los vehículos referencia
     @GetMapping("/ObtenerVehiculoDisponibles")
     public List<VehiculoReferencia> getAllVehiculosAvailable(
@@ -82,6 +84,7 @@ public class ClienteController {
         }
     }
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // Seleccionar el vehículo referencia para ver los detalles con el costo de arriendo y devolución cambiados
     @PostMapping("/VerDetallesVehiculo")
     public VehiculoReferencia obtenerDetalles(
@@ -103,6 +106,7 @@ public class ClienteController {
         // la llave que contiene el vehiculo referencia guardado anteriormente
     }
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // Confirmar vehiculo obteniendo el dato del vehículo físico disponible
     @PostMapping("/SelecionarVehiculoReferencia")
     public String SelecionarVehiculo(@RequestBody VehiculoReferencia vehiculoReferencia,
@@ -122,6 +126,7 @@ public class ClienteController {
         return VehiculosMismoModelo.get(0).getPatente();
     }
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // Mostrar detalles de la reserva // siempre se trabaja con el mismo vehiculo referencia que esta en la llave
     @PostMapping("/DetallesReserva")
     public List<String> obtenerDetallesReserva(@RequestBody VehiculoReferencia vehiculoReferencia,
@@ -141,8 +146,9 @@ public class ClienteController {
         return DetallesReserva;
     }
 
-    // Se omite el pago, se hace como que esta pagado
+    // Se omite el pago, se hace como que está pagado (la reserva al guardarse se guardará como pagada)
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // Confirmar reserva con vehiculo seleccionado
     @PostMapping("/ConfirmarReserva")
     @Transactional
@@ -181,7 +187,7 @@ public class ClienteController {
             LocalDate NuevFechaDispo = ValidacionDatos.calcularNuevaFechaFin(fechaRetiro, fechaDevolucion);
             agendarRerservaService.realizarAgendamiento(vehiculo, AgendarSucursalRetiro, AgensarSucursalDevo, fechaRetiro, fechaDevolucion, NuevFechaDispo, reserva, cliente);
 
-            return "Agendamiento Registrado exitosamente";
+            return "Agendamiento Registrado exitosamente" + "ID de la reserva" + IdReserva;
 
         } catch (Exception e) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();

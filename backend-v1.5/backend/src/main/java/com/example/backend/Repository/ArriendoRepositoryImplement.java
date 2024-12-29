@@ -28,15 +28,14 @@ public class ArriendoRepositoryImplement implements ArriendoRepository {
     }
 
     @Override
-    public void CambiarEstadoPendiennteById(Long id_arriendo, Boolean estado) {
-
+    public void ChangePendingStatusById(Long id_arriendo, Boolean estado) {
         String sql = " UPDATE arriendo SET pendiente_arriendo = ? WHERE id_arriendo = ?";
         jdbcTemplate.update(sql, estado, id_arriendo);
     }
 
 
     @Override
-    public void CambiarEstado(Long id_arriendo, Boolean estado) {
+    public void ChangeState(Long id_arriendo, Boolean estado) {
         String sql = " UPDATE arriendo SET estado_arriendo = ? WHERE id_arriendo = ?";
         jdbcTemplate.update(sql, estado, id_arriendo);
     }
