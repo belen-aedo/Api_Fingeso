@@ -49,16 +49,20 @@ public class EmpleadoController {
     }
 
     @PostMapping("/login")
-    public int loginEmpleado(@RequestBody Empleado empleadoR) {
+    public String loginEmpleado(@RequestBody Empleado empleadoR) {
             return empleadoService.login(empleadoR.getEmail(), empleadoR.getPassword());
     }
 
 
-    //ejemplo http://localhost:8080/api/empleado/DatosArriendo?Nombre Sucursal=Sucursal Central&id reserva=1
+    //ejemplo http://localhost:8080/api/empleado/DatosArriendo?Nombre Sucursal=Sucursal Central&id reserva=1&rol=gerente
     @GetMapping("/DatosArriendo")
-    public String ObtenerDatosArriendo(@RequestParam("Nombre Sucursal") String sucursalActual, @RequestParam("id reserva") Long idReserva) {
+    public String ObtenerDatosArriendo(@RequestParam("Nombre Sucursal") String sucursalActual, @RequestParam("id reserva") Long idReserva, @RequestParam("rol") String rol) {
+
         StringBuilder sb = new StringBuilder();
         try {
+
+            if(rol.equals("gerente") || rol.equals("asalariado")) {
+
             Sucursal sucursal = sucursalService.buscarSucursalPorNombre(sucursalActual);
             Vehiculo vehiculo = vehiculoFilterService.ObtenerDatosDeVehiculos(idReserva); // busco el vehiculo vinculado al arriendo por el id de la reserva
             Arriendo arriendo = empleadoService.BuscarArriendoPorReserva(idReserva); // busco el arriendo vinculado a la reserva
@@ -106,18 +110,23 @@ public class EmpleadoController {
             }else {
                 sb.append("Arriendo concluido");
             }
+
+            }else {
+                return "Su rol no tiene los permisos para revisar la información solicitada";
+            }
         } catch (Exception e) {
             sb.append(e.getMessage());
         }
         return sb.toString();
     }
 
-    // ejemplo http://localhost:8080/api/empleado/confirmaDevolucion?EstadoPendiente=1&idReserva=4
+    // ejemplo http://localhost:8080/api/empleado/confirmaDevolucion?EstadoPendiente=1&idReserva=4&rol=asalariado
     @PostMapping("/confirmaDevolucion")
-    public String confirmarDevolucion(@RequestParam("EstadoPendiente") int Bool, @RequestParam("idReserva") Long idReserva){
+    public String confirmarDevolucion(@RequestParam("EstadoPendiente") int Bool, @RequestParam("idReserva") Long idReserva, @RequestParam("rol") String rol){
 
         StringBuilder sb = new StringBuilder();
         try{
+            if(rol.equals("gerente") || rol.equals("asalariado")) {
             // se borra el agendamiento del vehículo
         agendarRerservaService.BorrarAgendamiento(idReserva);
         Arriendo arriendo = empleadoService.BuscarArriendoPorReserva(idReserva);
@@ -134,11 +143,15 @@ public class EmpleadoController {
 
             return sb.toString();
 
+            }else {
+                return "Su rol no tiene los permisos para ejecutar la acción solicitada";
+            }
+
         }catch (Exception e){
             return "Error al confirmar el devolución: " + e.getMessage();
         }
+    }
 
-        }
 }
 
 

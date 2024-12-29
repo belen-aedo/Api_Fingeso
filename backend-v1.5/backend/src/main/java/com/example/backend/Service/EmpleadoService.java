@@ -38,7 +38,7 @@ public class EmpleadoService {
         LinkedList<String> RolesPermitidos = new LinkedList<String>();
         RolesPermitidos.add("gerente");
         RolesPermitidos.add("mecanico");
-        RolesPermitidos.add("empleado");
+        RolesPermitidos.add("asalariado");
 
         // Verificar número telefónico válido
         ValidacionDatos Validar = new ValidacionDatos(telefonoRegistrado); // dato a validar contiene el número telefónico
@@ -84,14 +84,14 @@ public class EmpleadoService {
     }
 
 
-    public int login(String correo_registrado, String password_register) {
+    public String login(String correo_registrado, String password_register) {
         Empleado empleado = empleadoRepository.findByEmail(correo_registrado);
         if (empleado != null) {
             if (password_register.equals(empleado.getPassword())) {
-                return 1;
+                return empleado.getRol();
             }
         }
-        return 0;
+        return "no existe";
     }
 
 
