@@ -22,6 +22,9 @@ public class EmpleadoService {
     @Autowired
     private ArriendoRepository arriendoRepository;
 
+    @Autowired
+    private VehiculoRepository vehiculoRepository;
+
 
     // Registra un cliente
     public void registrarEmpleado(String nombreEmpleado, String rutEmpleado, String telefonoRegistrado, String rol, String nombreSucursal, String correoRegistrado, String passwordRegister) {
@@ -102,6 +105,10 @@ public class EmpleadoService {
             throw new IllegalArgumentException("No existe el arriendo vinculado al ID de la reserva indicada: " + id_reserva);
         }
         return arriendo;
+    }
+
+    public void actualizarKilometrajeVehiculo(Long id_vehiculo, Double kilometraje) {
+            vehiculoRepository.updateKilometrajeById(id_vehiculo, kilometraje);
     }
 
 }

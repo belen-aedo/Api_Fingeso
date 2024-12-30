@@ -146,6 +146,21 @@ public class VehiculoRepositoryImplement implements VehiculoRepository {
         }
     }
 
+    @Override
+    public void updateKilometrajeById(Long idVehiculo, Double nuevoKilometraje) {
 
+        // Primero, obtener el kilometraje actual del vehículo
+        String sqlSelect = "SELECT kilometraje_vehiculo FROM public.vehiculo WHERE id = ?";
+        Double kilometrajeActual = jdbcTemplate.queryForObject(sqlSelect, Double.class, idVehiculo);
+
+        // Verificar si el nuevo kilometraje es mayor o igual al actual
+        if (nuevoKilometraje < kilometrajeActual) {
+            throw new IllegalArgumentException("El nuevo kilometraje debe ser mayor o igual al kilometraje actual.");
+        }
+
+        // Si la verificación es exitosa, actualizar el kilometraje
+        String sqlUpdate = "UPDATE public.vehiculo SET kilometraje_vehiculo = ? WHERE id = ?";
+        jdbcTemplate.update(sqlUpdate, nuevoKilometraje, idVehiculo);
+    }
 
 }

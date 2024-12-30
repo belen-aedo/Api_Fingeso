@@ -13,5 +13,6 @@ public interface VehiculoRepository {
     VehiculoReferencia getReferencias(String modelo);
     List<VehiculoReferencia> getReferenciasPorModelos(List<String> modelos);
     Vehiculo getVehiculoByIdReserva(Long id);
+    public void updateKilometrajeById(Long idVehiculo, Double nuevoKilometraje);
 
 }
