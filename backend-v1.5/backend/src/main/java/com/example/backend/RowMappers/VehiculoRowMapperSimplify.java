@@ -18,6 +18,7 @@ public class VehiculoRowMapperSimplify implements RowMapper<Vehiculo> {
         vehiculo.setMarca(rs.getString("marca"));
         vehiculo.setModelo(rs.getString("modelo"));
         vehiculo.setColorPrincipal(rs.getString("color_principal"));
+        vehiculo.setKilometrajeVehiculo(rs.getDouble("kilometraje_vehiculo"));
         return vehiculo;
     }
 }

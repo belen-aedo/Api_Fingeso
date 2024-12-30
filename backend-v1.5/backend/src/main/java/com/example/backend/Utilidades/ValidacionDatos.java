@@ -1,5 +1,6 @@
 package com.example.backend.Utilidades;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.regex.Pattern;
 import java.time.temporal.ChronoUnit;
@@ -153,6 +154,23 @@ public class ValidacionDatos {
         return nuevaFechaFin; // Devuelve la nueva fecha de fin considerando el mantenimiento
     }
 
+    public Pair<Boolean, Double> verificarKilometraje(LocalDate fechaInicio, LocalDate fechaFin, double kmVehiculo, double nuevoKmVehiculo) {
+        // Calcula la duración del arriendo en días
+        long diasArriendo = ChronoUnit.DAYS.between(fechaInicio, fechaFin);
 
+        // Límite diario de kilometraje permitido
+        double limiteDiarioKm = 100.0;
 
+        // Calcula el kilometraje máximo permitido
+        double kilometrajeMaximoPermitido = diasArriendo * limiteDiarioKm;
+
+        // Calcula el kilometraje utilizado
+        double kilometrajeUtilizado = nuevoKmVehiculo - kmVehiculo;
+
+        // Verifica si el kilometraje utilizado excede el permitido
+        boolean excedido = kilometrajeUtilizado > kilometrajeMaximoPermitido;
+
+        // Devuelve un par con el resultado y el kilometraje excedido
+        return new Pair<>(excedido, kilometrajeUtilizado-kilometrajeMaximoPermitido);
+    }
 }

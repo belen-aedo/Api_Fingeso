@@ -33,10 +33,16 @@ public class ArriendoRepositoryImplement implements ArriendoRepository {
         jdbcTemplate.update(sql, estado, id_arriendo);
     }
 
-
     @Override
     public void ChangeState(Long id_arriendo, Boolean estado) {
         String sql = " UPDATE arriendo SET estado_arriendo = ? WHERE id_arriendo = ?";
         jdbcTemplate.update(sql, estado, id_arriendo);
     }
+
+    @Override
+    public void updateCostWithPenalty(Long idReserva, Double multa) {
+        String sql = "UPDATE arriendo SET costo_total = costo_total + ? WHERE id_reserva = ?";
+        jdbcTemplate.update(sql, multa, idReserva);
+    }
+
 }

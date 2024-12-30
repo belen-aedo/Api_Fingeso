@@ -5,6 +5,8 @@ import com.example.backend.Entity.Empleado;
 import com.example.backend.Entity.Sucursal;
 import com.example.backend.Entity.Vehiculo;
 import com.example.backend.Service.*;
+import com.example.backend.Utilidades.Pair;
+import com.example.backend.Utilidades.ValidacionDatos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -56,9 +58,13 @@ public class EmpleadoController {
 
     //ejemplo http://localhost:8080/api/empleado/DatosArriendo?Nombre Sucursal=Sucursal Central&id reserva=1&rol=gerente
     @GetMapping("/DatosArriendo")
-    public String ObtenerDatosArriendo(@RequestParam("Nombre Sucursal") String sucursalActual, @RequestParam("id reserva") Long idReserva, @RequestParam("rol") String rol) {
+    public String ObtenerDatosArriendo(@RequestParam("Nombre Sucursal") String sucursalActual,
+                                       @RequestParam("id reserva") Long idReserva,
+                                       @RequestParam("rol") String rol,
+                                       @RequestParam("kilometraje") Double kilometraje) {
 
         StringBuilder sb = new StringBuilder();
+        int Multa = 500; // 500 pesos por kilometro excedido
         try {
 
             if(rol.equals("gerente") || rol.equals("asalariado")) {
@@ -88,29 +94,43 @@ public class EmpleadoController {
                 if ( arriendo.getFechaInicioArriendo().isAfter(LocalDate.now())) {
                     sb.append("\n");
                     sb.append("El arriendo todavía no comienza");
-                    sb.append("\nfecha actual :").append(LocalDate.now()).append("\nfecha inicio del arriendo: ").append(arriendo.getFechaInicioArriendo());
+                    sb.append("\nfecha actual: ").append(LocalDate.now()).append("\nfecha inicio del arriendo: ").append(arriendo.getFechaInicioArriendo());
                 }else if (arriendo.getFechaTerminoArriendo().isEqual(LocalDate.now()) || arriendo.getFechaTerminoArriendo().isAfter(LocalDate.now())) {
                     sb.append("\n");
                     sb.append("Arriendo dentro del plazo establecido");
-                    sb.append("\nfecha actual :").append(LocalDate.now()).append("\nfecha de termino del arriendo: ").append(arriendo.getFechaTerminoArriendo());
+                    sb.append("\nfecha actual: ").append(LocalDate.now()).append("\nfecha de termino del arriendo: ").append(arriendo.getFechaTerminoArriendo());
                 }else {
                     sb.append("\n");
                     sb.append("Arriendo fuera del plazo establecido");
-                    sb.append("\nfecha actual :").append(LocalDate.now()).append("\nfecha de termino del arriendo: ").append(arriendo.getFechaTerminoArriendo());
+                    sb.append("\nfecha actual: ").append(LocalDate.now()).append("\nfecha de termino del arriendo: ").append(arriendo.getFechaTerminoArriendo());
                 }
                 // datos del vehículo asociado al arriendo
                 sb.append("\n\nVehiculo asociado al arriendo: \n");
-                sb.append("ID: ").append(vehiculo.getId()).append("\n").append("Patente: ").append(vehiculo.getPatente()).append("\n").append("Marca: ").append(vehiculo.getMarca()).append("\n").append("Modelo: ").append(vehiculo.getModelo()).append("\n").append("Color principal: ").append(vehiculo.getColorPrincipal()).append("\n");
+                sb.append("ID: ").append(vehiculo.getId()).append("\n").append("Patente: ").append(vehiculo.getPatente()).append("\n").append("Marca: ").append(vehiculo.getMarca()).append("\n").append("Modelo: ").append(vehiculo.getModelo()).append("\n").append("Color principal: ").append(vehiculo.getColorPrincipal()).append("\nKilometraje: ").append(vehiculo.getKilometrajeVehiculo()).append("[km]").append("\n");
 
                 // persona asociada al arriendo
                 sb.append("\nRut persona asociad al arriendo: ");
                 sb.append(arriendo.getRutCliente());
 
+                // verificar multa por exceso de kilometraje
+                ValidacionDatos vd = new ValidacionDatos();
+
+                // me devuelve un pair en donde la primera parte es un bolean que es "true" si se excedió y el segundo es el kilometraje excedido
+                Pair<Boolean, Double> pair = vd.verificarKilometraje(
+                        arriendo.getFechaInicioArriendo(),
+                        arriendo.getFechaTerminoArriendo(),
+                        vehiculo.getKilometrajeVehiculo(),
+                        kilometraje
+                );
+                // si se excede el Kilometraje
+                if(pair.getObj1()){
+                    sb.append("\n\nMulta por exceso de kilometraje: ").append(pair.getObj2() * Multa).append("[clp]");
+                    sb.append("\nKilometraje excedido: ").append(pair.getObj2()).append("[km]");
+                }
                 return String.valueOf(sb);
             }else {
                 sb.append("Arriendo concluido");
             }
-
             }else {
                 return "Su rol no tiene los permisos para revisar la información solicitada";
             }
@@ -120,12 +140,20 @@ public class EmpleadoController {
         return sb.toString();
     }
 
-    // ejemplo http://localhost:8080/api/empleado/confirmaDevolucion?EstadoPendiente=1&idReserva=4&rol=asalariado
+    // se paga la multa lo cual se omite
+
+
+    // ejemplo http://localhost:8080/api/empleado/confirmaDevolucion?EstadoPendiente=1&idReserva=4&rol=asalariado&multa=4500.0
     @PostMapping("/confirmaDevolucion")
-    public String confirmarDevolucion(@RequestParam("EstadoPendiente") int Bool, @RequestParam("idReserva") Long idReserva, @RequestParam("rol") String rol){
+    public String confirmarDevolucion(@RequestParam("EstadoPendiente") int Bool,
+                                      @RequestParam("idReserva") Long idReserva,
+                                      @RequestParam("rol") String rol,
+                                      @RequestParam("multa") double multa){
 
         StringBuilder sb = new StringBuilder();
+
         try{
+
             if(rol.equals("gerente") || rol.equals("asalariado")) {
             // se borra el agendamiento del vehículo
         agendarRerservaService.BorrarAgendamiento(idReserva);
@@ -135,6 +163,11 @@ public class EmpleadoController {
         if(Bool==1){
             arriendoService.CambiarEstadoPendiente(arriendo.getId_arriendo(),true );
             sb.append("Arriendo marcado como pendiente con el ID: ").append(arriendo.getId_arriendo()).append("\n");
+        }
+
+        // se actualiza el precio del arriendo según multa
+        if(multa > 0){
+            arriendoService.actualizarCostoConMulta(idReserva,multa);
         }
 
         // el arriendo concluye

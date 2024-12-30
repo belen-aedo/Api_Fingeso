@@ -49,17 +49,15 @@ public class BackendApplication implements CommandLineRunner {
 				"SUV todo terreno con gran capacidad.", "Automático", "Jeep Wrangler", "Gasolina",
 				"http://example.com/jeep_wrangler.jpg");
 
-		/// nuevos añadidos -------
-
 		jdbcTemplate.update(sqlVehiculoReferencia,4, 5, 130000.00, 65000.00,  3,
 				"LCAR", "Ideal para aventuras off-road.", "Automático", "Ford Bronco", "Gasolina", "http://example.com/ford_bronco.jpg");
 
 		jdbcTemplate.update(sqlVehiculoReferencia, 4, 5, 140000.00, 70000.00, 4, "LCAR",
 				"Vehículo con gran tracción para todo tipo de terreno.", "Automático", "Land Rover Defender", "Diésel", "http://example.com/land_rover_defender.jpg");
 
-
 		jdbcTemplate.update(sqlVehiculoReferencia, 4, 5, 160000.00, 80000.00, 5, "LCAR",
 				"SUV de lujo con capacidad para 5 personas.", "Automático", "Mercedes-Benz G-Class", "Gasolina", "http://example.com/mercedes_g_class.jpg");
+
 
 		// Insertar vehículos individuales con estados "D" o "M"
 		String sqlVehiculo = "INSERT INTO vehiculo " +

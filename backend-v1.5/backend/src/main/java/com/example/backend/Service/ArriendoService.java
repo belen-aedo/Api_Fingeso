@@ -27,4 +27,12 @@ public class ArriendoService {
             System.out.println(e.getMessage());
         }
     }
+
+    public void actualizarCostoConMulta(Long idReserva, Double multa){
+        try{
+            arriendoRepository.updateCostWithPenalty(idReserva, multa);
+        }catch (EmptyResultDataAccessException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }

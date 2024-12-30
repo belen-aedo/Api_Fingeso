@@ -134,7 +134,7 @@ public class VehiculoRepositoryImplement implements VehiculoRepository {
     @Override
     public Vehiculo getVehiculoByIdReserva(Long id) {
 
-        String sql = " SELECT v.id, v.patente, v.marca, v.modelo, v.color_principal " +
+        String sql = " SELECT v.id, v.patente, v.marca, v.modelo, v.color_principal, v.kilometraje_vehiculo " +
                      " FROM vehiculo v INNER JOIN arriendo a ON v.id = a.id_vehiculo WHERE a.id_reserva = ? ";
         try {
 
