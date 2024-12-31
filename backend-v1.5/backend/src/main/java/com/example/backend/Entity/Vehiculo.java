@@ -4,24 +4,39 @@ import jakarta.persistence.*;
 
 import java.util.Objects;
 
-@Table(name = "vehiculo")
+@Table(name = "vehiculo", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"patente"})
+})
+
 @Entity
 public class Vehiculo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @Column(nullable = false, unique = true)
     private String patente; // Placa del vehículo
+
+    @Column(nullable = false)
     private String marca; // Marca del vehículo
+
+    @Column(nullable = false)
     private String modelo; // Modelo del vehículo
+
+    @Column(nullable = false)
     private String colorPrincipal; // Color del vehículo
+
     private int year; // Año de fabricación
+
+    @Column(nullable = false)
     private Character estadoVehiculo; // D: Disponible, O: Ocupado, M: Mantenimiento
+
+    @Column(nullable = false)
     private double kilometrajeVehiculo; // Kilometraje del vehículo
 
     @ManyToOne
     @JoinColumn(name = "id_sucursal")
     private Sucursal ubicacionActual; // muchos vehiculos en una sucursal, un vehiculo puede estar en una sucursal, Vehiculo-M------1-Sucursal
-
 
     public Vehiculo(long id, String patente, String marca, String modelo, String colorPrincipal, int year, Character estadoVehiculo, double kilometrajeVehiculo, Sucursal ubicacionActual, Reserva reserva) {
         this.id = id;

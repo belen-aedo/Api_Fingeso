@@ -11,6 +11,8 @@ public class Arriendo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id_arriendo;//Identificador
+
+    @Column(nullable = false)
     private String rutCliente; // DNI del cliente
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -29,12 +31,22 @@ public class Arriendo {
     @JoinColumn(name = "id_reserva")
     private Reserva reserva;
 
+    @Column(nullable = false)
     private LocalDate fechaArriendo;
+
+    @Column(nullable = false)
     private LocalDate fechaInicioArriendo;
+
+    @Column(nullable = false)
     private LocalDate FechaTerminoArriendo;
 
+    @Column(nullable = false)
     private double CostoTotal;
+
+    @Column(nullable = false)
     private boolean EstadoArriendo; // TRUE : esta vigente/corriendo, FALSE : Finalizado
+
+    @Column(nullable = false)
     private boolean PendienteArriendo; // si el vehiculo arrendado llega en malas condiciones se marca como pendiente
 
     public Arriendo(String rutCliente, Vehiculo vehiculo, double costoTotal, LocalDate fechaArriendo, boolean estadoArriendo, LocalDate fechaInicioArriendo, LocalDate FechaTerminoArriendo) {

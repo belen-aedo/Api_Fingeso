@@ -2,23 +2,35 @@ package com.example.backend.Entity;
 
 import jakarta.persistence.*;
 
-@Table(name = "empleado")
 @Entity
+@Table(name = "empleado" , uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"rut"}),
+        @UniqueConstraint(columnNames = {"email"})
+})
 public class Empleado {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idEmpleado;
 
+    @Column(nullable = false)
     private String nombre;
+
+    @Column(nullable = false, unique = true)
     private String rut;
+
     private String telefono;
+
+    @Column(nullable = false)
     private String rol; // mecanico, gerente, asalariado
 
     @ManyToOne
-    @JoinColumn(name = "id_sucursal")
+    @JoinColumn(name = "id_sucursal", nullable = false)
     private Sucursal sucursal; // empleado-M---1-sucursal
 
+    @Column(nullable = false, unique = true)
     private String email;
+
+    @Column(nullable = false)
     private String password;
 
     // No-arg constructor

@@ -28,11 +28,22 @@ public class Reserva {
     @JoinColumn(name = "id_vehiculo_referencia")
     private VehiculoReferencia vehiculoAsignado;
 
+    @Column(nullable = false)
     private double CostoTotal;
+
+    @Column(nullable = false)
     private LocalDate fechaInicioReserva;
+
+    @Column(nullable = false)
     private LocalDate fechaTerminoReserva;
+
+    @Column(nullable = false)
     private LocalDate FechaReserva;
+
+    @Column(nullable = false)
     private Boolean ReservaFinalizada;
+
+    @Column(nullable = false)
     private Boolean pagoReserva;
 
     public Reserva(long id_reserva,
@@ -61,7 +72,6 @@ public class Reserva {
     }
 
    //Getters
-
     public long getId_reserva() {
         return id_reserva;
     }
@@ -165,7 +175,6 @@ public class Reserva {
     public int hashCode() {
         return Objects.hash(id_reserva);
     }
-
 
 }
 

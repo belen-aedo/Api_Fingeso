@@ -31,8 +31,13 @@ public class Agendamiento {
     @JoinColumn(name = "id_sucursal_devolucion")
     private Sucursal sucursalDevolucion;
 
+    @Column(nullable = false)
     private LocalDate fechaInicio;
+
+    @Column(nullable = false)
     private LocalDate fechaFinalizacion;
+
+    @Column(nullable = false)
     private LocalDate ProximaFechaDisponible;
 
     //ESTADO AGENDAMIENTO, PROXIMO INCREMENTO

@@ -1,6 +1,5 @@
 -- este archivito servira para rellenar con datos la base de datos
 
-
 --(1)----- fechas para el 6 de enero (presentación)
 
 -- Insertar clientes

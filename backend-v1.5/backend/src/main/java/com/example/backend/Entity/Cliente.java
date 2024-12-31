@@ -8,19 +8,34 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
-@Table(name = "cliente")
 @Entity
+@Table(name = "cliente", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"rut"}),
+        @UniqueConstraint(columnNames = {"email"})
+})
 public class Cliente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idCliente; // Identificador
+
+    @Column(nullable = false, unique = true)
     private String rut; // DNI del cliente
+
+    @Column(nullable = false)
     private String nombre; // Nombre del cliente
+
     private String direccion; // Dirección del cliente
+
+    @Column(nullable = false)
     private String telefono; // Teléfono del cliente
+
+    @Column(nullable = false, unique = true)
     private String email; // Correo electrónico del cliente
+
+    @Column(nullable = false)
     private String password; // Contraseña del cliente
+
     private LocalDate fechaNacimiento; // Fecha de nacimiento del cliente
 
     /* -mappedBy = "cliente": Indica que esta relación es mantenida por el atributo "cliente" en la clase Reserva.

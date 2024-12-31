@@ -5,15 +5,23 @@ import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Table(name = "sucursal")
 @Entity
+@Table(name = "sucursal" , uniqueConstraints = {
+        @UniqueConstraint( columnNames = {"nombre_sucursal"})
+})
 public class Sucursal {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idSucursal;
 
+    @Column(unique = true , nullable = false)
     private String nombreSucursal;
+
+    @Column(nullable = false)
     private String ciudadSucursal;
+
+    @Column(nullable = false)
     private String telefonoSucursal;
 
     @OneToMany(mappedBy = "ubicacionActual", cascade = CascadeType.ALL, orphanRemoval = true)

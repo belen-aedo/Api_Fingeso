@@ -12,15 +12,31 @@ public class VehiculoReferencia {
 
     private String url; // Aquí agregas el campo URL
 
+    @Column(nullable = false)
     private String modelo;
 
+    @Column(nullable = false)
     private String descripcionPublicacion;
+
+    @Column(nullable = false)
     private double CostoReservaVehiculo;
+
+    @Column(nullable = false)
     private double CostoArriendoVehiculo;
+
+    @Column(nullable = false)
     private int capacidadPasajeros;
+
+    @Column(nullable = false)
     private int cantidadPuertas;
+
+    @Column(nullable = false)
     private String tipoCombustible;
+
+    @Column(nullable = false)
     private String mecanico_automatico;
+
+    @Column(nullable = false)
     private String acriss;
 
     //precio, capacidad de pasajeros, cantidad de puertas, tipo de gasolina, mecánico o automático,
@@ -56,7 +72,6 @@ public class VehiculoReferencia {
         return descripcionPublicacion;
     }
 
-
     public double getCostoReservaVehiculo() {
         return CostoReservaVehiculo;
     }
@@ -64,7 +79,6 @@ public class VehiculoReferencia {
     public double getCostoArriendoVehiculo() {
         return CostoArriendoVehiculo;
     }
-
 
     public int getCapacidadPasajeros() {
         return capacidadPasajeros;
@@ -94,7 +108,6 @@ public class VehiculoReferencia {
     public void setDescripcionPublicacion(String descripcionPublicacion) {
         this.descripcionPublicacion = descripcionPublicacion;
     }
-
 
     public void setCostoReservaVehiculo(double precioPublicacion) {
         this.CostoReservaVehiculo = precioPublicacion;
