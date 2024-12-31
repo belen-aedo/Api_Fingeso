@@ -55,7 +55,6 @@ public class EmpleadoController {
             return empleadoService.login(empleadoR.getEmail(), empleadoR.getPassword());
     }
 
-
     //ejemplo http://localhost:8080/api/empleado/DatosArriendo?Nombre Sucursal=Sucursal Central&id reserva=1&rol=gerente&kilometraje=20300
     @GetMapping("/DatosArriendo")
     public String ObtenerDatosArriendo(@RequestParam("Nombre Sucursal") String sucursalActual,
@@ -68,7 +67,6 @@ public class EmpleadoController {
         try {
 
             if(rol.equals("gerente") || rol.equals("asalariado")) {
-
             Sucursal sucursal = sucursalService.buscarSucursalPorNombre(sucursalActual);
             Vehiculo vehiculo = vehiculoFilterService.ObtenerDatosDeVehiculos(idReserva); // busco el vehiculo vinculado al arriendo por el id de la reserva
             Arriendo arriendo = empleadoService.BuscarArriendoPorReserva(idReserva); // busco el arriendo vinculado a la reserva
@@ -83,7 +81,6 @@ public class EmpleadoController {
                     sb.append("El arriendo no es de está sucursal\n");
                     sb.append("Sucursal actual: ").append(sucursalActual).append(" \nSucursal de devolución del arriendo: ").append(sucursal2.getNombreSucursal());
                     sb.append("\n");
-
                 }else {
                     sb.append("\n");
                     sb.append("El arriendo pertenece a esta sucursal\n");
@@ -196,9 +193,9 @@ ejemplo
     "nombre": "Juan Perez",
     "rut": "20722210-0",
     "telefono": "56996663811",
-    "rol": "empleado",
+    "rol": "asalariado",
     "email": "juan.perez@example.com",
     "password": "2lol12MN",
-    "sucursal": { "nombreSucursal": "Sucursal uno"}
+    "sucursal": { "nombreSucursal": "Sucursal Central"}
 }
  */

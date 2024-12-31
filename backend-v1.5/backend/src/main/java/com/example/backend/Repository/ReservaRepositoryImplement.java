@@ -5,6 +5,7 @@ import com.example.backend.Entity.Reserva;
 import com.example.backend.RowMappers.ReservaRowMapper;
 import com.example.backend.RowMappers.VehiculoReferenciaRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -45,6 +46,24 @@ public class ReservaRepositoryImplement implements ReservaRepository {
 
     @Override
     public Long save(Reserva reserva) {
+        // Consulta para verificar si ya existe una reserva con el mismo cliente y las mismas fechas
+        String checkSql = "SELECT id_reserva FROM reservas WHERE id_cliente = ? AND fecha_inicio_reserva = ? AND fecha_termino_reserva = ?";
+
+        // Ejecutar la consulta y obtener la lista de reservas
+        List<Reserva> reservasExistentes = jdbcTemplate.query(checkSql, new Object[]{
+                reserva.getCliente().getIdCliente(),
+                java.sql.Date.valueOf(reserva.getFechaInicioReserva()),
+                java.sql.Date.valueOf(reserva.getFechaTerminoReserva())
+        },  new ReservaRowMapper());
+
+        // Si la lista no está vacía, lanzar una excepción con el ID de la reserva duplicada
+        if (!reservasExistentes.isEmpty()) {
+            // Obtener el ID de la primera reserva duplicada
+            Long idReservaDuplicada = reservasExistentes.get(0).getId_reserva();
+            throw new IllegalArgumentException("Ya existe una reserva con las mismas fechas para este cliente. ID de reserva duplicada: " + idReservaDuplicada);
+        }
+
+        // Si no existe una reserva con las mismas fechas, proceder con la inserción
         String sql = "INSERT INTO reservas " +
                 "(id_cliente, id_sucursal_retiro, id_sucursal_devolucion, id_vehiculo_referencia, " +
                 "costo_total, fecha_inicio_reserva, fecha_termino_reserva, fecha_reserva, reserva_finalizada, pago_reserva) " +
@@ -72,6 +91,8 @@ public class ReservaRepositoryImplement implements ReservaRepository {
         // Retornar el ID generado
         return keyHolder.getKey().longValue();
     }
+
+
 
     @Override
     public List<Reserva> findByBetwenDates(LocalDate from, LocalDate to) {

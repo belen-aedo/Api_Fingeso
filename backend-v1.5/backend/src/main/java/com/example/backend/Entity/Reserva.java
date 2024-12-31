@@ -4,20 +4,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
-@Table(
-        name = "reservas",
-        uniqueConstraints = @UniqueConstraint(
-                columnNames = {
-                        "id_cliente",
-                        "id_sucursal_retiro",
-                        "id_sucursal_devolucion",
-                        "id_vehiculo_referencia",
-                        "fecha_inicio_reserva",
-                        "fecha_termino_reserva"
-                }
-        )
-)
-
+@Table(name = "reservas")
 @Entity
 public class Reserva {
 
@@ -30,7 +17,7 @@ public class Reserva {
     private Cliente cliente;
 
     @ManyToOne
-    @JoinColumn(name = "id_Sucursal_retiro")
+    @JoinColumn(name = "id_sucursal_retiro")
     private Sucursal sucursalRetiro;
 
     @ManyToOne

@@ -178,7 +178,6 @@ public class ClienteController {
             reserva.setPagoReserva(Boolean.TRUE); // SE SIMULA QUE SE PAGUE LA RESERVA
 
             //Guardar reserva // funciona bien
-            reservaService.GuardarReserva(reserva);
             Long IdReserva = reservaService.GuardarReserva(reserva);
             reserva.setId_reserva(IdReserva);
 
@@ -187,7 +186,7 @@ public class ClienteController {
             LocalDate NuevFechaDispo = ValidacionDatos.calcularNuevaFechaFin(fechaRetiro, fechaDevolucion);
             agendarRerservaService.realizarAgendamiento(vehiculo, AgendarSucursalRetiro, AgensarSucursalDevo, fechaRetiro, fechaDevolucion, NuevFechaDispo, reserva, cliente);
 
-            return "Agendamiento Registrado exitosamente" + "ID de la reserva" + IdReserva;
+            return "Agendamiento Registrado exitosamente" + " ID de la reserva: " + IdReserva;
 
         } catch (Exception e) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
