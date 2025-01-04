@@ -59,51 +59,6 @@ public class VehiculoRepositoryImplement implements VehiculoRepository {
         }
     }
 
-
-/*
- * Busca los vehículos disponibles en una sucursal específica para un rango de fechas dado.
- *
- * Este metodo consulta la base de datos para obtener los vehículos disponibles en la sucursal
- * especificada que no estén reservados en las fechas indicadas. Si un vehículo tiene agendamientos
- * en las fechas proporcionadas (ya sea solapándose con el inicio o el final del rango), no será
- * considerado disponible. Además, si un vehículo no tiene registros en la tabla de agendamientos,
- * también será incluido en los resultados.
- *
- * @param fechaRetiro La fecha de retiro del vehículo (inicio del rango de fechas).
- * @param fechaDevolucion La fecha de devolución del vehículo (fin del rango de fechas).
- * @param nombreSucursal El nombre de la sucursal donde se busca la disponibilidad de los vehículos.
- * @return Una lista de vehículos disponibles que cumplen con los criterios de fecha y sucursal.
- *         Si no hay vehículos disponibles, se devuelve una lista vacía.
- * @throws EmptyResultDataAccessException Si ocurre un error al ejecutar la consulta en la base de datos.
-
-    @Override
-    public List<Vehiculo> findByDates(LocalDate fechaRetiro, LocalDate fechaDevolucion, String nombreSucursal) {
-        String sql = " SELECT v.*, s.* " +
-                     " FROM vehiculo v " +
-                     " JOIN sucursal s ON v.id_sucursal = s.id_sucursal " +
-                     " LEFT JOIN agendamiento a ON a.id_vehiculo = v.id " +
-                     "   AND ( " +
-                "       (a.fecha_inicio <= ? AND a.proxima_fecha_disponible > ?) OR " +
-                "       (a.fecha_inicio <= ? AND a.proxima_fecha_disponible >= ?) OR " +
-                "       (a.fecha_inicio >= ? AND a.fecha_inicio <= ?) " +
-                "   ) " +
-                      " WHERE s.nombre_sucursal = ? " +
-                      " AND a.id_reserva IS NULL " +
-                      " AND v.estado_vehiculo = 'D' ;";
-        try {
-            return jdbcTemplate.query(
-                    sql,
-                    new VehiculoRowMapper(),
-                    fechaRetiro, fechaRetiro,
-                    fechaDevolucion, fechaDevolucion,
-                    fechaRetiro, fechaDevolucion,
-                    nombreSucursal
-            );
-        } catch (EmptyResultDataAccessException e) {
-            return new ArrayList<>();
-        }
-    }
-*/
     @Override
     public List<VehiculoReferencia> getReferenciasPorModelos(List<String> modelos) {
         String sql = "SELECT v.*" +
@@ -185,6 +140,7 @@ public class VehiculoRepositoryImplement implements VehiculoRepository {
 
                         while (rs.next()) {
                             long vehiculoId = rs.getLong("id");
+
                             // Mapear o recuperar el vehículo
                             Vehiculo vehiculo = vehiculoMap.computeIfAbsent(vehiculoId, id -> {
                                 Vehiculo v = new Vehiculo();
@@ -248,11 +204,8 @@ public class VehiculoRepositoryImplement implements VehiculoRepository {
                                     throw new RuntimeException(e);
                                 }
                                 v.setUbicacionActual(sucursal);
-
                                 return v;
-
                             });
-
                             // Mapear agendamientos
                             LocalDate fechaInicio = rs.getDate("fecha_inicio") != null
                                     ? rs.getDate("fecha_inicio").toLocalDate()
@@ -292,3 +245,48 @@ public class VehiculoRepositoryImplement implements VehiculoRepository {
         }
     }
 }
+
+/*
+ * Busca los vehículos disponibles en una sucursal específica para un rango de fechas dado.
+ *
+ * Este metodo consulta la base de datos para obtener los vehículos disponibles en la sucursal
+ * especificada que no estén reservados en las fechas indicadas. Si un vehículo tiene agendamientos
+ * en las fechas proporcionadas (ya sea solapándose con el inicio o el final del rango), no será
+ * considerado disponible. Además, si un vehículo no tiene registros en la tabla de agendamientos,
+ * también será incluido en los resultados.
+ *
+ * @param fechaRetiro La fecha de retiro del vehículo (inicio del rango de fechas).
+ * @param fechaDevolucion La fecha de devolución del vehículo (fin del rango de fechas).
+ * @param nombreSucursal El nombre de la sucursal donde se busca la disponibilidad de los vehículos.
+ * @return Una lista de vehículos disponibles que cumplen con los criterios de fecha y sucursal.
+ *         Si no hay vehículos disponibles, se devuelve una lista vacía.
+ * @throws EmptyResultDataAccessException Si ocurre un error al ejecutar la consulta en la base de datos.
+
+    @Override
+    public List<Vehiculo> findByDates(LocalDate fechaRetiro, LocalDate fechaDevolucion, String nombreSucursal) {
+        String sql = " SELECT v.*, s.* " +
+                     " FROM vehiculo v " +
+                     " JOIN sucursal s ON v.id_sucursal = s.id_sucursal " +
+                     " LEFT JOIN agendamiento a ON a.id_vehiculo = v.id " +
+                     "   AND ( " +
+                "       (a.fecha_inicio <= ? AND a.proxima_fecha_disponible > ?) OR " +
+                "       (a.fecha_inicio <= ? AND a.proxima_fecha_disponible >= ?) OR " +
+                "       (a.fecha_inicio >= ? AND a.fecha_inicio <= ?) " +
+                "   ) " +
+                      " WHERE s.nombre_sucursal = ? " +
+                      " AND a.id_reserva IS NULL " +
+                      " AND v.estado_vehiculo = 'D' ;";
+        try {
+            return jdbcTemplate.query(
+                    sql,
+                    new VehiculoRowMapper(),
+                    fechaRetiro, fechaRetiro,
+                    fechaDevolucion, fechaDevolucion,
+                    fechaRetiro, fechaDevolucion,
+                    nombreSucursal
+            );
+        } catch (EmptyResultDataAccessException e) {
+            return new ArrayList<>();
+        }
+    }
+*/

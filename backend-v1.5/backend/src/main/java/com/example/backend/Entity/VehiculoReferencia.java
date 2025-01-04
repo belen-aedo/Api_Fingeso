@@ -2,17 +2,19 @@ package com.example.backend.Entity;
 
 import jakarta.persistence.*;
 
-@Table(name = "vehiculo_referencia")
+@Table(name = "vehiculo_referencia", uniqueConstraints = {
+            @UniqueConstraint(columnNames = {"modelo"})
+})
 @Entity
-
 public class VehiculoReferencia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idVehiculoReferencia;//Identificador
 
+    @Column(nullable = false)
     private String url; // Aquí agregas el campo URL
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String modelo;
 
     @Column(nullable = false)
@@ -41,7 +43,6 @@ public class VehiculoReferencia {
 
     //precio, capacidad de pasajeros, cantidad de puertas, tipo de gasolina, mecánico o automático,
     public VehiculoReferencia(String descripcionPublicacion,
-                              boolean estado,
                               double CostoReservaVehiculo,
                               double CostoArriendolVehiculo,
                               int capacidadPasajeros,

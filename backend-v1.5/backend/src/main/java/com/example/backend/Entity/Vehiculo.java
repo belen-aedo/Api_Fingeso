@@ -26,6 +26,7 @@ public class Vehiculo {
     @Column(nullable = false)
     private String colorPrincipal; // Color del vehículo
 
+    @Column(nullable = false)
     private int year; // Año de fabricación
 
     @Column(nullable = false)
