@@ -1,12 +1,9 @@
 package com.example.backend.Service;
 
-import com.example.backend.Entity.Sucursal;
 import com.example.backend.Entity.Vehiculo;
 import com.example.backend.Entity.VehiculoReferencia;
 import com.example.backend.Repository.SucursalRepository;
 import com.example.backend.Repository.VehiculoRepository;
-import com.example.backend.Repository.VehiculoRepositoryImplement;
-import com.example.backend.Utilidades.Pair;
 import com.example.backend.Utilidades.ValidacionDatos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,10 +12,9 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
-public class VehiculoFilterService {
+public class VehiculoSearchService {
 
     @Autowired
     VehiculoRepository vehiculoRepository;

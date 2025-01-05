@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import com.example.backend.Entity.VehiculoReferencia;
 import com.example.backend.Service.VehiculoReferenciaService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.*;
 

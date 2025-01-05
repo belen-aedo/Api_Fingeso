@@ -82,7 +82,6 @@ public class EmpleadoService {
         if (existentePorRut != null) {
             throw new IllegalArgumentException("\n ya se encuentra registrado con el rut: " + existentePorRut.getRut());
         }
-
         empleadoRepository.save(empleado);
     }
 
