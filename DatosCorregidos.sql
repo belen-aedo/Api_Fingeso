@@ -55,7 +55,7 @@ VALUES
 INSERT INTO arriendo (costo_total, estado_arriendo, fecha_arriendo, fecha_inicio_arriendo, fecha_termino_arriendo, pendiente_arriendo, id_reserva, id_sucursal_devolucion, id_sucursal_retiro, id_vehiculo, rut_cliente)
 VALUES
     (120000.00, true, '2024-12-31', '2025-01-04', '2025-01-06', false, 1, 2, 1, 1, '12345678-9'),
-    (150000.00, true, '2024-12-31', '2025-01-04', '2024-01-07', false, 2, 1, 1, 2, '98765432-1'),
+    (150000.00, true, '2024-12-31', '2025-01-04', '2025-01-07', false, 2, 1, 1, 2, '98765432-1'),
     (130000.00, true, '2024-12-31', '2025-01-07', '2025-01-08', false, 3, 1, 1, 3, '12345678-9'),
     (140000.00, true, '2024-12-31', '2025-01-08', '2025-01-09', false, 4, 1, 1, 4, '98765432-1');
 
