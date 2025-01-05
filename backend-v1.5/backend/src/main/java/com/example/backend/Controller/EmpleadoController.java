@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 public class EmpleadoController {
 
     @Autowired
-    EmpleadoService empleadoService;
+    private EmpleadoService empleadoService;
 
     @PostMapping("/registrar")
     public String registrarEmpleado(@RequestBody Empleado nuevoEmpleado) {

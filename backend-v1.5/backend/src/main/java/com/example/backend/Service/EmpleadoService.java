@@ -25,7 +25,6 @@ public class EmpleadoService {
     @Autowired
     private VehiculoRepository vehiculoRepository;
 
-
     // Registra un cliente
     public void registrarEmpleado(String nombreEmpleado, String rutEmpleado, String telefonoRegistrado, String rol, String nombreSucursal, String correoRegistrado, String passwordRegister) {
 
@@ -86,7 +85,6 @@ public class EmpleadoService {
         empleadoRepository.save(empleado);
     }
 
-
     public String login(String correo_registrado, String password_register) {
         Empleado empleado = empleadoRepository.findByEmail(correo_registrado);
         if (empleado != null) {
@@ -96,7 +94,6 @@ public class EmpleadoService {
         }
         return "no existe";
     }
-
 
     public Arriendo BuscarArriendoPorReserva(Long id_reserva) {
 
@@ -110,5 +107,4 @@ public class EmpleadoService {
     public void actualizarKilometrajeVehiculo(Long id_vehiculo, Double kilometraje) {
             vehiculoRepository.updateKilometrajeById(id_vehiculo, kilometraje);
     }
-
 }

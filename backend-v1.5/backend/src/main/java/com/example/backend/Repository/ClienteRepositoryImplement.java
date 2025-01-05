@@ -1,7 +1,9 @@
 package com.example.backend.Repository;
 
 import com.example.backend.Entity.Cliente;
+import com.example.backend.Entity.Reserva;
 import com.example.backend.RowMappers.ClienteRowMapper;
+import com.example.backend.RowMappers.ReservaRowMapperComplete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -69,4 +71,17 @@ public class ClienteRepositoryImplement implements ClienteRepository {
                 cliente.getRut(), cliente.getTelefono());
     }
 
+    @Override
+    public List<Reserva> GetReservasByIdCliente(Long idCliente) {
+        String sql = "SELECT r.id_reserva,r.costo_total,r.fecha_inicio_reserva,r.fecha_reserva,r.fecha_termino_reserva,r.pago_reserva,r.reserva_finalizada " +
+                     "FROM reservas r  " +
+                     "WHERE id_cliente = ?";
+        List<Reserva> reservas = new ArrayList<>();
+        try {
+            reservas = jdbcTemplate.query(sql, new Object[]{idCliente}, new ReservaRowMapperComplete());
+            return reservas;
+        } catch (EmptyResultDataAccessException e) {
+            return reservas; // Devuelve una lista vacía si no se encuentran resultados
+        }
+    }
 }

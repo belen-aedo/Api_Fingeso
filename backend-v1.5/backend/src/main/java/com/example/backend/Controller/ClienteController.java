@@ -19,19 +19,7 @@ import java.util.*;
 public class ClienteController {
 
     @Autowired
-    ClienteService clienteService;
-
-    @Autowired
-    VehiculoSearchService vehiculoSearchService;
-
-    @Autowired
-    SucursalService sucursalService;
-
-    @Autowired
-    private ReservaService reservaService;
-
-    @Autowired
-    AgendarRerserva agendarRerservaService;
+    private ClienteService clienteService;
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // Primero registrarse
@@ -56,5 +44,16 @@ public class ClienteController {
     @PostMapping("/login")
     public int loginCliente(@RequestBody Cliente clienteR) {
         return clienteService.login(clienteR.getEmail(), clienteR.getPassword());
+    }
+
+    // reservas del mismo cliente
+    @GetMapping("/Reservas")
+    public List<Reserva> ObtenerReservasCliente(@RequestParam String correoCliente) {
+        try {
+            return clienteService.buscarReservarPorCliente(correoCliente);
+        }catch (Exception e) {
+            System.out.println("Error en obtenerReservasCliente " + e.getMessage());
+            return new ArrayList<>();
+        }
     }
 }

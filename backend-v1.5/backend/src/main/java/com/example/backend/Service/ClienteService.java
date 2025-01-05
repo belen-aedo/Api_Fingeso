@@ -1,12 +1,14 @@
 package com.example.backend.Service;
 
 import com.example.backend.Entity.Cliente;
+import com.example.backend.Entity.Reserva;
 import com.example.backend.Repository.ClienteRepository;
 import com.example.backend.Utilidades.ValidacionDatos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -105,5 +107,13 @@ public class ClienteService {
         return clienteRepo.findByEmail(email);
     }
 
+    // obtener un listado con las reservas del cliente
+    public List<Reserva> buscarReservarPorCliente(String correoCliente) {
+
+        Cliente cliente = clienteRepo.findByEmail(correoCliente);
+
+            return clienteRepo.GetReservasByIdCliente(cliente.getIdCliente());
+
+    }
 }
 
