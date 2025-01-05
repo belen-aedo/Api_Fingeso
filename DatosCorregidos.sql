@@ -38,7 +38,7 @@ VALUES
 -- Insertar reservas
 INSERT INTO reservas (id_cliente, id_sucursal_retiro, id_sucursal_devolucion, id_vehiculo_referencia, costo_total, fecha_inicio_reserva, fecha_termino_reserva, fecha_reserva, reserva_finalizada, pago_reserva)
 VALUES
-    (1, 1, 2, 1, 60000.00, '2025-01-04', '2025-01-06', '2025-12-29', true, true),
+    (1, 1, 2, 1, 60000.00, '2025-01-04', '2025-01-06', '2024-12-29', true, true),
     (2, 1, 1, 2, 75000.00, '2025-01-04', '2024-01-07', '2024-12-29', true, false),
     (1, 1, 2, 3, 65000.00, '2025-01-07', '2025-01-08', '2024-12-29', true, true),
     (2, 1, 1, 4, 70000.00, '2025-01-08', '2025-01-09', '2024-12-29', true, false);
