@@ -34,8 +34,8 @@ public class ValidarDevolucion {
 
     //ejemplo http://localhost:8080/api/Devolucion/DatosArriendo?Nombre Sucursal=Sucursal Central&id reserva=1&rol=gerente&kilometraje=20300
     @GetMapping("/DatosArriendo")
-    public String ObtenerDatosArriendo(@RequestParam("Nombre Sucursal") String sucursalActual,
-                                       @RequestParam("id reserva") Long idReserva,
+    public String ObtenerDatosArriendo(@RequestParam("NombreSucursal") String sucursalActual,
+                                       @RequestParam("idReserva") Long idReserva,
                                        @RequestParam("rol") String rol,
                                        @RequestParam("kilometraje") Double kilometraje) {
 
